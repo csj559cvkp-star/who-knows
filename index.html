@@ -165,7 +165,7 @@ body.dim #dim{opacity:1}
 .insp-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
 #inspExtra .gift{margin-top:2px}
 .dialog{position:relative;max-width:400px;margin:22px auto 0;padding:12px 14px 12px}
-#duo{display:block;width:100%;height:auto;box-shadow:var(--ol);margin-bottom:10px}
+#duo{display:block;width:100%;height:auto;box-shadow:var(--ol);margin-bottom:10px;cursor:pointer}
 .dlg-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .dlg-name{font-weight:700;color:var(--orgd);font-size:19px;line-height:1.1}
 .dlg-step{font-size:14px;color:var(--ink2)}
@@ -786,6 +786,8 @@ function drawDuo(now) {
   if (duo.sp === 'me' && talking) { f = Math.floor(now * 7) % 2; hy = 0; }
   if (yay) { f = 2 + Math.floor(k * 6) % 2; hy = k < .36 ? ([-2, -3, -2, -1][Math.floor(k / .09)] || 0) : 0; }
   if (no) { hx = Math.floor(k * 18) % 2 ? 1 : -1; hy = 0; }
+  const pk = now - (duo.pt || -9);
+  if (duo.poke === 'me' && pk < .5) { f = 2 + Math.floor(pk * 8) % 2; hy = [-2, -3, -2, -1, 0][Math.floor(pk / .1)] || 0; }
   const mx = 14, my = 9;
   d.ell(mx + 19, 57, 13, 1, 'rgba(62,49,80,.18)');
   if (ME_IMG.complete && ME_IMG.naturalWidth) x.drawImage(ME_IMG, f * ME_W, 0, ME_W, ME_H, mx + hx, my + hy, ME_W, ME_H);
@@ -795,7 +797,8 @@ function drawDuo(now) {
   if (duo.sp === 'cala' && talking) { o.hx = Math.floor(now * 9) % 2 ? 1 : -1; }
   if (yay) { o.eyes = 'happy'; }
   if (no) { o.hx = Math.floor(k * 18) % 2 ? 1 : -1; o.eyes = 'closed'; }
-  const cdy = yay && k < .45 ? ([-2, -3, -2, -1, 0][Math.floor(k / .09)] || 0) : 0;
+  let cdy = yay && k < .45 ? ([-2, -3, -2, -1, 0][Math.floor(k / .09)] || 0) : 0;
+  if (duo.poke === 'cala' && pk < .5) { cdy = [-2, -3, -2, -1, 0][Math.floor(pk / .1)] || 0; o.eyes = 'happy'; }
   d.ell(66, 57, 11, 1, 'rgba(62,49,80,.16)');
   drawCala(d, 55, 33 + cdy, o);
   // who's talking
@@ -928,6 +931,46 @@ const crackSnd = () => { noise(.08, 2600, 1.5, .5); setTimeout(() => noise(.12, 
 function jingle() { if (!ctx) return; const t = ctx.currentTime + .02; [72, 76, 79, 84, 88, 91, 96].forEach((m, i) => tone(hz(m), t + i * .07, .16, 'square', .045)); tone(hz(96), t + .5, .9, 'square', .04); tone(hz(84), t + .5, .9, 'triangle', .07); }
 function blip(up = true) { if (!ctx) return; const t = ctx.currentTime + .01; tone(hz(up ? 84 : 66), t, .09, 'square', .04); if (up) tone(hz(91), t + .07, .14, 'square', .04); }
 function tick() { if (!ctx) return; tone(1100 + Math.random() * 200, ctx.currentTime + .005, .025, 'square', .018); }
+/* ---------- little sound effects ---------- */
+function sweep(f0, f1, t, d, type = 'square', v = .04, dest) {
+  if (!ctx) return; const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = type; o.frequency.setValueAtTime(f0, t); o.frequency.exponentialRampToValueAtTime(Math.max(20, f1), t + d);
+  g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+  o.connect(g); g.connect(dest || master); o.start(t); o.stop(t + d + .02);
+}
+function hiss(d, f0, f1, q, v, delay = 0, type = 'bandpass') {
+  if (!ctx) return; const t = ctx.currentTime + .005 + delay, len = Math.floor(ctx.sampleRate * d), buf = ctx.createBuffer(1, len, ctx.sampleRate), ch = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 1.5);
+  const src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(); src.buffer = buf; f.type = type; f.Q.value = q;
+  f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(Math.max(40, f1), t + d); g.gain.value = v;
+  src.connect(f); f.connect(g); g.connect(ctx.destination); src.start(t);
+}
+const SFX = {
+  meow() { if (!ctx) return; const t = ctx.currentTime + .01, o = ctx.createOscillator(), g = ctx.createGain(), l = ctx.createOscillator(), lg = ctx.createGain();
+    o.type = 'triangle'; o.frequency.setValueAtTime(520, t); o.frequency.linearRampToValueAtTime(880, t + .12); o.frequency.linearRampToValueAtTime(1180, t + .22); o.frequency.exponentialRampToValueAtTime(760, t + .42);
+    l.frequency.value = 34; lg.gain.setValueAtTime(.6, t); lg.gain.linearRampToValueAtTime(0, t + .16); l.connect(lg); const am = ctx.createGain(); am.gain.value = .6; lg.connect(am.gain);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.12, t + .03); g.gain.exponentialRampToValueAtTime(.06, t + .3); g.gain.exponentialRampToValueAtTime(.0001, t + .46);
+    o.connect(am); am.connect(g); g.connect(master); o.start(t); l.start(t); o.stop(t + .5); l.stop(t + .5);
+    sweep(1040, 1500, t + .02, .2, 'square', .012); },
+  paper() { hiss(.09, 2600, 4200, 1.2, .22); hiss(.12, 3200, 1800, 1.4, .18, .08); hiss(.07, 4200, 3000, 1.5, .12, .19); },
+  pop() { if (!ctx) return; const t = ctx.currentTime + .01; sweep(1100, 180, t, .09, 'triangle', .14); hiss(.04, 3000, 2000, 2, .15); },
+  peel() { hiss(.22, 1400, 4200, 1.6, .28); hiss(.1, 3800, 2400, 2, .16, .2); },
+  pour() { hiss(1.05, 700, 1600, .9, .12, 0, 'lowpass'); if (!ctx) return; const t = ctx.currentTime + .05; for (let i = 0; i < 9; i++) sweep(300 + Math.random() * 380, 650 + Math.random() * 400, t + .08 + i * .1 + Math.random() * .04, .06, 'sine', .07); tone(hz(91), t + 1.1, .25, 'triangle', .06); tone(hz(96), t + 1.2, .3, 'triangle', .05); },
+  chomp() { if (!ctx) return; const t = ctx.currentTime + .01; sweep(190, 70, t, .09, 'triangle', .2); hiss(.06, 1500, 900, 1.8, .3, .01); sweep(170, 60, t + .14, .08, 'triangle', .17); hiss(.05, 1300, 800, 1.8, .25, .15); },
+  flip() { if (!ctx) return; hiss(.08, 1800, 6500, 1.2, .3, 0, 'highpass'); const t = ctx.currentTime + .09; tone(hz(91), t, .08, 'square', .025); tone(hz(98), t + .06, .12, 'square', .022); },
+  chime() { if (!ctx) return; hiss(.3, 3500, 5200, .8, .07); const t = ctx.currentTime + .02; [84, 88, 91, 96, 100].forEach((m, i) => tone(hz(m), t + i * .06, .3, 'triangle', .055)); },
+  hooves() { if (!ctx) return; const t = ctx.currentTime + .01; [0, .13, .32, .45].forEach((dt, i) => { sweep(i % 2 ? 760 : 980, i % 2 ? 520 : 680, t + dt, .045, 'square', .05); hiss(.03, 2400, 1800, 3, .12, dt); }); },
+  drop() { if (!ctx) return; const t = ctx.currentTime + .01; sweep(260, 110, t, .12, 'triangle', .16); hiss(.05, 900, 500, 1.2, .12, .01); },
+  pick() { if (!ctx) return; const t = ctx.currentTime + .01; sweep(420, 900, t, .1, 'square', .035); tone(hz(88), t + .07, .1, 'square', .03); },
+  hover() { if (!ctx) return; tone(1500 + Math.random() * 150, ctx.currentTime + .005, .03, 'square', .012); },
+  page() { hiss(.32, 600, 3200, .7, .1, 0, 'lowpass'); hiss(.12, 3000, 2000, 1.2, .08, .2); },
+  printer() { if (!ctx) return; const t = ctx.currentTime + .05; for (let i = 0; i < 7; i++) { sweep(150, 140, t + i * .09, .07, 'square', .03); hiss(.06, 3200, 2600, 2, .07, .05 + i * .09); } tone(hz(96), t + .72, .14, 'square', .03); },
+  click() { if (!ctx) return; const t = ctx.currentTime + .005; tone(hz(86), t, .05, 'square', .03); },
+  bonk() { if (!ctx) return; const t = ctx.currentTime + .01; sweep(330, 140, t, .18, 'square', .045); sweep(250, 110, t + .05, .2, 'triangle', .08); },
+  boop() { if (!ctx) return; const t = ctx.currentTime + .01; sweep(500, 760, t, .08, 'square', .04); sweep(760, 640, t + .08, .1, 'square', .03); },
+};
+function sfx(name) { initAudio(); if (SFX[name]) SFX[name](); }
+
 function scheduleSong(t0) {
   notes.forEach(n => { const s = t0 + bt(n.b), e = t0 + bt(n.b + n.len), d = (e - s) * .9; tone(hz(n.m), s, d, 'square', .05); tone(hz(n.m) * 2, s, Math.min(d, .35), 'triangle', .018); });
   BASS.forEach(([b, m, len]) => { const s = t0 + bt(b); tone(hz(m), s, (t0 + bt(b + len) - s) * .85, 'triangle', .14, bassBus); });
@@ -1046,9 +1089,13 @@ function listen(now) {
 function cakeTap(e) {
   let hit = true;
   if (e && e.clientX !== undefined && e.detail !== 0) { const [px, py] = toPix(CK.c, e); hit = px > WICK[0] - 14 && px < WICK[0] + 14 && py > WICK[1] - 16 && py < WICK[1] + 22; }
-  if (!hit) return;
+  if (!hit) {
+    const [px, py] = e && e.clientX !== undefined ? toPix(CK.c, e) : [0, 0];
+    if (px > 84 && px < 112 && py > 66 && py < 98) { sfx('meow'); cake.hop = NOW(); cake.talkUntil = NOW() + .9; const b = $('#catBubble'); b.classList.add('on'); clearTimeout(cake.bt); cake.bt = setTimeout(() => b.classList.remove('on'), 900); }
+    return;
+  }
   if (phase === 'wish' || phase === 'blow') blowOut();
-  else if (phase === 'song') { toast('hay, wait for the song to finish'); cake.wiggle = NOW() + .35; }
+  else if (phase === 'song') { sfx('boop'); toast('hay, wait for the song to finish'); cake.wiggle = NOW() + .35; }
 }
 $('#cakeWrap').addEventListener('click', cakeTap);
 $('#cakeWrap').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cakeTap(); } });
@@ -1066,9 +1113,9 @@ function blowOut() {
     const r = CK.c.getBoundingClientRect(); confetti(r.left + r.width * WICK[0] / 118, r.top + r.height * (WICK[1] - 4) / 104);
     const t = $('#tname'); t.classList.remove('party'); void t.offsetWidth; t.classList.add('party');
     cake.hop = NOW(); cake.talkUntil = NOW() + 3.2;
-    const b = $('#catBubble'); b.classList.add('on'); setTimeout(() => b.classList.remove('on'), 3200);
-    setPrompt('<p class="greet">maligayang kaarawan!</p><p class="ilo">bonne f&ecirc;te!</p><p>i hope your wish comes true</p><button class="textbtn" id="again" type="button">light it again</button>');
-    $('#again').addEventListener('click', relight);
+    const b = $('#catBubble'); b.classList.add('on'); setTimeout(() => b.classList.remove('on'), 3200); setTimeout(() => sfx('meow'), 250);
+    setPrompt('<p class="greet">happiest birthday!</p><p class="ilo">bonne f&ecirc;te!</p><p>i hope your wish comes true</p><button class="textbtn" id="again" type="button">light it again</button>');
+    $('#again').addEventListener('click', () => { sfx('click'); relight(); });
     showNav(true); nextBtn.classList.remove('nudge'); void nextBtn.offsetWidth; nextBtn.classList.add('nudge');
   }, 380);
 }
@@ -1103,8 +1150,9 @@ async function goTo(i) {
   await dissolve('#EAE4F5', true);
   busy = false;
 }
-nextBtn.addEventListener('click', () => goTo(cur + 1));
-backBtn.addEventListener('click', () => goTo(cur - 1));
+let printed = false;
+nextBtn.addEventListener('click', () => { if (busy) return; sfx('page'); goTo(cur + 1).then(() => { if (SCENES[cur].id === 's-haul' && !printed) { printed = true; sfx('printer'); } }); });
+backBtn.addEventListener('click', () => { if (busy) return; sfx('page'); goTo(cur - 1); });
 updateNav();
 
 /* ================= friends' notes ================= */
@@ -1152,6 +1200,11 @@ function typeText(text, done, who) {
 }
 lockQ.addEventListener('click', () => { if (lockQ.textContent.length < typeFull.length) { clearInterval(typer); lockQ.textContent = typeFull; const f = typeDone; typeDone = null; f && f(); } });
 function react(r) { duo.react = r; duo.t = NOW(); }
+$('#duo').addEventListener('click', e => {
+  const [px] = toPix(DUO.c, e), now = NOW();
+  if (px >= 52 && px < 84) { sfx('meow'); duo.poke = 'cala'; duo.pt = now; }
+  else if (px >= 10 && px < 52) { sfx('boop'); duo.poke = 'me'; duo.pt = now; }
+});
 function reveal(el) { const r = el.getBoundingClientRect(), room = innerHeight - 120; window.scrollTo({ top: Math.max(0, scrollY + r.top - Math.max(14, (room - r.height) / 2)), behavior: reduce ? 'auto' : 'smooth' }); }
 function startQuiz() {
   if (stage !== 'basket') return;
@@ -1176,13 +1229,13 @@ function answer(b, i) {
     qBusy = true; react('yay'); b.classList.add('right'); blip();
     [...lockOpts.children].forEach(o => o.disabled = true);
     typeText(Q.yes, () => setTimeout(() => { qBusy = false; qi++; if (qi < QUIZ.length) showQ(); else unlock(); }, 700));
-  } else { react('no'); b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong'); blip(false); typeText(Q.no); }
+  } else { react('no'); b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong'); sfx('bonk'); typeText(Q.no); }
 }
 function unlock() {
   lockStep.textContent = 'all done'; lockOpts.innerHTML = '';
   react('yay'); jingle();
   typeText("okay. no horsing around, it's really you.", () => setTimeout(() => {
-    typeText('mrrp. this is for you.', () => setTimeout(() => {
+    sfx('meow'); typeText('mrrp. this is for you.', () => setTimeout(() => {
       stage = 'sealed'; lock.hidden = true; envArea.hidden = false; lt.stage = 'sealed';
       $('#bkLede').textContent = 'cala has your letter';
       setTimeout(() => reveal(envArea), 150);
@@ -1194,9 +1247,9 @@ function ltTap(hitSeal, hitCala) {
   if (lt.stage === 'sealed' && hitSeal) {
     initAudio(); crackSnd(); lt.stage = 'breaking'; lt.tB = now; envHint.textContent = '';
     setTimeout(() => { noise(.4, 1800, .6, .2); lt.stage = 'opening'; lt.tO = NOW(); }, 450);
-    setTimeout(() => { lt.stage = 'open'; envHint.textContent = 'cala brought you a letter. tap it.'; }, 450 + 1700);
+    setTimeout(() => { lt.stage = 'open'; envHint.textContent = 'cala brought you a letter. tap it.'; sfx('meow'); }, 450 + 1700);
   } else if (lt.stage === 'open' && hitCala) {
-    lt.stage = 'give'; lt.give = now; blip();
+    lt.stage = 'give'; lt.give = now; sfx('paper');
     setTimeout(openReader, 600);
   }
 }
@@ -1214,14 +1267,14 @@ function closeReader() {
   if (lt.stage === 'give') lt.stage = 'open';
   setTimeout(() => { readerOpen = false; }, 520);
 }
-$$('.sheet .x').forEach(b => b.addEventListener('click', closeReader));
+$$('.sheet .x').forEach(b => b.addEventListener('click', () => { sfx('paper'); closeReader(); }));
 $('#toMine').addEventListener('click', async () => {
-  blip(); await dissolve('#FFFDF8', false, 420);
+  sfx('paper'); await dissolve('#FFFDF8', false, 420);
   $('#letterCala').hidden = true; $('#letterMe').hidden = false; reader.scrollTop = 0;
   await dissolve('#FFFDF8', true, 460); $('#letterMe .x').focus({ preventScroll: true });
 });
-$('#readerClose').addEventListener('click', closeReader);
-$('#relight').addEventListener('click', () => { closeReader(); setTimeout(relight, 400); });
+$('#readerClose').addEventListener('click', () => { sfx('paper'); closeReader(); });
+$('#relight').addEventListener('click', () => { sfx('click'); closeReader(); setTimeout(relight, 400); });
 reader.addEventListener('click', e => { if (e.target === reader) closeReader(); });
 addEventListener('keydown', e => { if (e.key === 'Escape' && readerOpen) closeReader(); });
 
@@ -1514,7 +1567,7 @@ LIVE.forEach(it => {
   if (it.id === 'flowers') bkWrap.insertBefore(b, bkWrap.querySelector('.hot')); else bkWrap.append(b);
   const on = () => { bk.hover = it.id; bkTip.textContent = it.name; bkTip.style.left = ((x0 + w / 2) / 144 * 100) + '%'; bkTip.style.top = (Math.max(4, y0 - 5) / 128 * 100) + '%'; bkTip.classList.add('on'); };
   const off = () => { if (bk.hover === it.id) { bk.hover = null; bkTip.classList.remove('on'); } };
-  b.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') on(); }); b.addEventListener('pointerleave', off);
+  b.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { on(); if (ctx) SFX.hover(); } }); b.addEventListener('pointerleave', off);
   b.addEventListener('focus', () => { if (b.matches(':focus-visible')) on(); }); b.addEventListener('blur', off);
   b.addEventListener('click', () => { off(); openItem(it); });
   it.btn = b;
@@ -1527,7 +1580,7 @@ let inspOpen = false, inspItem = null, inspParts = [];
 function say(t) { $('#inspSay').textContent = t; }
 function openItem(it) {
   if (inspOpen) return;
-  initAudio(); blip(); it.st.seen = true; inspItem = it; inspOpen = true; inspParts = []; updCount();
+  initAudio(); sfx(it.id === 'letter' || it.gift != null ? 'paper' : (it.id === 'flowers' ? 'chime' : 'pick')); it.st.seen = true; inspItem = it; inspOpen = true; inspParts = []; updCount();
   const extra = $('#inspExtra'); [...extra.children].forEach(ch => giftHold.append(ch));
   const isGift = it.gift != null;
   $('#inspCv').hidden = isGift; $('#inspHint').hidden = isGift || it.id === 'letter';
@@ -1548,6 +1601,7 @@ function openItem(it) {
 function updCount() { const n = LIVE.filter(i => i.st.seen).length; $('#bkCount').textContent = !n ? '' : (n === LIVE.length ? 'you looked at everything \u2661' : `${n} of ${LIVE.length} looked at`); }
 function closeInspect() {
   if (!inspOpen) return;
+  sfx('drop');
   insp.classList.remove('show'); insp.setAttribute('aria-hidden', 'true'); if (!readerOpen) document.body.classList.remove('locked');
   const it = inspItem; setTimeout(() => { inspOpen = false; it.st.back = NOW(); if (it.btn) it.btn.focus({ preventScroll: true }); }, 380);
 }
@@ -1570,12 +1624,12 @@ function inspTap() {
   if (now - st.t < .25) return;
   st.t = now; st.n++;
   const cyc = arr => arr[(st.n - 1) % arr.length];
-  if (it.id === 'pomelo') { noise(.12, 2200, 1, .25); popBits(6, [C.e, C.W, C.h], 22, 14); say(cyc(it.says)); }
-  if (it.id === 'tea') { noise(1.1, 1500, .7, .1); setTimeout(() => { if (ctx) tone(hz(88), ctx.currentTime + .01, .2, 'triangle', .05); }, 1100); say(cyc(it.says)); }
-  if (it.id === 'horse') { neigh(); say(cyc(it.says)); }
-  if (it.id === 'card') { noise(.06, 3200, 1, .25); say(cyc(it.says)); }
-  if (it.id === 'dog') { noise(.07, 900, 2, .4); setTimeout(() => noise(.06, 700, 2, .3), 90); if (st.n % 4) popBits(5, [C.T, C.t], 30, 16); say(cyc(it.says)); }
-  if (it.id === 'flowers') { noise(.25, 3600, .8, .08); petals(); say(cyc(it.says)); }
+  if (it.id === 'pomelo') { sfx(st.n % 4 === 1 ? 'peel' : (st.n % 4 === 3 ? 'chomp' : 'pop')); popBits(6, [C.e, C.W, C.h], 22, 14); say(cyc(it.says)); }
+  if (it.id === 'tea') { sfx('pour'); say(cyc(it.says)); }
+  if (it.id === 'horse') { sfx('hooves'); setTimeout(neigh, 420); say(cyc(it.says)); }
+  if (it.id === 'card') { sfx('flip'); say(cyc(it.says)); }
+  if (it.id === 'dog') { sfx(st.n % 4 ? 'chomp' : 'pick'); if (st.n % 4) popBits(5, [C.T, C.t], 30, 16); say(cyc(it.says)); }
+  if (it.id === 'flowers') { sfx('chime'); petals(); say(cyc(it.says)); }
 }
 $('#inspCv').addEventListener('click', inspTap);
 function drawInspect(now) {
@@ -1681,6 +1735,7 @@ function drawInspect(now) {
     sc.addEventListener('pointermove', e => { if (!down || revealed) return; scratchAt(e); if (Math.random() < .25) noise(.03, 3200, 1, .06); e.preventDefault(); });
     ['pointerup', 'pointercancel'].forEach(t => sc.addEventListener(t, () => { down = false; }));
     q('.reveal').addEventListener('click', reveal);
+    q('.gift-link').addEventListener('click', () => sfx('click'));
   });
 })();
 
