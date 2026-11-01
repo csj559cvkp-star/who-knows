@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>for Aleisha</title>
+<meta name="description" content="something for your birthday">
+<meta property="og:title" content="for Aleisha">
+<meta property="og:description" content="something for your birthday">
+<meta name="theme-color" content="#EAE4F5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='10' height='8' fill='%233E3150'/%3E%3Crect x='1' y='1' width='8' height='6' fill='%23F3EADF'/%3E%3Crect x='2' y='2' width='6' height='1' fill='%23FFFDF8'/%3E%3Crect x='4' y='3' width='2' height='2' fill='%238E7DC6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=VT323&family=Nunito:wght@400;600&family=Caveat:wght@400..700&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --px:3px;
+  --bg:#EAE4F5; --paper:#FFFDF8; --cream:#F3EADF; --ink:#3E3150; --ink2:#6B5B86;
+  --lav:#B9ABDF; --lavd:#6E5DB0; --org:#E8975A; --orgl:#F5C08F; --orgd:#C06A33; --sage:#A3B694; --saged:#6E855F;
+  --pix:'Pixelify Sans','Silkscreen',ui-monospace,Menlo,monospace;
+  --mono:'VT323',ui-monospace,Menlo,monospace;
+  --read:'Nunito',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --hand:'Caveat','Bradley Hand','Segoe Print',cursive;
+  --sign:'Great Vibes','Snell Roundhand','Apple Chancery',cursive;
+  --ol:var(--px) 0 0 0 var(--ink),calc(var(--px)*-1) 0 0 0 var(--ink),0 var(--px) 0 0 var(--ink),0 calc(var(--px)*-1) 0 0 var(--ink);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--pix);color:var(--ink);background:var(--bg);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;font-size:18px;line-height:1.4}
+body.locked{overflow:hidden}
+button{font:inherit;color:inherit}
+:focus-visible{outline:var(--px) solid var(--org);outline-offset:var(--px)}
+[hidden]{display:none!important}
+canvas.px{image-rendering:-moz-crisp-edges;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;image-rendering:pixelated}
+#bgfx{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#dim{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;background:rgba(46,34,72,.32);transition:opacity 1.2s steps(6)}
+body.dim #dim{opacity:1}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:70;pointer-events:none}
+#wipe{position:fixed;inset:0;width:100%;height:100%;z-index:90;pointer-events:none;display:none}
+
+/* stages: crisp pixel canvases that fit phones and laptops */
+.stagewrap{position:relative;margin:0 auto;container-type:inline-size;
+  width:min(100%,calc(var(--w)*4.6px),calc((100vh - var(--room,150px))*var(--w)/var(--h)))}
+@supports (height:100svh){.stagewrap{width:min(100%,calc(var(--w)*4.6px),calc((100svh - var(--room,150px))*var(--w)/var(--h)))}}
+.stagewrap canvas{display:block;width:100%;height:auto}
+.ov{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;line-height:1}
+
+/* pixel boxes + buttons */
+.pbox{background:var(--paper);box-shadow:var(--ol),calc(var(--px)*2) calc(var(--px)*3) 0 0 rgba(62,49,80,.18)}
+.pbtn{border:0;cursor:pointer;background:var(--ink);color:var(--paper);padding:8px 16px 9px;font-size:18px;margin:var(--px);
+  box-shadow:inset 0 calc(var(--px)*-1) 0 0 rgba(0,0,0,.3),var(--ol)}
+.pbtn:hover{background:#54446C}
+.pbtn:active{transform:translateY(var(--px))}
+.pbtn.light{background:var(--paper);color:var(--ink);box-shadow:inset 0 calc(var(--px)*-1) 0 0 #E2D3BF,var(--ol)}
+.pbtn.light:hover{background:#FFF6EA}
+
+/* ---------- envelope opener ---------- */
+#cover{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;background:var(--bg)}
+#cover.gone{display:none}
+#cover{overflow:hidden}
+#coverBg{position:absolute;left:0;top:0;pointer-events:none}
+#opWrap,#opHint{position:relative;z-index:1}
+#opWrap{--w:112;--h:124;--room:120px;cursor:pointer}
+.op-hint{font-size:20px;color:var(--ink);min-height:30px;text-align:center;background:var(--paper);padding:3px 14px 5px;box-shadow:var(--ol),calc(var(--px)*1) calc(var(--px)*2) 0 0 rgba(46,34,72,.25)}
+.op-hint:empty{visibility:hidden}
+.blink{animation:blinkTxt 1.1s steps(2,jump-none) infinite}
+@keyframes blinkTxt{50%{opacity:.35}}
+
+/* ---------- pages ---------- */
+#scenes{position:relative;z-index:1}
+.scene{display:none;min-height:100vh;min-height:100svh;max-width:600px;margin:0 auto;padding:max(24px,env(safe-area-inset-top)) 18px 130px}
+.scene.active{display:block}
+.scene-h{font-weight:700;font-size:clamp(30px,8.6vw,42px);line-height:1.05;text-align:center;margin-top:14px;text-shadow:3px 3px 0 var(--orgl)}
+.lede{text-align:center;color:var(--ink2);margin-top:10px;font-size:18px}
+
+/* cake */
+.hero{text-align:center;padding-top:6px}
+.t-small{font-size:clamp(20px,5.6vw,26px);color:var(--ink2)}
+.t-name{font-weight:700;font-size:clamp(54px,16vw,86px);line-height:1;color:var(--lavd);text-shadow:4px 4px 0 var(--orgl);margin-top:2px}
+.t-name span{display:inline-block}
+.t-name.party span{animation:hopL .7s steps(4) both;animation-delay:calc(var(--i)*80ms)}
+@keyframes hopL{50%{transform:translateY(-18px);color:var(--orgd)}}
+#cakeWrap{--w:118;--h:104;--room:240px;margin-top:4px}
+.flag-label{font-size:11px;font-size:2.95cqw;color:var(--lavd)}
+.cala-label{font-size:14px;font-size:4cqw;color:var(--ink2)}
+.bubble{background:var(--paper);font-size:15px;font-size:4.3cqw;padding:.22em .5em .3em;
+  box-shadow:.7cqw 0 0 0 var(--ink),-.7cqw 0 0 0 var(--ink),0 .7cqw 0 0 var(--ink),0 -.7cqw 0 0 var(--ink);visibility:hidden}
+.bubble.on{visibility:visible;animation:popIn .3s steps(3)}
+@keyframes popIn{from{transform:translate(-50%,-30%) scale(.5)}}
+.lyric{position:relative;height:34px;margin-top:6px}
+.lyric.hide,.lyric.hide .line,.lyric.hide .line.active{visibility:hidden}
+.lyric .line{position:absolute;left:0;right:0;text-align:center;font-size:clamp(19px,5.4vw,25px);color:#B3A9C6;visibility:hidden}
+.lyric .line.active{visibility:visible}
+.lyric .w{white-space:nowrap}
+.lyric .s{position:relative}
+.lyric .s.sung{color:var(--ink)}
+.lyric .s.on{color:var(--orgd);top:-3px}
+.prompt{text-align:center;min-height:132px;margin-top:4px;position:relative;z-index:16}
+.prompt h2{font-weight:600;font-size:clamp(21px,6vw,27px);line-height:1.25}
+.prompt p{font-size:17px;color:var(--ink2);margin-top:8px}
+.prompt .greet{font-weight:700;font-size:clamp(25px,7.2vw,33px);color:var(--lavd);text-shadow:3px 3px 0 var(--orgl);margin:0}
+.prompt .ilo{font-size:19px;color:var(--saged);margin-top:4px}
+.prompt .in{animation:stepIn .45s steps(3) both}
+@keyframes stepIn{from{opacity:0;transform:translateY(9px)}}
+.meter{display:inline-flex;gap:2px;align-items:flex-end;height:12px;margin-left:8px;vertical-align:-1px}
+.meter i{width:3px;height:3px;background:var(--saged)}
+.textbtn{border:0;background:none;color:var(--lavd);text-decoration:underline;text-underline-offset:4px;cursor:pointer;margin-top:12px;font-size:17px}
+
+/* receipt */
+.receipt-wrap{position:relative;width:min(100%,330px);margin:34px auto 0}
+.receipt{position:relative;background:#FFFEFA;color:#4F4762;font-family:var(--mono);font-size:20px;line-height:1.12;padding:22px 18px 26px;box-shadow:calc(var(--px)*2) calc(var(--px)*2) 0 0 rgba(62,49,80,.16)}
+.receipt::before,.receipt::after{content:"";position:absolute;left:0;right:0;height:calc(var(--px)*2);background:linear-gradient(90deg,#FFFEFA 50%,transparent 0) 0 0/calc(var(--px)*4) 100% repeat-x}
+.receipt::before{top:calc(var(--px)*-2)}
+.receipt::after{bottom:calc(var(--px)*-2)}
+.r-icon{display:block;width:42px;height:42px;margin:0 auto 8px}
+.r-store{text-align:center;font-size:23px;letter-spacing:.06em;line-height:1.05}
+.r-meta{text-align:center;font-size:17px;opacity:.75;margin-top:4px}
+.r-rule{height:var(--px);margin:12px 0;background:repeating-linear-gradient(90deg,#C9C1D3 0 calc(var(--px)*2),transparent 0 calc(var(--px)*4))}
+.r-kv{display:flex;justify-content:space-between;gap:10px}
+.r-total{font-size:24px;color:var(--ink)}
+.r-items{list-style:none}
+.r-items li{display:grid;grid-template-columns:2ch 1fr auto;column-gap:.5ch;margin-bottom:7px}
+.r-items .a{text-align:right;white-space:nowrap}
+.r-items .n{grid-column:2/-1;font-size:17px;opacity:.72;line-height:1.08}
+.barcode{height:36px;margin:14px 14% 8px;background:repeating-linear-gradient(90deg,#4F4762 0 3px,transparent 3px 6px,#4F4762 6px 9px,transparent 9px 15px,#4F4762 15px 21px,transparent 21px 24px)}
+.scribble{position:absolute;right:0;bottom:-38px;font-size:23px;color:var(--orgd);transform:rotate(-6deg)}
+
+/* friends' notes */
+.pile{position:relative;height:370px;margin:34px auto 0;max-width:360px}
+.fnote{position:absolute;left:50%;top:14px;width:min(80vw,300px);height:320px;margin-left:calc(min(80vw,300px)/-2);transform:rotate(var(--r,0deg));border:0;background:none;padding:0;text-align:left;cursor:pointer;transition:transform .4s steps(4),opacity .4s steps(4)}
+.fnote.toss{transform:translate(115%,-20px) rotate(16deg);opacity:0}
+.fnote.notrans{transition:none}
+.fside{position:absolute;inset:0;padding:30px 24px 22px;background:var(--tint,var(--paper));box-shadow:var(--ol),calc(var(--px)*2) calc(var(--px)*3) 0 0 rgba(62,49,80,.18)}
+.fside.back{display:none;overflow-y:auto}
+.fnote.flipped .fside.front{display:none}
+.fnote.flipped .fside.back{display:block}
+.fside.front{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.tape{position:absolute;top:-10px;left:50%;width:84px;height:20px;margin-left:-42px;background:var(--tape);opacity:.8}
+.from-label{font-size:17px;color:var(--ink2)}
+.from-name{font-weight:700;font-size:38px;line-height:1.15}
+.tapme{font-size:15px;color:var(--ink2);margin-top:12px}
+.msg{font-family:var(--read);font-size:19px;line-height:1.5;white-space:pre-line}
+.sig{font-weight:600;font-size:22px;color:var(--ink2);text-align:right;margin-top:12px}
+.paper-0{--tint:#FFFDF8;--tape:#B9ABDF}.paper-1{--tint:#F7F3FC;--tape:#A3B694}.paper-2{--tint:#F5F8F0;--tape:#F5C08F}.paper-3{--tint:#FEF6EE;--tape:#B9ABDF}
+.pile-count{text-align:center;font-size:17px;color:var(--ink2)}
+
+/* basket + inspect + dialog + letter envelope */
+#bkWrap{--w:144;--h:128;--room:200px;margin-top:6px}
+.hot{position:absolute;border:0;padding:0;margin:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.hot:focus{outline:none}
+.hot:focus-visible{outline:var(--px) dashed var(--org);outline-offset:0}
+.bk-tip{background:var(--paper);font-size:13px;font-size:3.3cqw;padding:.2em .5em .28em;transform:translate(-50%,-100%);box-shadow:.6cqw 0 0 0 var(--ink),-.6cqw 0 0 0 var(--ink),0 .6cqw 0 0 var(--ink),0 -.6cqw 0 0 var(--ink);visibility:hidden;z-index:3}
+.bk-tip.on{visibility:visible}
+.bk-count{text-align:center;font-size:15px;color:var(--ink2);margin-top:8px;min-height:21px}
+.inspect{position:fixed;inset:0;z-index:58;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(46,34,72,.5);padding:max(28px,calc(env(safe-area-inset-top) + 18px)) 16px 40px;visibility:hidden;display:flex;flex-direction:column}
+.inspect.show{visibility:visible}
+.insp-box{position:relative;width:100%;max-width:420px;margin:auto;padding:24px 18px 18px;text-align:center;transform:translateY(30px);opacity:0;transition:transform .4s steps(4),opacity .4s steps(4)}
+.inspect.show .insp-box{transform:none;opacity:1}
+#inspCv{display:block;width:min(100%,264px);height:auto;margin:6px auto 0;cursor:pointer;background:var(--cream);box-shadow:var(--ol)}
+.insp-hint{font-size:14px;color:var(--ink2);margin-top:8px}
+.insp-name{font-weight:700;font-size:28px;line-height:1.1;color:var(--lavd);text-shadow:3px 3px 0 var(--orgl);margin-top:12px}
+.insp-desc{font-size:18px;line-height:1.35;margin-top:8px}
+.insp-say{font-size:17px;line-height:1.3;color:var(--orgd);min-height:1.3em;margin-top:8px}
+.insp-say:empty{min-height:0;margin:0}
+.insp-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px}
+#inspExtra .gift{margin-top:2px}
+.dialog{position:relative;max-width:400px;margin:22px auto 0;padding:12px 14px 12px}
+#duo{display:block;width:100%;height:auto;box-shadow:var(--ol);margin-bottom:10px}
+.dlg-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.dlg-name{font-weight:700;color:var(--orgd);font-size:19px;line-height:1.1}
+.dlg-step{font-size:14px;color:var(--ink2)}
+.dlg-text{font-size:18px;line-height:1.35;min-height:2.8em;margin-top:6px;cursor:pointer}
+.dlg-opts{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:4px}
+.opt{border:0;background:var(--paper);cursor:pointer;padding:5px 12px 6px 10px;font-size:18px;margin:var(--px);box-shadow:var(--ol)}
+.opt::before{content:"\25B8 ";color:var(--org)}
+.opt:hover{background:#FFF3E6}
+.opt.right{background:var(--saged);color:var(--paper)}
+.opt.right::before{color:var(--paper)}
+.opt.wrong{animation:shakeP .32s steps(4)}
+@keyframes shakeP{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+#envArea{margin-top:18px}
+#ltWrap{--w:80;--h:84;--room:170px;cursor:pointer;width:min(100%,360px,calc((100svh - 170px)*80/84))}
+.env-hint{text-align:center;color:var(--ink2);margin-top:10px}
+
+/* letter */
+.reader{position:fixed;inset:0;z-index:60;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(46,34,72,.5);padding:max(96px,calc(env(safe-area-inset-top) + 82px)) 16px 48px;visibility:hidden}
+.reader.show{visibility:visible}
+.sheet{position:relative;max-width:560px;margin:0 auto;background:var(--paper);padding:34px 26px 0;box-shadow:var(--ol),calc(var(--px)*3) calc(var(--px)*3) 0 0 rgba(0,0,0,.22);transform:translateY(36px);opacity:0;transition:transform .5s steps(5),opacity .5s steps(5)}
+.reader.show .sheet{transform:none;opacity:1}
+.sheet-cala{position:absolute;left:50%;bottom:calc(100% - 12px);width:96px;transform:translateX(-50%)}
+.sheet h2{padding-right:46px;font-weight:700;font-size:36px;color:var(--lavd);text-shadow:3px 3px 0 var(--orgl);line-height:1.1}
+#myTitle{font-size:32px;line-height:1.1}
+.sheet-body.hand{font-family:var(--hand);font-size:25px;line-height:1.42;font-weight:500;color:#3B3149;margin-top:16px}
+.sheet-body.hand p+p{margin-top:.75em}
+.sheet-sig.sign{font-family:var(--sign);font-weight:400;font-size:64px;line-height:1.1;margin-top:10px;padding-right:6px}
+#mySig{display:inline-block;padding:.12em .3em .22em .2em;clip-path:inset(0 100% 0 0);-webkit-clip-path:inset(0 100% 0 0);transition:clip-path 1.9s cubic-bezier(.45,.05,.35,1),-webkit-clip-path 1.9s cubic-bezier(.45,.05,.35,1)}
+#mySig.on{clip-path:inset(0 0 0 0);-webkit-clip-path:inset(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){#mySig{clip-path:none;-webkit-clip-path:none}}
+.sheet-body{font-family:var(--read);font-size:18px;line-height:1.72;margin-top:12px;color:#3B3149}
+.sheet-body p+p{margin-top:1em}
+.sheet-body.cat{font-family:var(--pix);font-size:19px;line-height:1.6;color:var(--ink)}
+.sheet-sig .paw{width:28px;height:auto;vertical-align:-4px;margin-left:4px}
+.sheet-sig{font-weight:600;font-size:28px;color:var(--lavd);text-align:right;margin-top:16px}
+.x{position:absolute;z-index:3;top:10px;right:10px;width:38px;height:38px;border:0;background:var(--cream);font-size:24px;line-height:1;cursor:pointer;box-shadow:var(--ol)}
+.gift-ps{text-align:center;font-size:17px;color:var(--ink2);margin-top:30px}
+.gift{position:relative;max-width:380px;margin:12px auto 0;}
+.gift+.gift{margin-top:26px}
+.gift{background:#ECE5FA;padding:24px 16px 14px;text-align:center;box-shadow:var(--ol),calc(var(--px)*2) calc(var(--px)*3) 0 0 rgba(62,49,80,.18)}
+.gift::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background-image:var(--weave);background-size:auto 12px;image-rendering:pixelated}
+.gift-top{display:flex;align-items:center;justify-content:center;gap:10px}
+.gift-icon{width:32px;height:auto}
+.gift-kicker{font-size:17px;color:var(--ink2)}
+.gift-store{font-weight:700;font-size:24px;margin-top:8px;line-height:1.15}
+.gift-amt{font-weight:700;font-size:44px;line-height:1.1;color:var(--lavd);text-shadow:3px 3px 0 var(--orgl)}
+.scratch{position:relative;margin:14px auto 0;width:100%;max-width:300px;aspect-ratio:64/18;background:var(--paper);box-shadow:var(--ol)}
+.scratch-under{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px}
+.scratch-label{font-size:13px;color:var(--ink2);line-height:1.1}
+.scratch-code{font-family:var(--mono);font-size:27px;letter-spacing:.08em;line-height:1.1;cursor:copy;-webkit-user-select:all;user-select:all}
+.scratch-msg{font-size:18px;line-height:1.2}
+.scratch-top{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+.scratch-top:active{cursor:grabbing}
+.gift-hint{font-size:15px;color:var(--ink2);margin-top:10px}
+.gift .textbtn{font-size:14px;margin-top:2px}
+.gift-link{display:inline-block;text-decoration:none;margin-top:10px}
+.gift-note{font-family:var(--hand);font-size:23px;line-height:1.32;font-weight:500;text-align:left;color:#3B3149;background:var(--paper);padding:10px 14px 12px;margin:14px 2px 4px;box-shadow:var(--ol)}
+.sheet-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:26px}
+.sheet-band{height:15px;margin:28px -26px 0;background-image:var(--weave);background-size:auto 15px;image-rendering:pixelated}
+
+/* nav */
+#nav{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translate(-50%,220%);display:flex;align-items:center;gap:8px;padding:5px 6px;background:var(--paper);box-shadow:var(--ol),calc(var(--px)*2) calc(var(--px)*2) 0 0 rgba(62,49,80,.18);z-index:20;transition:transform .45s steps(4)}
+#nav.show{transform:translate(-50%,0)}
+.navbtn{border:0;cursor:pointer;background:transparent;padding:7px 12px 8px;font-size:18px;white-space:nowrap}
+#back{color:var(--ink2)}
+#back:hover{color:var(--ink)}
+#back[disabled]{visibility:hidden}
+#next{background:var(--ink);color:var(--paper);box-shadow:inset 0 calc(var(--px)*-1) 0 0 rgba(0,0,0,.3)}
+#next:hover{background:#54446C}
+#next.nudge{animation:nudgeP .9s steps(2,jump-none) 4}
+@keyframes nudgeP{50%{transform:translateY(calc(var(--px)*-1))}}
+.dots{display:flex;gap:5px;padding:0 2px}
+.dots i{width:6px;height:6px;background:var(--lav)}
+.dots i.on{background:var(--ink)}
+.toast{position:fixed;left:50%;bottom:max(96px,calc(env(safe-area-inset-bottom) + 80px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:7px 14px 8px;font-size:17px;z-index:40;white-space:nowrap;visibility:hidden;box-shadow:var(--ol)}
+.toast.show{visibility:visible}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body class="locked">
+<canvas id="bgfx" class="px" aria-hidden="true"></canvas>
+<div id="dim" aria-hidden="true"></div>
+
+<!-- ================= the envelope ================= -->
+<div id="cover">
+  <canvas id="coverBg" class="px" aria-hidden="true"></canvas>
+  <div class="stagewrap" id="opWrap" role="button" tabindex="0" aria-label="Your birthday envelope. Press to open.">
+    <canvas id="opStage" class="px" width="112" height="124"></canvas>
+  </div>
+  <p class="op-hint blink" id="opHint">tap the seal</p>
+</div>
+
+<div id="scenes">
+
+<!-- ================= the cake ================= -->
+<section class="scene active" id="s-cake" data-next="see what i got you">
+  <header class="hero">
+    <p class="t-small">happy birthday,</p>
+    <h1 class="t-name" id="tname">Aleisha</h1>
+  </header>
+  <div class="stagewrap" id="cakeWrap" tabindex="0" aria-label="A pixel Costco strawberry shortcake with one candle, and Cala the cat">
+    <canvas id="cakeStage" class="px" width="118" height="104"></canvas>
+    <span class="ov flag-label" style="left:58.5%;top:39.9%">the Costco one</span>
+    <span class="ov cala-label" style="left:83%;top:96.6%">Cala</span>
+    <span class="ov bubble" id="catBubble" style="left:68%;top:59%">mrrp!</span>
+  </div>
+  <div id="lyric" class="lyric" aria-hidden="true"></div>
+  <div id="prompt" class="prompt" aria-live="polite"></div>
+</section>
+
+<!-- ================= the receipt ================= -->
+<section class="scene" id="s-haul" data-next="read your notes">
+  <h2 class="scene-h">a little receipt</h2>
+  <p class="lede">of things that are very you</p>
+  <div class="receipt-wrap">
+    <div class="receipt">
+      <canvas class="r-icon px" id="pomeloIcon" width="14" height="14" aria-hidden="true"></canvas>
+      <p class="r-store">ALEISHA'S BIRTHDAY<br>WAREHOUSE CLUB</p>
+      <p class="r-meta">members only / est. nov 1</p>
+      <div class="r-rule"></div>
+      <div class="r-kv"><span>MEMBER</span><span>ALEISHA</span></div>
+      <div class="r-kv"><span>LEVEL</span><span>executive</span></div>
+      <div class="r-kv"><span>EXPIRES</span><span>never</span></div>
+      <div class="r-rule"></div>
+      <ul class="r-items">
+        <li><span>1</span><span>STRAWBERRY SHORTCAKE</span><span class="a">1 wish</span><span class="n">yes, the Costco one. serves 12, or 1 Aleisha</span></li>
+        <li><span>1</span><span>POMELO, X-LARGE</span><span class="a">in season</span><span class="n">best fruit. not up for debate</span></li>
+        <li><span>1</span><span>CALA</span><span class="a">not for sale</span><span class="n">chief cake inspector</span></li>
+        <li><span>3</span><span>COLORS</span><span class="a">everywhere</span><span class="n">lavender, orange, sage green</span></li>
+        <li><span>1</span><span>JASMINE TEA</span><span class="a">on the house</span><span class="n">Uncle Iroh insists</span></li>
+        <li><span>1</span><span>MOVIE REWATCH</span><span class="a">soon?</span><span class="n">The Princess and the Pauper. Preminger's face included</span></li>
+        <li><span>1</span><span>HISOKA</span><span class="a">&#9824;&#9829;&#9830;&#9827;</span><span class="n">suspicious as always. bungee gum sold separately</span></li>
+        <li><span>&infin;</span><span>HORSE JOKES</span><span class="a">neigh charge</span><span class="n">straight from the horse's mouth</span></li>
+        <li><span>1</span><span>HOT DOG + DRINK</span><span class="a">$1.50</span><span class="n">some things never change</span></li>
+        <li><span>&infin;</span><span>FREE SAMPLES</span><span class="a">0.00</span></li>
+      </ul>
+      <div class="r-rule"></div>
+      <div class="r-kv"><span>SUBTOTAL</span><span>a lot</span></div>
+      <div class="r-kv"><span>BIRTHDAY DISCOUNT</span><span>-100%</span></div>
+      <div class="r-kv r-total"><span>TOTAL</span><span>$0.00</span></div>
+      <div class="r-kv"><span>CHANGE</span><span>don't ever</span></div>
+      <div class="r-rule"></div>
+      <p class="r-meta">items 10 / wishes made 1</p>
+      <div class="barcode" aria-hidden="true"></div>
+      <p class="r-meta">thank you for being born.<br>please come back next year.</p>
+    </div>
+    <span class="scribble">you're welcome</span>
+  </div>
+</section>
+
+<!-- ================= notes from friends ================= -->
+<section class="scene" id="s-friends" data-next="one more thing">
+  <h2 class="scene-h">notes from your people</h2>
+  <p class="lede">tap a note to open it</p>
+  <div class="pile" id="pile"></div>
+  <p class="pile-count" id="pileCount"></p>
+</section>
+
+<!-- ================= the gift basket ================= -->
+<section class="scene" id="s-basket">
+  <h2 class="scene-h">a basket for you</h2>
+  <p class="lede" id="bkLede">tap anything to take a closer look</p>
+  <div class="stagewrap" id="bkWrap" aria-label="A pixel gift basket with a bouquet of tulips beside it">
+    <canvas id="bkStage" class="px" width="144" height="128"></canvas>
+    <span class="ov bk-tip" id="bkTip"></span>
+  </div>
+  <p class="bk-count" id="bkCount"></p>
+  <div class="dialog pbox" id="lock" hidden>
+    <canvas id="duo" class="px" width="96" height="62" aria-hidden="true"></canvas>
+    <div class="dlg-head"><p class="dlg-name" id="dlgName">cala</p><p class="dlg-step" id="lockStep"></p></div>
+    <p class="dlg-text" id="lockQ" aria-live="polite"></p>
+    <div class="dlg-opts" id="lockOpts"></div>
+  </div>
+  <div id="envArea" hidden>
+    <div class="stagewrap" id="ltWrap" role="button" tabindex="0" aria-label="An envelope from Cala">
+      <canvas id="ltStage" class="px" width="80" height="84"></canvas>
+      <span class="ov bubble" id="envBubble" style="left:82%;top:20%">mrrp!</span>
+    </div>
+    <p class="env-hint blink" id="envHint">tap the seal</p>
+  </div>
+</section>
+</div>
+
+<!-- ================= looking at something from the basket ================= -->
+<div id="inspect" class="inspect" role="dialog" aria-modal="true" aria-labelledby="inspName" aria-hidden="true">
+  <div class="insp-box pbox">
+    <button class="x" type="button" aria-label="Put it back">×</button>
+    <canvas id="inspCv" class="px" width="44" height="32" aria-hidden="true"></canvas>
+    <p class="insp-hint blink" id="inspHint">tap it</p>
+    <h3 class="insp-name" id="inspName"></h3>
+    <p class="insp-desc" id="inspDesc"></p>
+    <p class="insp-say" id="inspSay" aria-live="polite"></p>
+    <div id="inspExtra"></div>
+    <div class="insp-actions" id="inspActs"></div>
+  </div>
+</div>
+<div id="giftHold" hidden></div>
+
+<!-- ================= the letter ================= -->
+<div id="reader" class="reader" role="dialog" aria-modal="true" aria-labelledby="readerTitle" aria-hidden="true">
+  <article class="sheet" id="letterCala">
+    <canvas class="sheet-cala px" id="sheetCala" width="26" height="16" aria-hidden="true"></canvas>
+    <button class="x" type="button" aria-label="Close the letter">×</button>
+    <h2 id="readerTitle">to my favorite human,</h2>
+    <div class="sheet-body cat">
+      <p>mrrp. it is me, Cala. i was asked to deliver this, which is a very big job for a cat my size.</p>
+      <p>happy birthday. you are my favorite lap, my favorite person to sit on, and you are allowed to put silly hats on me. i will allow it. sometimes.</p>
+      <p>my birthday wishes for you: more naps, more pomelo, more treats (for me), and the best year ever.</p>
+      <p>okay. there is one more letter. it is not from me. i did not read it. (i read it.)</p>
+    </div>
+    <p class="sheet-sig">love, Cala <canvas class="px paw" id="pawSig" width="7" height="7" aria-hidden="true"></canvas></p>
+    <div class="sheet-actions"><button class="pbtn" id="toMine" type="button">read the other letter</button></div>
+    <div class="sheet-band" aria-hidden="true"></div>
+  </article>
+  <article class="sheet" id="letterMe" hidden>
+    <button class="x" type="button" aria-label="Close the letter">×</button>
+    <h2 id="myTitle">my message for my preminger</h2>
+    <div class="sheet-body hand">
+      <p>happy birthday mojito, or should i say aleisha?</p>
+      <p>anyways, i hope you have the loveliest birthday later. i just wanted to give you this little message as my present to you and as my own way of greeting you. i don’t usually do things like this, so consider yourself a little special. i tried to make this as personal as i could with everything i’ve gotten to know about you so far, and i genuinely hope it makes you smile, even just a little.</p>
+      <p>i know we haven’t known each other for that long, but i’m honestly really glad i got the chance to meet you. there’s just something about you that makes me want to keep getting to know you more, and i hope that as the days go by, i’ll get to discover more of the little things that make you, you. whether it’s your random thoughts, your stories, your silly side, or even those questionable horse jokes of ours, i’d love to know all of it.</p>
+      <p>and hey, if you ever feel a little sad or lonely, especially on your birthday, just give me a call. i’ll do my best to cheer you up, even if it means making an absolute horse out of myself. although, knowing us, one stupid horse joke would probably be enough to get us laughing again.</p>
+      <p>but seriously, i hope this new chapter of your life treats you gently and brings you all the happiness you deserve. i hope you get to experience beautiful things, make unforgettable memories, and find more reasons to smile. and maybe, if i’m lucky enough, i’ll get to be a small part of some of those memories too.</p>
+      <p>anyways, sleep well, pretty girl. i’m probably either fast asleep or really drunk by the time you’re reading this, but i wanted to make sure you had something sweet waiting for you. there’s honestly a lot more i’d love to tell you, but i think i’ll save those words for when we get to call again. some things are just better said when i get to hear your reaction.</p>
+      <p>happy birthday again, aleisha. i hope your day is as lovely as you are, and i hope i get to know you a whole lot more as time goes on.</p>
+    </div>
+    <p class="sheet-sig sign"><span id="mySig">aron</span></p>
+    <p class="gift-ps" id="giftPs">p.s. did you find the gift cards in the basket? 👀</p>
+    <div class="sheet-actions">
+      <button class="pbtn light" id="readerClose" type="button">fold it back up</button>
+      <button class="pbtn" id="relight" type="button">light the candle again</button>
+    </div>
+    <div class="sheet-band" aria-hidden="true"></div>
+  </article>
+</div>
+
+<nav id="nav" aria-label="Pages">
+  <button class="navbtn" id="back" type="button" disabled>back</button>
+  <div class="dots" id="dots" aria-hidden="true"></div>
+  <button class="navbtn" id="next" type="button">next</button>
+</nav>
+<canvas id="fx" class="px" aria-hidden="true"></canvas>
+<canvas id="wipe" class="px" aria-hidden="true"></canvas>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// friends' notes (that page is skipped while this is empty)
+const FRIENDS = [];
+
+const MY_NAME = "aron";
+
+// gift cards in the basket (links are scrambled)
+const GIFT_CARDS = [
+  { store: "Tim Hortons", amount: "$25", icon: "cup", link: "CxUYEV5XXV0VBAcYT0QDXSBBCgJBJWs7BiIWUBRUGA==",
+    note: "i know i told you not to eat here too often, but i’ll make an exception for your crispy chicken wrap cravings. hope this keeps your hungry tummy happy. and don’t forget to drink water, not just coffee. take care of yourself for me, alright?" },
+  { store: "Sephora", amount: "$50", icon: "lipstick", link: "CxUYEV5XXV0VBAcYT0QDXREvChhcWUQ7OyUJVwkvKw==",
+    note: "i honestly don’t know a thing about makeup, so i figured i’d let you do the shopping before i accidentally buy you the wrong shade of something. get yourself something nice, although i don’t think you need much to look pretty anyway" },
+];
+
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NOW = () => performance.now() / 1000;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+
+/* ================= palette ================= */
+const C = {
+  K:'#3E3150', k:'#6B5B86', W:'#FFFDF8', w:'#F3EADF', c:'#E2D3BF', u:'#F7E6D8',
+  L:'#DCD3F4', l:'#B9ABDF', V:'#8E7DC6', v:'#5F4F98',
+  O:'#E8975A', o:'#F5C08F', R:'#C06A33',
+  S:'#A3B694', s:'#CBD8BE', G:'#6E855F',
+  P:'#F4B9C3', p:'#E25D6A', r:'#B13F4F',
+  Y:'#FFF1C2', y:'#FFCB6E', f:'#F08A3C',
+  B:'#4B4453', b:'#6D6576', T:'#F3DCA8', t:'#DDBD82', g:'#CFC7DA',
+  e:'#E9DE8E', h:'#F6B5A1',
+};
+const B4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
+
+/* ================= tiny pixel engine ================= */
+function cnv(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d'); x.imageSmoothingEnabled = false; return [c, x]; }
+function D(x) {
+  const R = Math.round;
+  return {
+    p(px, py, col) { x.fillStyle = col; x.fillRect(R(px), R(py), 1, 1); },
+    r(px, py, w, h, col) { x.fillStyle = col; x.fillRect(R(px), R(py), R(w), R(h)); },
+    ell(cx, cy, rx, ry, col) { x.fillStyle = col; for (let yy = -ry; yy <= ry; yy++) { const hw = R(rx * Math.sqrt(Math.max(0, 1 - (yy * yy) / (ry * ry + .25)))); x.fillRect(R(cx - hw), R(cy + yy), hw * 2 + 1, 1); } },
+    line(x0, y0, x1, y1, col) {
+      x0 = R(x0); y0 = R(y0); x1 = R(x1); y1 = R(y1);
+      const dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1, dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1; let e = dx + dy;
+      x.fillStyle = col;
+      for (let n = 0; n < 2000; n++) { x.fillRect(x0, y0, 1, 1); if (x0 === x1 && y0 === y1) break; const e2 = 2 * e; if (e2 >= dy) { e += dy; x0 += sx; } if (e2 <= dx) { e += dx; y0 += sy; } }
+    },
+    poly(pts, col) {
+      x.fillStyle = col;
+      const ys = pts.map(q => q[1]); const y0 = Math.floor(Math.min(...ys)), y1 = Math.ceil(Math.max(...ys));
+      for (let yy = y0; yy <= y1; yy++) {
+        const xs = [], yc = yy + .5;
+        for (let i = 0; i < pts.length; i++) { const [ax, ay] = pts[i], [bx, by] = pts[(i + 1) % pts.length]; if ((ay <= yc && by > yc) || (by <= yc && ay > yc)) xs.push(ax + (yc - ay) * (bx - ax) / (by - ay)); }
+        xs.sort((a, b) => a - b);
+        for (let k = 0; k + 1 < xs.length; k += 2) { const xa = R(xs[k]), xb = R(xs[k + 1]); if (xb > xa) x.fillRect(xa, yy, xb - xa, 1); }
+      }
+    },
+    edges(pts, col, closed = true) { for (let i = 0; i < pts.length - (closed ? 0 : 1); i++) { const a = pts[i], b = pts[(i + 1) % pts.length]; this.line(a[0], a[1], b[0], b[1], col); } },
+    img(c, px, py) { x.drawImage(c, R(px), R(py)); },
+  };
+}
+function grid(rows, map = C) {
+  const h = rows.length, w = Math.max(...rows.map(r => r.length)); const [c, x] = cnv(w, h);
+  rows.forEach((r, y) => { for (let i = 0; i < r.length; i++) { const col = map[r[i]]; if (r[i] !== '.' && col) { x.fillStyle = col; x.fillRect(i, y, 1, 1); } } });
+  return c;
+}
+function outlined(src, col = C.K) {
+  const sw = src.width, sh = src.height, [c, x] = cnv(sw + 2, sh + 2);
+  const d = src.getContext('2d').getImageData(0, 0, sw, sh).data;
+  const A = (i, j) => i >= 0 && j >= 0 && i < sw && j < sh && d[(j * sw + i) * 4 + 3] > 0;
+  x.fillStyle = col;
+  for (let j = -1; j <= sh; j++) for (let i = -1; i <= sw; i++) if (!A(i, j) && (A(i - 1, j) || A(i + 1, j) || A(i, j - 1) || A(i, j + 1))) x.fillRect(i + 1, j + 1, 1, 1);
+  x.drawImage(src, 1, 1); return c;
+}
+function setupStage(id) { const c = $(id), x = c.getContext('2d'); x.imageSmoothingEnabled = false; return { c, x, d: D(x) }; }
+function toPix(c, e) { const r = c.getBoundingClientRect(); return [(e.clientX - r.left) * c.width / r.width, (e.clientY - r.top) * c.height / r.height]; }
+
+/* ================= sprites ================= */
+// Cala the calico (22 x 24): head + body drawn separately so her head can bob
+const HEAD = [
+  "..KK..............KK..",
+  "..KBK............KBK..",
+  "..KBPK..........KPOK..",
+  ".KBBPBKKKKKKKKKKOPOOK.",
+  ".KBBBBBBWWWWWWOOOOOOK.",
+  "KBBBBBBBWWWWWWOOOOOOOK",
+  "KBBBbWKbWWWWWWOWKOOOOK",
+  "KBBBbKKbWWWWWWOKKOOOOK",
+  "KBBBBbbWWWPPWWOOOOOOOK",
+  "KBBBBWWWWWKKWWWOOOOOOK",
+  ".KBBWWWWWWWWWWWWWOOOK.",
+  "..KKWWWWWWWWWWWWWWKK..",
+];
+const BODY = [
+  "..KOOOOOOOyyOOOOOOOK..",
+  "..KOOOWWWWWWWWWWWWWK..",
+  ".KOOOOWWWWWWWWWWWWWWK.",
+  ".KOOOWWWWWWWWWWWWWWWK.",
+  ".KOOWWWWWWWWWWWWWWWwK.",
+  ".KOWWWWWWWWWWWWWWBBwK.",
+  ".KWWWWWWWWWWWWWWBBBwK.",
+  ".KWWWWWWWWWWWWWWWBBwK.",
+  ".KWWWWWKWWWWKWWWWWWwK.",
+  ".KWWWWWKWWWWKWWWWWWwK.",
+  ".KWWwwWKWwwWKWWWWWwwK.",
+  "..KKKKKKKKKKKKKKKKKK..",
+];
+function headRows(eyes, ear) {
+  const r = HEAD.map(s => s.split('')); const set = (x, y, ch) => { r[y][x] = ch; };
+  if (eyes === 'blink' || eyes === 'closed') { set(5, 6, 'b'); set(6, 6, 'b'); set(15, 6, 'O'); set(16, 6, 'O'); set(5, 7, 'K'); set(6, 7, 'K'); set(15, 7, 'K'); set(16, 7, 'K'); }
+  if (eyes === 'happy') { set(5, 6, 'w'); set(6, 6, 'w'); set(4, 7, 'w'); set(5, 7, 'b'); set(6, 7, 'b'); set(7, 7, 'w'); set(15, 6, 'K'); set(16, 6, 'K'); set(14, 7, 'K'); set(15, 7, 'O'); set(16, 7, 'O'); set(17, 7, 'K'); }
+  if (ear) { r[0] = "..KK...............KK.".split(''); r[1] = "..KBK.............KBK.".split(''); r[2] = "..KBPK...........KPOK.".split(''); }
+  return r.map(a => a.join(''));
+}
+const HEADS = {};
+const headSprite = (eyes = 'open', ear = 0) => HEADS[eyes + ear] || (HEADS[eyes + ear] = grid(headRows(eyes, ear)));
+const BODY_S = grid(BODY);
+const PAW = grid([".KKK.", "KWWWK", ".KKK."]);
+const LETTER = grid([
+  "KKKKKKKKKKKKKK", "KWVWWWWWWWWVWK", "KWWVWWWWWWVWWK", "KWWWVWWWWVWWWK", "KWWWWVOOVWWWWK",
+  "KWWWWWOOWWWWWK", "KWWWWWWWWWWWWK", "KwwwwwwwwwwwwK", "KKKKKKKKKKKKKK"]);
+function calaLook(now, seed = 0) {
+  const tb = (now + seed) % 4.3, te = (now + seed * 1.7) % 6.4;
+  return { eyes: tb < .14 ? 'blink' : 'open', ear: te > 6.05 ? 1 : 0 };
+}
+function drawTail(d, bx, by, ph) {
+  const tipx = bx + 6 + Math.round(2 * Math.sin(ph)), tipy = by - 10 + Math.round(Math.cos(ph) * 1.4), cx1 = bx + 7, cy1 = by;
+  const pts = [];
+  for (let i = 0; i <= 16; i++) { const t = i / 16; pts.push([Math.round((1 - t) * (1 - t) * bx + 2 * (1 - t) * t * cx1 + t * t * tipx), Math.round((1 - t) * (1 - t) * by + 2 * (1 - t) * t * cy1 + t * t * tipy)]); }
+  pts.forEach(([x, y]) => d.r(x - 1, y - 1, 4, 4, C.K));
+  pts.forEach(([x, y]) => d.r(x, y, 2, 2, C.O));
+}
+function drawCala(d, x, y, o) {
+  drawTail(d, x + 18, y + 20, o.tail || 0);
+  d.img(BODY_S, x, y + 12);
+  d.img(headSprite(o.eyes, o.ear), x + (o.hx || 0), y + (o.hy || 0));
+}
+function drawCalaHolding(d, x, y, o) {
+  d.img(headSprite(o.eyes, o.ear), x + (o.hx || 0), y);
+  const ly = y + 11 - (o.lift || 0) - (o.bob || 0);
+  d.img(LETTER, x + 4, ly);
+  d.img(PAW, x + 2, ly - 1); d.img(PAW, x + 15, ly - 1);
+}
+
+// flame frames (7 x 10)
+const FLAME = [
+  ["...f...", "...f...", "..fyf..", "..fyf..", ".fyYyf.", ".fyYyf.", ".fyYyf.", ".fyYyf.", ".ffyff.", "..fff.."],
+  ["..f....", "..ff...", "..fyf..", ".fyyf..", ".fyYyf.", ".fyYyf.", ".fyYyf.", ".fyYyf.", ".ffyff.", "..fff.."],
+  ["....f..", "...ff..", "..fyf..", "..fyyf.", ".fyYyf.", ".fyYyf.", ".fyYyf.", ".fyYyf.", ".ffyff.", "..fff.."],
+].map(g => grid(g));
+const LEAN = [
+  [".......", "....f..", "...fyf.", "..fyyf.", ".fyYyf.", ".fyYyf.", ".fyYyf.", ".fyyff.", ".fffff.", "..fff.."],
+  [".......", ".......", ".......", "....ff.", "...fyyf", "..fyYyf", ".fyYyf.", ".fyyff.", ".ffff..", "..ff..."],
+].map(g => grid(g));
+const GLOW = (() => { const Rr = 15, [c, x] = cnv(Rr * 2 + 1, Rr * 2 + 1); x.fillStyle = 'rgba(255,212,140,.5)'; for (let j = 0; j <= Rr * 2; j++) for (let i = 0; i <= Rr * 2; i++) { const dd = Math.hypot(i - Rr, j - Rr); if (dd > Rr) continue; const v = 1 - dd / Rr; if (B4[(j & 3) * 4 + (i & 3)] / 16 < v * v * 1.5) x.fillRect(i, j, 1, 1); } return c; })();
+
+const NOTE_ROWS = ["...K..", "...KK.", "...K.K", "...K..", ".KKK..", "KKKK..", ".KK..."];
+const NOTES = [C.V, C.O, C.G].map(col => grid(NOTE_ROWS, { K: col }));
+const SPARK = [
+  ["....."], [".....", ".....", "..X..", ".....", "....."], [".....", "..X..", ".XXX.", "..X..", "....."], ["..X..", "..X..", "XXXXX", "..X..", "..X.."],
+];
+const SPARKS = {};
+function sparkSprite(f, col) { const k = f + col; return SPARKS[k] || (SPARKS[k] = grid(SPARK[f], { X: col })); }
+
+const BERRY = outlined(grid([".GSG.", "pPppp", "ppYpp", "pYppr", ".prr.", "..r.."]));
+const BERRY_LY = outlined(grid(["G.pp..", "GppPp.", "GpYppp", "Gpppr.", "G.rr.."]));
+const POMELO_W = grid(["..eee..", ".ehWhe.", "ehhWhhe", "eeeeeee"]);
+const TUL_ROWS = [".l..l..l.", ".ll.l.ll.", "lllllllll", "lLlllllVl", "lLllllVVl", "lLlllVVVl", ".llllVVV.", ".lllVVVV.", "..lVVVV.."];
+const BUD = outlined(grid([".S.", "SGS", ".S."], { S: '#7CB65B', G: '#4C8A3B' }), '#4C8A3B');
+// her tulip colors: lilac, lavender, pink, pumpkin-pie orange (and fresh greens, never olive)
+const FG = { L: '#B3DB94', M: '#7CB65B', D: '#4C8A3B' };
+const TUL_C = { lav: [C.L, C.l, C.V], lilac: ['#F0DDF0', '#CFA6D4', '#9F70AC'], pink: ['#FDE1E8', '#F4A7B9', '#D8728C'], pump: ['#F1A464', '#D2691E', '#A04C14'] };
+const TUL_BUD_ROWS = ["..l..", ".llV.", "lLlVV", "lLlVV", "lLlVV", ".lVV."];
+const TULIP = {}, TULIP_BUD = {};
+Object.entries(TUL_C).forEach(([k, [a, b, c]]) => { const m = { ...C, L: a, l: b, V: c }; TULIP[k] = outlined(grid(TUL_ROWS, m)); TULIP_BUD[k] = outlined(grid(TUL_BUD_ROWS, m)); });
+const BOW = outlined(grid(["SSS.....SSS", "SsSS...SSsS", "SssSSGSSssS", "SsSSGGGSSsS", "SSS.SGS.SSS", "...SS.SS...", "..SS...SS.."]));
+const TAG = outlined(grid(["...WWWWWWWWWWWWWWWW", "..WWWWWWWWWWWWWWWWW", ".WWWWWWWWWWWWWWWWWW", "WWKWWWWWWWWWWWWWWWW", ".WWWWWWWWWWWWWWWWWW", "..WWWWWWWWWWWWWWWWW", "...WWWWWWWWWWWWWWWW"]));
+const ARROW = grid(["KKKKKKK", "KOOOOOK", ".KOOOK.", "..KOK..", "...K..."]);
+const WEAVE = grid(["OOOOOOOO", "vvvvvvvv", "vvvSvvvv", "vvSlSvvv", "vSlWlSvv", "vvSlSvvv", "vvvSvvvv", "vvvvvvvv", "OOOOOOOO", "WWWWWWWW"]);
+document.documentElement.style.setProperty('--weave', `url(${(() => { const [c, x] = cnv(8, 10); x.drawImage(WEAVE, 0, 0); return c.toDataURL(); })()})`);
+
+// wax seals (16 x 16 + outline)
+const GLYPH_A = ["..v..", ".v.v.", ".vvv.", "v...v", "v...v"];
+const GLYPH_PAW = ["v.v.v", ".....", ".vvv.", "vvvvv", ".vvv."];
+function makeSeal(base, light, dark, glyph) {
+  const [c, x] = cnv(16, 16);
+  for (let Y = 0; Y < 16; Y++) for (let X = 0; X < 16; X++) {
+    const dx = X - 7.5, dy = Y - 7.5, a = Math.atan2(dy, dx), rr = 6.8 + .8 * Math.sin(a * 5 + 1.3) + .3 * Math.sin(a * 3 + .4), dist = Math.hypot(dx, dy);
+    if (dist <= rr) { let col = base; if (dist > 4.3 && dist < 5.3) col = dark; else if (dx + dy < -6.5) col = light; else if (dx + dy > 7.5) col = dark; x.fillStyle = col; x.fillRect(X, Y, 1, 1); }
+  }
+  x.fillStyle = dark; glyph.forEach((row, j) => { for (let i = 0; i < row.length; i++) if (row[i] !== '.') x.fillRect(5 + i, 5 + j, 1, 1); });
+  x.fillStyle = 'rgba(255,255,255,.6)'; x.fillRect(4, 2, 2, 1); x.fillRect(2, 4, 1, 2);
+  return outlined(c);
+}
+function splitSeal(s) {
+  const w = s.width, h = s.height, [L, lx] = cnv(w, h), [Rr, rx] = cnv(w, h);
+  const jag = [0, -1, 0, 1, 1, 0, -1, -1, 0, 1, 0, -1, 0, 1, 1, 0, -1, 0];
+  for (let y = 0; y < h; y++) { const b = 9 + jag[y % jag.length]; lx.drawImage(s, 0, y, b, 1, 0, y, b, 1); rx.drawImage(s, b, y, w - b, 1, b, y, w - b, 1); }
+  return [L, Rr];
+}
+const SEAL_A = makeSeal('#8E7DC6', '#B9ABDF', '#5F4F98', GLYPH_A), SEAL_A2 = splitSeal(SEAL_A);
+const SEAL_P = makeSeal('#E8975A', '#F5C08F', '#B5602B', GLYPH_PAW), SEAL_P2 = splitSeal(SEAL_P);
+
+// the cake: a Costco-style strawberry shortcake, drawn pixel by pixel
+const CAKE = (() => {
+  const W = 64, H = 70, [c, x] = cnv(W, H), d = D(x);
+  const cx = 32, rx = 22, ry = 4, top = 30, bot = 54;
+  let sd = 7; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  d.ell(32, 66, 12, 2, C.G); d.ell(32, 65, 12, 2, C.S);
+  d.r(29, 58, 7, 7, C.S); d.r(33, 58, 2, 7, C.G);
+  d.ell(32, 57, 29, 4, C.G); d.ell(32, 56, 29, 4, C.S); d.ell(32, 55, 27, 3, C.s);
+  const dy = X => Math.round(ry * Math.sqrt(Math.max(0, 1 - ((X - cx) / rx) ** 2)));
+  for (let X = cx - rx; X <= cx + rx; X++) {
+    const o = dy(X);
+    for (let Y = top + o; Y <= bot + o; Y++) {
+      const v = Y - o; let col;
+      if (v < top + 3) col = 'W'; else if (v < top + 9) col = 'T'; else if (v < top + 13) col = (v === top + 11 ? 'p' : 'W'); else if (v < bot - 2) col = 'T'; else col = 'W';
+      if (X > cx + rx - 6) col = { W: 'c', T: 't', p: 'r' }[col] || col;
+      d.p(X, Y, C[col]);
+      if (col === 'T' && rnd() < .12) d.p(X, Y, C.t);
+    }
+  }
+  for (let X = cx - rx + 3; X <= cx + rx - 4; X += 6) { const o = dy(X + 1); d.p(X, top + 9 + o, C.p); d.p(X + 1, top + 9 + o, C.P); d.p(X + 2, top + 9 + o, C.p); d.r(X, top + 10 + o, 3, 1, C.p); d.p(X + 1, top + 11 + o, C.r); }
+  d.ell(cx, top, rx, ry, C.W);
+  for (let X = cx - rx; X <= cx + rx; X++) d.p(X, top + dy(X), C.w);
+  for (let X = cx - rx + 2; X <= cx + rx - 2; X += 4) { const yb = top - dy(X); d.r(X - 1, yb, 3, 1, C.W); d.p(X, yb - 1, C.W); d.p(X + 1, yb, C.c); }
+  // candle with sage stripes
+  for (let Y = 14; Y <= top; Y++) for (let X = cx - 1; X <= cx + 1; X++) d.p(X, Y, ((X + Y) % 4 < 2) ? C.S : C.L);
+  // strawberries on top (back row)
+  [[cx - 15, top - 5], [cx - 7, top - 7], [cx + 6, top - 7], [cx + 13, top - 5]].forEach(([bx, by]) => d.img(BERRY, bx - 3, by - 4));
+  d.img(POMELO_W, 6, 52); d.img(BERRY_LY, 48, 50);
+  const out = outlined(c), ox = out.getContext('2d'), od = D(ox);
+  // front berries, piping (drawn after the outline so they keep their own edges)
+  [[cx - 10, top + 1], [cx + 9, top + 1], [cx - 18, top], [cx + 17, top]].forEach(([bx, by]) => od.img(BERRY, bx - 3 + 1, by - 5 + 1));
+  for (let X = cx - rx + 1; X <= cx + rx - 1; X += 3) { const yb = top + dy(X) + 1; od.r(X, yb, 3, 1, C.W); od.p(X + 1, yb - 1, C.W); od.p(X + 2, yb, C.c); }
+  for (let X = cx - rx + 1; X <= cx + rx - 1; X += 3) { const yb = bot + dy(X) + 1; od.r(X, yb, 3, 1, C.W); od.p(X + 1, yb - 1, C.W); od.p(X + 2, yb, C.c); }
+  od.p(cx + 1, 13, C.K); od.p(cx + 1, 12, C.K);
+  return out;
+})();
+const CAKE_X = 4, CAKE_Y = 26, WICK = [CAKE_X + 33, CAKE_Y + 12];
+
+/* ================= stages ================= */
+const OP = setupStage('#opStage'), CK = setupStage('#cakeStage'), LT = setupStage('#ltStage'), SC = setupStage('#sheetCala');
+const linerPat = x => x._lp || (x._lp = x.createPattern(WEAVE, 'repeat'));
+function drawSprigFlap(d, cx, cy) {
+  d.line(cx - 19, cy + 9, cx + 14, cy - 13, C.G);
+  for (let i = 0; i < 6; i++) { const t = .5 + i * .09, bx = cx - 19 + 33 * t, by = cy + 9 - 22 * t, s = i % 2 ? 1 : -1; d.p(bx + s, by - 1, C.V); d.p(bx + s, by, C.l); }
+  d.r(cx - 22, cy + 9, 3, 2, C.S); d.p(cx - 23, cy + 10, C.G);
+}
+function drawEnvelope(S, ex, ey, f, inside, sprig, ew = 96, eh = 62) {
+  const { x, d } = S, mx = ex + ew / 2, tip = Math.round(eh * .58 * f), vd = Math.round(eh * .53), lp = linerPat(x);
+  d.r(ex + 3, ey + eh + 1, ew - 2, 2, 'rgba(62,49,80,.14)');
+  if (f < 0) { d.poly([[ex, ey], [ex + ew, ey], [mx, ey + tip]], lp); d.line(ex, ey, mx, ey + tip, C.K); d.line(mx, ey + tip, ex + ew - 1, ey, C.K); }
+  d.r(ex, ey, ew, vd + 1, lp);
+  d.r(ex - 1, ey - 1, ew + 2, 1, C.K);
+  if (inside) inside();
+  d.poly([[ex, ey], [mx, ey + vd], [ex + ew, ey], [ex + ew, ey + eh], [ex, ey + eh]], C.w);
+  d.poly([[ex, ey + eh], [mx, ey + vd - 2], [ex + ew, ey + eh]], '#EFE4D6');
+  d.line(ex, ey + eh - 1, mx - 1, ey + vd - 2, C.c); d.line(ex + ew - 1, ey + eh - 1, mx, ey + vd - 2, C.c);
+  const vc = f < 0 ? C.k : C.c; d.line(ex, ey, mx, ey + vd, vc); d.line(mx, ey + vd, ex + ew - 1, ey, vc);
+  d.r(ex - 1, ey, 1, eh + 1, C.K); d.r(ex + ew, ey, 1, eh + 1, C.K); d.r(ex - 1, ey + eh, ew + 2, 1, C.K);
+  if (f > 0) {
+    d.poly([[ex, ey], [ex + ew, ey], [mx, ey + tip]], C.W);
+    d.line(ex, ey, mx, ey + tip, C.k); d.line(mx, ey + tip, ex + ew - 1, ey, C.k);
+    if (sprig && f === 1) drawSprigFlap(d, mx, ey + tip);
+  }
+}
+function drawCard(d, x, y) { d.r(x - 1, y - 1, 86, 56, C.K); d.r(x, y, 84, 54, C.W); d.r(x, y + 53, 84, 1, C.w); d.r(x + 83, y, 1, 54, C.w); }
+
+/* ---------- opener ---------- */
+const op = { stage: 0, tBreak: 0, tOpen: 0, tPull: 0, nudge: -9 };
+const FLAP_SEQ = [1, .66, .33, .06, -.36, -.7, -1];
+function drawOpener(now) {
+  const { c, x, d } = OP; x.clearRect(0, 0, c.width, c.height);
+  const ex = 8, ey = 56;
+  let f = 1, rise = 0, sink = 0;
+  if (op.stage >= 2) { f = FLAP_SEQ[Math.min(FLAP_SEQ.length - 1, Math.floor((now - op.tOpen) / .065))]; rise = Math.min(24, Math.floor(Math.max(0, now - op.tOpen - .5) / .035) * 2); }
+  if (op.stage >= 3) { rise = 24 + Math.min(140, Math.floor((now - op.tPull) / .03) * 3); const k = now - op.tPull - .4; if (k > 0) sink = Math.floor(k / .045) * 3; }
+  const card = () => drawCard(d, ex + 6, ey + 4 - rise);
+  if (sink < 80) drawEnvelope(OP, ex, ey + sink, f, card, true); else card();
+  const sx = ex + 48 - 9, sy = ey + 36 - 9;
+  if (op.stage === 0) { const nb = now - op.nudge < .3 ? (Math.floor(now * 30) % 2 ? 1 : -1) : 0; d.img(SEAL_A, sx + nb, sy - (Math.floor(now * 1.6) % 2)); }
+  else { const k = now - op.tBreak; if (k < .9 && (k < .55 || Math.floor(k * 20) % 2 === 0)) { d.img(SEAL_A2[0], sx - Math.floor(k * 16), sy + Math.floor(k * k * 70)); d.img(SEAL_A2[1], sx + Math.floor(k * 16), sy + Math.floor(k * k * 85)); } }
+}
+
+/* ---------- cake + Cala ---------- */
+const cake = { out: false, hop: -9, talkUntil: 0, lean: 0, wiggle: 0, smoke: [], notes: [] };
+function drawCake(now) {
+  const { c, x, d } = CK; x.clearRect(0, 0, c.width, c.height);
+  if (!cake.out) d.img(GLOW, WICK[0] - 15 + (Math.floor(now * 3) % 2), WICK[1] - 21);
+  d.ell(36, 97, 15, 1, 'rgba(62,49,80,.12)'); d.ell(96, 96, 12, 1, 'rgba(62,49,80,.12)');
+  d.img(CAKE, CAKE_X, CAKE_Y);
+  d.line(52, 56, 52, 37, C.t); const fp = [[52, 37], [87, 37], [83, 41], [87, 45], [52, 45]]; d.poly(fp, C.W); d.edges(fp, C.K);
+  if (!cake.out) {
+    let fr = FLAME[Math.floor(now * 8) % 3];
+    if (cake.lean > .8) fr = LEAN[1]; else if (cake.lean > .35) fr = LEAN[0];
+    const wg = now < cake.wiggle ? (Math.floor(now * 24) % 2 ? 1 : -1) : 0;
+    d.img(fr, WICK[0] - 3 + wg, WICK[1] - 10);
+  }
+  cake.smoke = cake.smoke.filter(s => now - s.t < 1.6);
+  cake.smoke.forEach(s => { const k = now - s.t; if (k < 0) return; const yy = s.y - Math.floor(k / .07), xx = s.x + Math.round(Math.sin(k * 5 + s.ph) * 1.5); if (k < 1.2 || Math.floor(k * 16) % 2) d.r(xx, yy, 2, 2, C.g); });
+  cake.notes = cake.notes.filter(n => now - n.t < 1.8);
+  cake.notes.forEach(n => { const k = now - n.t; if (k > 1.4 && Math.floor(k * 14) % 2) return; d.img(n.s, n.x + Math.round(Math.sin(k * 4) * 1.5), n.y - Math.floor(k / .055)); });
+  const o = calaLook(now); o.tail = now * 2.2;
+  if (phase === 'song') { const bi = Math.floor((clock() - songT0) / BEAT); o.hx = bi >= 0 ? (bi % 2 ? 1 : -1) : 0; }
+  if (phase === 'wish') o.eyes = 'closed';
+  if (now < cake.talkUntil) o.eyes = 'happy';
+  const hk = now - cake.hop; const dy = hk < .48 ? ([-2, -4, -5, -4, -2, 0][Math.floor(hk / .08)] || 0) : 0;
+  drawCala(d, 86, 71 + dy, o);
+}
+
+/* ---------- small flower helpers ---------- */
+function plusDot(d, x, y) { d.r(x, y, 2, 2, C.W); d.p(x + 1, y + 1, C.c); d.p(x - 1, y, C.g); }
+function drawLeaf(d, bx, by, a, L, w, pal) {
+  const dx = Math.cos(a), dy = Math.sin(a), px = -dy, py = dx;
+  const pts = [[bx, by], [bx + dx * L * .4 + px * w, by + dy * L * .4 + py * w], [bx + dx * L, by + dy * L], [bx + dx * L * .4 - px * w, by + dy * L * .4 - py * w]];
+  const [m, dk, lt] = pal || [C.S, C.G, C.s]; d.poly(pts, m); d.edges(pts, dk); d.line(bx, by, bx + dx * L * .8, by + dy * L * .8, lt);
+}
+
+/* ---------- letter envelope ---------- */
+const lt = { stage: 'hidden', tB: 0, tO: 0, give: 0 };
+function drawLetterEnv(now) {
+  const { c, x, d } = LT; x.clearRect(0, 0, c.width, c.height);
+  const ex = 8, ey = 38, MAXR = 38;
+  let f = 1, rise = 0;
+  if (lt.stage === 'opening' || lt.stage === 'open' || lt.stage === 'give') { f = FLAP_SEQ[Math.min(FLAP_SEQ.length - 1, Math.floor((now - lt.tO) / .065))]; rise = Math.min(MAXR, Math.floor(Math.max(0, now - lt.tO - .5) / .05) * 2); }
+  const inside = () => {
+    if (rise <= 0) return;
+    const o = calaLook(now, 1.3);
+    if (lt.stage === 'give') { o.eyes = 'happy'; o.lift = Math.min(4, Math.floor((now - lt.give) / .06)); }
+    else if (rise >= MAXR) { o.hx = Math.floor(now / 1.1) % 2; o.bob = Math.floor(now * 2.4) % 2; }
+    drawCalaHolding(d, 29, ey + 22 - rise, o);
+  };
+  drawEnvelope(LT, ex, ey, f, inside, false, 64, 42);
+  const sx = ex + 32 - 9, sy = ey + 24 - 9;
+  if (lt.stage === 'sealed') d.img(SEAL_P, sx, sy - (Math.floor(now * 1.6) % 2));
+  else { const k = now - lt.tB; if (k < .9 && (k < .55 || Math.floor(k * 20) % 2 === 0)) { d.img(SEAL_P2[0], sx - Math.floor(k * 16), sy + Math.floor(k * k * 70)); d.img(SEAL_P2[1], sx + Math.floor(k * 16), sy + Math.floor(k * k * 85)); } }
+  $('#envBubble').classList.toggle('on', rise >= MAXR && lt.stage === 'open');
+}
+
+/* ---------- Cala on the letter ---------- */
+function drawSheetCala(now) {
+  const { c, x, d } = SC; x.clearRect(0, 0, c.width, c.height);
+  const o = calaLook(now, .6), k = now % 5, peek = k > 4 ? [0, 1, 2, 3, 3, 2, 1, 0][Math.floor((k - 4) * 8)] || 0 : 0;
+  d.img(headSprite(o.eyes, o.ear), 2, 1 + peek);
+  d.img(PAW, 4, 12); d.img(PAW, 17, 12);
+}
+
+/* ---------- me + Cala in the security check ---------- */
+// my pixel sprite: 9 frames, 38 x 48 each (0 idle, 1 talking, 2-3 arms out, 4 front, 5-6 turning, 7-8 walking)
+const ME_IMG = new Image(), ME_W = 38, ME_H = 48;
+ME_IMG.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVYAAAAwCAYAAABKdVJwAAAOgUlEQVR42u2dT2hcxxnAvxUCdzGFOiTOKXswKI/FwRYqhvgmiZyMMCLE/0AH40t0sA1OkOjJBxUTsEhDIxfSi3HBNHZcihHGJ7PR0WBqYuMgXkRMWZ8ql7qQiI3BsD3Y3+v3vp15b2bezLxvEw0IW7tPO7/9/s+8mXkAntvOZrO/s9ns8//X3aRybbfh0Z1kG9q275+5A5T9f5tLlkNId0gpupNuQ1LZtptnBZu8vs1Vr0MMg0NK0Z1UG5LOJjGpD111rwKUaniSueowMKkOKYlPsqyk61FKUo/Vb8N3lixqW71eo67sXSfXtqyqM2G/Ze//kvQnna2Mm3Pgd4mhS1XfPvttuIKNJYn2mo00Vb6/kabBFCuRaxhlpeOpU1bYZ5EsQ3BJlNMwsEkO/LF4Gj6DhGnzqViJXDGYyjJsUUXwc5WVLy6pti6dTXJRETsRNUyhfBm+j6AhmSs0k00W5dk5FJerA4SSlYkOQyeeKnKSzCa5qJBUTDTqNP6qQUMaVwwmG0eQxlMXm06HMRJPleAqlU1yUSGlmGjUWVHwz5YQMFy5YjHZOgDlKhvyxAwaIQOFjQ5VLJLlJIVNahKXwtGo2wFcJoklcsVicjH8kMNIiYFVYpXjGrwks0ktKiQUE41hG0ZK5JI85JbGF4vl52Jb22xuRUXdxcQI1NzGkkTkQuYirrp4XWQVM5BJW6BuI6865bTNVq7HmH/nw75GfAmLD73473UpMQQX3lXGH4myCj20VjGjoeGP6g5tFWNX9SlNdjZyGka2YSgqJBQTI2XzE1KEJo0Lg4ZEWdU17KbyKAqqMYOhrW3FlJOJHqWx/ZKKiirFxAjfNx5j0tdlP7s0LjSyjTSNzhQ7WGykKTx7/LDQCcaSBFAWfEmTD/2pGCRWq6Zy4k45TGySiwopxcQIFxY6h00050ozUaKp0KRy2awY8M0kOYBwedjqz7aZyK5svjzkXWMdH5WHzoYks0ksKqQUEwNTAVu9XgN/bOe6fJbcKiVK5Ir1GSqjNzEw12CmSgRVK3sT/RXNo3IGUy7T7x9bTlVlIoHtl1RU2BQTTjevuJJ8OJ6p8UjkqoMJqwXVzQT83XVpls4hd+3Zl2Vo3XcwufFhsiebJ5EyhjLnLNOhz8DlQ07DwiapqJBWTIzYTt6WBQr6mk02KjsWTjpXTKaiqsKmEipKBCZVIq8+qt7dp33j76aVapH8dDp0PaYuhpwks0krKiQWE6M2nXKF0LZrzz7l667LmGyG/VK4YjKF2NVCg7wp77PHD7P3Xfsv6ttGZsiicnauQ5vAFVtOktlMthC7FBU6vZlMQVQ54wA5du3ZZ5yIaMDVMY+C4Q0C12uqCm3YuGIy+QqoJgGrqK3Mz8KZL25WMmwfcuVBgsuR6tAlaMWSk2S2YS8qYiWikbJyeyxJYP/kDOyfnIG33jmQu27/5EzuX2xvvXMg+9k/OQOtVgs20hTOTrXh7FTbyzBACpdUWZU5ERpYq9WCVquV4zDlxu9K75AWBQWUlSrbU7lRBtqH6ncqO3z92eOHsDI/W1l+dclpWNlUUzem14S+icWH+2UJvey7rMzPFvZnNBXQarWg2+3Cs8cPM6U9eXRvQFn8ParYlflZOH7y9KtXLsHnX69D1XkRaVyhmXy0s1NtOH7yNBw/eRreePe9HK+OrYgb37NxirNTbTj+lz/BG+++l1UHrVYLHqzdUvbDg+mDtVtK+e2fnIEXm5tw7colIj+AU599aZogszlDCXKSzoZctKgAAPjPv/81oJcHa7eyfzkHAMBrr7+ZFRUYtHzaPVbkY0kCz3u9gf5NeV97/U0AAFg4NFGYiEbKhiP4JZ/evZMBUAjaMX/vxeYmvNjcBACAucUlGN29G0Z37648eS2NKyaTj51X+NnoiE/v3sn6tuGmf2M6hMVrsP+V+dlMXlQGKoYiDs7iw9bqlNOwsWFQ7na78OTRPeXIg48ykOPJo3sZHxYVx0+e9jZiw0T09O6dAU78MeWlcixKRKUVK2aN3x49VXgdH2aAxYLfjTS1fpCXBC4a4MaSJDgTZ9M5gu3JPmW8Zdyff72eYypzUJzLm1tcgrnFJbh68bwXDgCAa1cuwdziEgAAXL143nje0GRxuQ85QaAzMupiwxuBK/OzsHz7fq6ooA0rQNV7NLij7qr4pK6YwCH+/smZLBHh66a8ponICBAjPofUNd45/Ttq7C6HN0vj4kEsFJPLDQ5dZbsyPwtzi0uFfZsyX7uSnz4xOfuUygoblVkV2V27cikXLFzP8AwtpyqHlUtg40UFAGRDbFWjgaqo0Yrw6sXzyoCvsrOiYuLsVDsXsE05iq7b0WwOVK2Up2HijFu9XuPyuRN9NH6d0o5++BH89fe/KzT2M1/cHFhXaDJpXoXr6sXzSsf1waVaIuNLVjaBwdZJqwQ1dMprVy7Bqc++NFq6pNMf5eEctoEVeVxsi+6Tp3ZAb1L4kpPL436kskkrKqQUE1YOe/nciX5ZyY4AdGiC0V2XEakwXIKINC5u9K5Mvh/0phsq0UrjH19dLk1SqmTkK9gv376fY9FxvNjczMlt4dCEkqdMh0Xvc1m5ygmDfZXzbKWxDVNRUUcxYQ3dTpL+t+vrsLfdzgyat+Xb9+Hb9f+X8Hvb7VzpHOJxu9K4djab/VarBVWYfAdXXVDl/es4ASD7Pt1uN0jApzw6uVEWKrOQSchVTutp6t3WJbOZFhV0mL2j2YSzU+2BYX9Iu+dJnE9DVC0mnAMrVSICHf3wI0jT7wYco9vtDuzM8B1cJXK1k6TPA0AZE3Lx+SLfz7zCz2u1WtlrlCVJ3oav/vyHzAk4ZyinRB6VzKhTch7fCZI7Iy6lM5UTvh9KTlLZeJLUJUbKgjzcH33oU/dARix6OIMuidsm7lFb0PU0bextt3MB4+iHHwEAwPsfHIFPLlzIICenp2Gt04Eftrbg1zt3gsmzwV2bDRcAZGx8yURVLgym2Af2aSIrbGudTlaJ6Ia44LAcbCNNs7u36Ii0X8r5/gdHMlb6Prm+T2XvQ4etVqtQZrxRnrVOJ0tIVXVI955ztrVOx0hOIZMPZ/thayuTRZ1sfH0rDV6YIDHA00KC8tB1sSYrYFyKia1er7GepoDxghYWnPPkpy/ZbQP8qKvwJqenYWJiIlOgzuBR2SGG/zygUacs4sLAhf/3YWSXz53oL9++nwtUVFZlTPx6DBY4lDJZ5A4Gi6TnFpdg+fZMKSdl/eTChQFO9vf9hUMTlebrqP7KZKbj8aVLbqtFbCVy6vsOYCo/2ttu97m/FbGh/UPgQ+AxePEEqSskeBFQ5b6L6efwwoInctfKvtLDBA8ePAgSmypo6F6fnJ7OVZmuQbVo/d1ap2PFxNvc4lLuBl0IRhPZFTlkFUYeuMpkpuPxoUsTNlsbk+4XIdt6mjZ4AWbCUeWUNtfPQS7krDJdMuJqaDZZL4TB64zfJRv74nuwdsu5GuB/t9bpaCfTQ3BW4a7CqQtcVYKHL1tzZaMjopB278KICSs0FyhWnXxy4YLoxIM6wyk6CHUeaxW4GMMN345ZtSqkQYv+2Bg9/qju6vpsC4cmKjNWDao6eZdVqyZ25qPClxbobQKnlEb9U8UVK06YFjSUs4ruRmNl8Adrt+DqxfN9H+vmeIBYvt2xGuqgQ9IqlwQIa8ZX1/cpE/0ME+XwOcJTLyfa+77WG3JGzmcqOzo0unzuRN91TSROTcwtvrxjXWXE4VOXZWy21WFmDwFObkJOymg5LdAPeRML24Ff/Rf++OqGEJ9bjVmEmcQCFq9gzfFzR12DmE01EWpISx0AwH4Pvk8+3wkjxGdK/Ty+fdAmSKCdhbI1062YBlMk/RA2whlNZBc64POYgXP7D0hwpcEsZpDXVdI0yKPeXnKfd5LRiIsSTY134dBEsKBats/YtPoKPeTebuYOWMWxQurShS2m3WN/pt/fxodDze9Lm2vlQbVqG60ynMT297/dUF5/76ffAHjePlfEc+aLm7kF7zou0yFyiGbCJKGF5tTJvdvt5m7+FLHgdbh+1ZcubT5Hx7Zrz77cYcgBRzT9nL8ZsOH0TWhbbydJf/X7H3MxQPLKicnp6dwuKwCA1e9/hHaSWFfTXhbC851C/JSbWCU+3/FBuTiT7y2Zpisp6O6SuuRUpk+A/E4mujg+NCPfqqk6P4G/HmqbdNHOMConvostxPbaKvrjO+xi2Rm1+yR5GwAA0vQ7bWCNYV9l9xRUrC5czhsEaICgp++oDjeJ3bB/ysWdE2q4+8gZ6paTTp8qedZxg0F1NJvNObMhmUBxVqhU/al2H8ViQrv5Z/dJ1rfOlrAQismleo/Kku7og7qXW0lrKmPy+fx0MJj/W0/Ths6oY1c3UPLsLhUffodY1aouMOjeD61LHVvdCVFqQ3ntaDZzhc5YkkC3281epz8x9ajqHwMq6rkKl7fAyqvWuhQpvekYY651tOlfgkwx8RQFf4l6jpW4TR9LLaXIkahH31yVD6oAg4M1YsybFPHQ58hz4//mm28aMYM/D1gbaQofLywAAMDq6mpUHhpUjxw7BgAAny4vDzxW2ddzmqpUhfSA57JrQslINSTU2VZMuQEAjI+P902DQoxzO44cO5azJZWOVKd0fbywADeuXw8SM8bHx/uHDx+OwjVa5SQidEZsN65fV74Wo+l4UBC692M2yvDp8rL4qRMW8KPIRxUcqNHTJ4MqkmRQPpQHNpTLVq/XoMmJ2V80vXE+lT/G0iXyUDvnAZ3rkvNDoK21rlw292lGfU3iYxC7cf36gIFJaNLYPl5YgNXVVZFD2Oe9Xs4hi55lFCM48OAkIUnWNbooCxpl/hhTl6jPokpPl5QkcGGFG3UqgM/LISCfq4u9m6KsbxVzXXOZ2P/4+HgfAGp1VM7QTpL+jmYTnvd64nRYl52V2U6dts/739Fs5nRZx1Irmz7xesotictWdv8DfegoZj2LWkMAAAAASUVORK5CYII=';
+const DUO = setupStage('#duo');
+const duo = { sp: 'cala', react: '', t: -9, talk: 0 };
+const DUO_BG = (() => {
+  const [c, x] = cnv(96, 62), d = D(x);
+  d.r(0, 0, 96, 62, '#E4DBF2'); d.r(0, 50, 96, 12, '#EADFD2'); d.r(0, 50, 96, 1, C.c); d.r(0, 49, 96, 1, '#CFC3E6');
+  for (let X = 3; X < 96; X += 8) d.r(X, 0, 1, 49, '#DCD1EE');
+  d.r(76, 8, 15, 13, C.K); d.r(77, 9, 13, 11, '#B8C8E8'); d.r(83, 9, 1, 11, C.K); d.r(77, 14, 13, 1, C.K); d.p(79, 11, C.W); d.p(87, 17, C.W); d.p(85, 10, C.y); d.r(75, 21, 17, 1, C.t);
+  d.ell(48, 57, 42, 3, C.l); d.ell(48, 57, 39, 2, C.L);
+  return c;
+})();
+function drawDuo(now) {
+  const { c, x, d } = DUO; x.clearRect(0, 0, c.width, c.height); d.img(DUO_BG, 0, 0);
+  const k = now - duo.t, talking = now - duo.talk < .12, yay = duo.react === 'yay' && k < 1.2, no = duo.react === 'no' && k < .55;
+  // me
+  let f = 0, hx = 0, hy = Math.floor(now / .7) % 2;
+  if (duo.sp === 'me' && talking) { f = Math.floor(now * 7) % 2; hy = 0; }
+  if (yay) { f = 2 + Math.floor(k * 6) % 2; hy = k < .36 ? ([-2, -3, -2, -1][Math.floor(k / .09)] || 0) : 0; }
+  if (no) { hx = Math.floor(k * 18) % 2 ? 1 : -1; hy = 0; }
+  const mx = 14, my = 9;
+  d.ell(mx + 19, 57, 13, 1, 'rgba(62,49,80,.18)');
+  if (ME_IMG.complete && ME_IMG.naturalWidth) x.drawImage(ME_IMG, f * ME_W, 0, ME_W, ME_H, mx + hx, my + hy, ME_W, ME_H);
+  if (no) { d.p(mx + 33, my + 14, C.L); d.p(mx + 33, my + 15, C.L); d.p(mx + 32, my + 16, C.L); }
+  // cala
+  const o = calaLook(now, 2.1); o.tail = now * 2.2;
+  if (duo.sp === 'cala' && talking) { o.hx = Math.floor(now * 9) % 2 ? 1 : -1; }
+  if (yay) { o.eyes = 'happy'; }
+  if (no) { o.hx = Math.floor(k * 18) % 2 ? 1 : -1; o.eyes = 'closed'; }
+  const cdy = yay && k < .45 ? ([-2, -3, -2, -1, 0][Math.floor(k / .09)] || 0) : 0;
+  d.ell(66, 57, 11, 1, 'rgba(62,49,80,.16)');
+  drawCala(d, 55, 33 + cdy, o);
+  // who's talking
+  const ax = duo.sp === 'me' ? mx + 19 : 66, ay = (duo.sp === 'me' ? 2 : 27) - (Math.floor(now * 3) % 2);
+  d.img(ARROW_S, ax - 2, ay);
+}
+const ARROW_S = grid(["OOOOO", ".OOO.", "..O.."]);
+
+/* ---------- Cala's paw-print signature ---------- */
+(() => { const { x } = setupStage('#pawSig'); x.drawImage(outlined(grid(["O.O.O", ".....", ".OOO.", "OOOOO", ".OOO."])), 0, 0); })();
+
+/* ---------- pomelo icon on the receipt ---------- */
+(() => {
+  const { x, d } = setupStage('#pomeloIcon');
+  for (let Y = 0; Y < 12; Y++) for (let X = 0; X < 12; X++) { const dd = Math.hypot(X - 5.5, Y - 5.5); if (dd < 6) d.p(X + 1, Y + 1, dd > 4.6 ? C.e : (dd > 3.9 ? C.W : C.h)); }
+  [[6.5, 2.5], [6.5, 10.5], [2.5, 6.5], [10.5, 6.5], [4, 4], [9, 9], [9, 4], [4, 9]].forEach(([a, b]) => d.line(6.5, 6.5, a, b, C.W));
+  const [tmp, tx] = cnv(12, 12); tx.drawImage(x.canvas, -1, -1);
+  const o = outlined(tmp); x.clearRect(0, 0, 14, 14); x.drawImage(o, 0, 0);
+})();
+
+/* ---------- background sparkles + confetti + dither wipe ---------- */
+const bg = { c: $('#bgfx'), P: 4, list: [] };
+const fx = { c: $('#fx'), P: 3, parts: [] };
+function sizeFull() {
+  [bg, fx].forEach(o => { o.c.width = Math.ceil(innerWidth / o.P); o.c.height = Math.ceil(innerHeight / o.P); o.x = o.c.getContext('2d'); o.x.imageSmoothingEnabled = false; });
+  bg.list = []; const n = Math.round(innerWidth * innerHeight / 26000) + 6;
+  for (let i = 0; i < n; i++) bg.list.push({ x: Math.random() * bg.c.width, y: Math.random() * bg.c.height, ph: Math.random() * 6, col: [C.l, C.o, C.S, C.W, C.l][i % 5], sp: .6 + Math.random() * .9 });
+  const s = Math.max(2, Math.min(5, Math.round(Math.min(innerWidth - 36, 118 * 4.6) / 118)));
+  document.documentElement.style.setProperty('--px', s + 'px');
+}
+function drawBg(now) {
+  const { c, x } = bg; x.clearRect(0, 0, c.width, c.height);
+  bg.list.forEach(s => { const f = [0, 1, 2, 3, 2, 1][Math.floor(now * s.sp * 2 + s.ph) % 6]; if (f) x.drawImage(sparkSprite(f, s.col), Math.round(s.x), Math.round(s.y)); });
+}
+function confetti(cx, cy) {
+  const P = fx.P, n = reduce ? 30 : 110, cols = [C.l, C.V, C.O, C.o, C.S, C.G, C.P, C.W, C.y];
+  for (let i = 0; i < n; i++) { const a = -Math.PI / 2 + (Math.random() - .5) * 2.4, s = 1 + Math.random() * 2.6; fx.parts.push({ x: cx / P, y: cy / P, vx: Math.cos(a) * s, vy: Math.sin(a) * s, c: cols[i % cols.length], w: Math.random() < .3 ? 2 : 1, h: Math.random() < .3 ? 2 : 1, t: Math.random() * 9, sw: .2 + Math.random() * .4 }); }
+  if (!reduce) for (let i = 0; i < 70; i++) fx.parts.push({ x: Math.random() * fx.c.width, y: -Math.random() * 90, vx: 0, vy: .2 + Math.random() * .4, c: cols[i % cols.length], w: Math.random() < .3 ? 2 : 1, h: 1, t: Math.random() * 9, sw: .2 + Math.random() * .4 });
+}
+function drawFx() {
+  if (!fx.parts.length) return;
+  const { c, x } = fx; x.clearRect(0, 0, c.width, c.height);
+  for (let i = fx.parts.length - 1; i >= 0; i--) {
+    const p = fx.parts[i]; p.t += .1; p.vx *= .97; p.vy = Math.min(.75, p.vy * .97 + .035); p.x += p.vx + Math.sin(p.t) * p.sw; p.y += p.vy;
+    if (p.y > c.height + 2) { fx.parts.splice(i, 1); continue; }
+    x.fillStyle = p.c; x.fillRect(Math.round(p.x), Math.round(p.y), Math.floor(p.t) % 3 === 0 ? p.h : p.w, Math.floor(p.t) % 3 === 0 ? p.w : p.h);
+  }
+  if (!fx.parts.length) x.clearRect(0, 0, c.width, c.height);
+}
+function dissolve(color, reverse, dur = 480) {
+  return new Promise(res => {
+    const cv = $('#wipe'), P = 5; cv.width = Math.ceil(innerWidth / P); cv.height = Math.ceil(innerHeight / P); cv.style.display = 'block';
+    const x = cv.getContext('2d'), t0 = performance.now();
+    if (reduce) dur = 1;
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur), th = (reverse ? 1 - k : k) * 16.01;
+      x.clearRect(0, 0, cv.width, cv.height); x.fillStyle = color;
+      for (let j = 0; j < cv.height; j++) for (let i = 0; i < cv.width; i++) if (B4[(j & 3) * 4 + (i & 3)] < th) x.fillRect(i, j, 1, 1);
+      if (k < 1) requestAnimationFrame(step); else { if (reverse) cv.style.display = 'none'; res(); }
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+/* ================= the song (birthday-card chip) ================= */
+const LINES = ['hap-py birth-day to you', 'hap-py birth-day to you', 'hap-py birth-day dear A-lei-sha', 'hap-py birth-day to you'];
+const MEL = [
+  [[67,.75],[67,.25],[69,1],[67,1],[72,1],[71,2]],
+  [[67,.75],[67,.25],[69,1],[67,1],[74,1],[72,2]],
+  [[67,.75],[67,.25],[79,1],[76,1],[72,1],[71,.5],[71,.5],[69,2]],
+  [[77,.75],[77,.25],[76,1],[72,1],[74,1],[72,3]],
+];
+const BASS = [[1,48,3],[4,55,2],[7,55,3],[10,48,2],[13,48,3],[16,53,3],[20,48,2],[22,55,1],[23,48,3]];
+const BEAT = .43, RIT = 19, RITF = 1.25;
+const bt = b => b <= RIT ? b * BEAT : RIT * BEAT + (b - RIT) * BEAT * RITF;
+const hz = m => 440 * Math.pow(2, (m - 69) / 12);
+const notes = []; { let b = 0; MEL.forEach((ln, li) => ln.forEach(([m, len]) => { notes.push({ m, len, b, line: li }); b += len; })); }
+const TOTAL = notes.reduce((s, n) => s + n.len, 0);
+const noteT = notes.map(n => bt(n.b)), songDur = bt(TOTAL);
+const lyricBox = $('#lyric'), sylEls = [];
+LINES.forEach(ln => {
+  const line = document.createElement('div'); line.className = 'line';
+  ln.split(' ').forEach((w, wi) => {
+    if (wi) line.append(' ');
+    const ws = document.createElement('span'); ws.className = 'w';
+    w.split('-').forEach(s => { const e = document.createElement('span'); e.className = 's'; e.textContent = s; ws.append(e); sylEls.push(e); });
+    line.append(ws);
+  });
+  lyricBox.append(line);
+});
+const lineEls = $$('.line', lyricBox);
+
+/* ================= audio ================= */
+let ctx = null, master = null, bassBus = null;
+function initAudio() {
+  if (ctx) { if (ctx.state === 'suspended') ctx.resume(); return; }
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+  const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+  try {
+    ctx = new AC();
+    const comp = ctx.createDynamicsCompressor(); comp.connect(ctx.destination);
+    master = ctx.createGain(); master.gain.value = .9;
+    const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 300;
+    const pk = ctx.createBiquadFilter(); pk.type = 'peaking'; pk.frequency.value = 2400; pk.Q.value = 1.2; pk.gain.value = 5;
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 4500;
+    master.connect(hp); hp.connect(pk); pk.connect(lp); lp.connect(comp);
+    bassBus = ctx.createGain(); bassBus.connect(comp);
+    ctx.resume();
+  } catch (e) { ctx = null; }
+}
+const audioOK = () => ctx && ctx.state === 'running';
+function tone(f, t, d, type = 'square', v = .05, dest = master) {
+  if (!ctx) return;
+  const o = ctx.createOscillator(), g = ctx.createGain();
+  o.type = type; o.frequency.setValueAtTime(f, t);
+  g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(v, t + .012);
+  g.gain.exponentialRampToValueAtTime(v * .45, t + Math.max(.03, Math.min(.18, d * .5)));
+  g.gain.exponentialRampToValueAtTime(.0001, t + d);
+  o.connect(g); g.connect(dest); o.start(t); o.stop(t + d + .03);
+}
+function noise(d, f, q, v) {
+  if (!ctx) return;
+  const len = Math.floor(ctx.sampleRate * d), buf = ctx.createBuffer(1, len, ctx.sampleRate), ch = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+  const s = ctx.createBufferSource(); s.buffer = buf;
+  const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = f; bp.Q.value = q;
+  const g = ctx.createGain(); g.gain.value = v; s.connect(bp); bp.connect(g); g.connect(ctx.destination); s.start();
+}
+const crackSnd = () => { noise(.08, 2600, 1.5, .5); setTimeout(() => noise(.12, 900, 1, .35), 40); };
+function jingle() { if (!ctx) return; const t = ctx.currentTime + .02; [72, 76, 79, 84, 88, 91, 96].forEach((m, i) => tone(hz(m), t + i * .07, .16, 'square', .045)); tone(hz(96), t + .5, .9, 'square', .04); tone(hz(84), t + .5, .9, 'triangle', .07); }
+function blip(up = true) { if (!ctx) return; const t = ctx.currentTime + .01; tone(hz(up ? 84 : 66), t, .09, 'square', .04); if (up) tone(hz(91), t + .07, .14, 'square', .04); }
+function tick() { if (!ctx) return; tone(1100 + Math.random() * 200, ctx.currentTime + .005, .025, 'square', .018); }
+function scheduleSong(t0) {
+  notes.forEach(n => { const s = t0 + bt(n.b), e = t0 + bt(n.b + n.len), d = (e - s) * .9; tone(hz(n.m), s, d, 'square', .05); tone(hz(n.m) * 2, s, Math.min(d, .35), 'triangle', .018); });
+  BASS.forEach(([b, m, len]) => { const s = t0 + bt(b); tone(hz(m), s, (t0 + bt(b + len) - s) * .85, 'triangle', .14, bassBus); });
+}
+
+/* ================= opening the envelope ================= */
+const cover = $('#cover'), opWrap = $('#opWrap'), opHint = $('#opHint');
+let coverGone = false;
+function opAdvance(hitSeal) {
+  const now = NOW();
+  if (op.stage === 0) {
+    if (!hitSeal) { op.nudge = now; blip(false); return; }
+    initAudio(); crackSnd(); op.stage = 1; op.tBreak = now; opHint.textContent = 'tap to open';
+  } else if (op.stage === 1) {
+    initAudio(); noise(.4, 1800, .6, .22); op.stage = 2; op.tOpen = now; opHint.textContent = 'tap the card';
+  } else if (op.stage === 2 && now - op.tOpen > .9) {
+    initAudio(); noise(.5, 1200, .5, .25); op.stage = 3; op.tPull = now; opHint.textContent = '';
+    setTimeout(async () => {
+      await dissolve('#FFFDF8', false, 520);
+      cover.classList.add('gone'); coverGone = true; document.body.classList.remove('locked');
+      await dissolve('#FFFDF8', true, 560);
+      startSong();
+    }, 1000);
+  }
+}
+opWrap.addEventListener('click', e => { const [px, py] = toPix(OP.c, e); opAdvance(Math.abs(px - 56) < 13 && Math.abs(py - 92) < 13); });
+opWrap.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); opAdvance(true); } });
+
+/* ================= song → wish → blow ================= */
+const promptEl = $('#prompt');
+let phase = 'cover', songT0 = 0, useAudioClock = false, lastIdx = -1, songRun = 0;
+const clock = () => useAudioClock ? ctx.currentTime : NOW();
+function startSong() {
+  phase = 'song'; const run = ++songRun;
+  sylEls.forEach(e => e.classList.remove('sung', 'on'));
+  lineEls.forEach((l, i) => l.classList.toggle('active', i === 0));
+  lyricBox.classList.remove('hide'); promptEl.innerHTML = '';
+  useAudioClock = audioOK();
+  songT0 = clock() + .3;
+  if (ctx) scheduleSong(useAudioClock ? songT0 : ctx.currentTime + .3);
+  lastIdx = -1; requestAnimationFrame(songLoop);
+  setTimeout(() => { if (phase === 'song' && songRun === run) endSong(); }, (songDur + 2.5) * 1000);
+}
+function songLoop() {
+  if (phase !== 'song') return;
+  const el = clock() - songT0;
+  let idx = -1; while (idx + 1 < notes.length && el >= noteT[idx + 1]) idx++;
+  if (idx !== lastIdx) {
+    for (let i = 0; i < sylEls.length; i++) { sylEls[i].classList.toggle('sung', i < idx); sylEls[i].classList.toggle('on', i === idx); }
+    const li = idx < 0 ? 0 : notes[idx].line;
+    lineEls.forEach((l, i) => l.classList.toggle('active', i === li));
+    if (idx >= 0 && idx % 2 === 0 && !reduce) cake.notes.push({ t: NOW(), x: WICK[0] - 16 + Math.floor(Math.random() * 28), y: 30, s: NOTES[Math.floor(Math.random() * 3)] });
+    lastIdx = idx;
+  }
+  if (el >= songDur + .5) { endSong(); return; }
+  requestAnimationFrame(songLoop);
+}
+function setPrompt(html) { promptEl.innerHTML = `<div class="in">${html}</div>`; }
+function endSong() {
+  if (phase !== 'song') return;
+  phase = 'wish';
+  lyricBox.classList.add('hide'); document.body.classList.add('dim');
+  setPrompt('<h2>close your eyes and make a wish</h2>');
+  startMic();
+  setTimeout(() => { if (phase === 'wish') { phase = 'blow'; renderBlowPrompt(); } }, 2800);
+}
+function renderBlowPrompt() {
+  if (phase !== 'blow') return;
+  let sub;
+  if (micState === 'on') sub = 'blow into your mic, or tap the flame<span class="meter" id="meter"><i></i><i></i><i></i><i></i><i></i></span>';
+  else if (micState === 'pending') sub = 'allow the microphone so you can blow, or just tap the flame';
+  else sub = 'tap the flame to blow it out';
+  setPrompt(`<h2>now blow out the candle</h2><p>${sub}</p>`);
+}
+
+/* ================= microphone ================= */
+let stream = null, analyser = null, tbuf = null, bbuf = null, micOn = false, micState = 'idle';
+let listenStart = 0, lastT = 0, baseline = 0, baseN = 0, level = 0, blowAcc = 0;
+async function startMic() {
+  micState = 'pending';
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || !ctx) { micState = 'off'; renderBlowPrompt(); return; }
+  try {
+    try { if (navigator.audioSession) navigator.audioSession.type = 'play-and-record'; } catch (e) {}
+    stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+    if (phase === 'done') { stopMic(); return; }
+    if (ctx.state === 'suspended') { try { await ctx.resume(); } catch (e) {} }
+    const src = ctx.createMediaStreamSource(stream);
+    analyser = ctx.createAnalyser(); analyser.fftSize = 1024; analyser.smoothingTimeConstant = 0; src.connect(analyser);
+    tbuf = new Float32Array(analyser.fftSize); bbuf = new Uint8Array(analyser.fftSize);
+    micState = 'on'; micOn = true; listenStart = lastT = performance.now(); baseline = 0; baseN = 0; level = 0; blowAcc = 0;
+    renderBlowPrompt(); requestAnimationFrame(listen);
+  } catch (e) { micState = 'off'; stopMic(); renderBlowPrompt(); }
+}
+function stopMic() {
+  micOn = false;
+  if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+  cake.lean = 0;
+}
+function listen(now) {
+  if (!micOn) return;
+  const dt = Math.min(.1, (now - lastT) / 1000); lastT = now;
+  let s = 0;
+  if (analyser.getFloatTimeDomainData) { analyser.getFloatTimeDomainData(tbuf); for (let i = 0; i < tbuf.length; i++) s += tbuf[i] * tbuf[i]; }
+  else { analyser.getByteTimeDomainData(bbuf); for (let i = 0; i < bbuf.length; i++) { const v = (bbuf[i] - 128) / 128; s += v * v; } }
+  const rms = Math.sqrt(s / tbuf.length);
+  if (now - listenStart < 600) baseline = (baseline * baseN + rms) / (++baseN);
+  level = Math.max(rms, level * .85);
+  const thr = Math.min(.24, Math.max(.09, baseline * 3.5)), ratio = level / thr;
+  cake.lean = clamp((ratio - .35) / .65, 0, 1.3);
+  const m = $('#meter'); if (m) [...m.children].forEach((b, i) => b.style.height = (Math.max(1, Math.min(4, Math.round(ratio * 4 - i * .7))) * 3) + 'px');
+  if (rms > thr) blowAcc += dt; else blowAcc = Math.max(0, blowAcc - dt * .5);
+  if (blowAcc > .28 && now - listenStart > 350) { blowOut(); return; }
+  requestAnimationFrame(listen);
+}
+function cakeTap(e) {
+  let hit = true;
+  if (e && e.clientX !== undefined && e.detail !== 0) { const [px, py] = toPix(CK.c, e); hit = px > WICK[0] - 14 && px < WICK[0] + 14 && py > WICK[1] - 16 && py < WICK[1] + 22; }
+  if (!hit) return;
+  if (phase === 'wish' || phase === 'blow') blowOut();
+  else if (phase === 'song') { toast('hay, wait for the song to finish'); cake.wiggle = NOW() + .35; }
+}
+$('#cakeWrap').addEventListener('click', cakeTap);
+$('#cakeWrap').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cakeTap(); } });
+
+/* ================= blow out ================= */
+function blowOut() {
+  if (phase !== 'wish' && phase !== 'blow') return;
+  phase = 'done'; stopMic();
+  const now = NOW();
+  cake.out = true; document.body.classList.remove('dim');
+  for (let i = 0; i < 9; i++) cake.smoke.push({ t: now + i * .07, x: WICK[0] - 1 + (i % 3) - 1, y: WICK[1] - 1, ph: i });
+  noise(.5, 500, .5, .5);
+  setTimeout(() => {
+    jingle();
+    const r = CK.c.getBoundingClientRect(); confetti(r.left + r.width * WICK[0] / 118, r.top + r.height * (WICK[1] - 4) / 104);
+    const t = $('#tname'); t.classList.remove('party'); void t.offsetWidth; t.classList.add('party');
+    cake.hop = NOW(); cake.talkUntil = NOW() + 3.2;
+    const b = $('#catBubble'); b.classList.add('on'); setTimeout(() => b.classList.remove('on'), 3200);
+    setPrompt('<p class="greet">maligayang kaarawan!</p><p class="ilo">bonne f&ecirc;te!</p><p>i hope your wish comes true</p><button class="textbtn" id="again" type="button">light it again</button>');
+    $('#again').addEventListener('click', relight);
+    showNav(true); nextBtn.classList.remove('nudge'); void nextBtn.offsetWidth; nextBtn.classList.add('nudge');
+  }, 380);
+}
+function relight() {
+  if (phase !== 'done') return;
+  initAudio();
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+  const go = () => { window.scrollTo(0, 0); showNav(false); cake.out = false; $('#tname').classList.remove('party'); promptEl.innerHTML = ''; setTimeout(startSong, 700); };
+  if (cur !== 0) goTo(0).then(go); else go();
+}
+$('#tname').innerHTML = [...'Aleisha'].map((c, i) => `<span style="--i:${i}">${c}</span>`).join('');
+
+/* ================= pages ================= */
+const friendList = FRIENDS.filter(f => f && String(f.msg || '').trim());
+if (!friendList.length) { $('#s-friends').remove(); $('#s-haul').dataset.next = 'one more thing'; }
+const SCENES = $$('.scene');
+let cur = 0, busy = false;
+const nav = $('#nav'), nextBtn = $('#next'), backBtn = $('#back'), dotsEl = $('#dots');
+dotsEl.innerHTML = SCENES.map(() => '<i></i>').join('');
+function showNav(on) { nav.classList.toggle('show', on); }
+function updateNav() {
+  backBtn.disabled = cur === 0; nextBtn.hidden = cur === SCENES.length - 1;
+  nextBtn.textContent = SCENES[cur].dataset.next || 'next';
+  [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === cur));
+}
+async function goTo(i) {
+  if (busy || i === cur || i < 0 || i >= SCENES.length) return;
+  busy = true; fx.parts.length = 0; if (fx.x) fx.x.clearRect(0, 0, fx.c.width, fx.c.height);
+  await dissolve('#EAE4F5', false);
+  SCENES[cur].classList.remove('active'); SCENES[i].classList.add('active'); cur = i; window.scrollTo(0, 0); updateNav();
+  if (SCENES[i].id === 's-basket' && bk.t0 == null) bk.t0 = NOW();
+  await dissolve('#EAE4F5', true);
+  busy = false;
+}
+nextBtn.addEventListener('click', () => goTo(cur + 1));
+backBtn.addEventListener('click', () => goTo(cur - 1));
+updateNav();
+
+/* ================= friends' notes ================= */
+const pile = $('#pile'), pileCount = $('#pileCount');
+let seen = 0;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+friendList.forEach((f, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = `fnote paper-${i % 4}`;
+  b.style.setProperty('--r', ((i % 2 ? 1 : -1) * (1 + Math.random() * 2.5)).toFixed(1) + 'deg');
+  b.setAttribute('aria-label', `Note from ${f.from}`);
+  b.innerHTML = `<div class="fside front"><span class="tape"></span><span class="from-label">a note from</span><span class="from-name">${esc(f.from)}</span><span class="tapme">tap to open</span></div><div class="fside back"><span class="tape"></span><p class="msg">${esc(f.msg)}</p><p class="sig">${esc(f.from)}</p></div>`;
+  if (pile) pile.prepend(b);
+});
+function updatePile() { if (friendList.length && pileCount) pileCount.textContent = `${Math.min(seen + 1, friendList.length)} of ${friendList.length}`; }
+if (pile) pile.addEventListener('click', e => {
+  const n = e.target.closest('.fnote');
+  if (!n || n !== pile.lastElementChild || n.dataset.busy) return;
+  if (!n.classList.contains('flipped')) { n.classList.add('flipped'); blip(); return; }
+  if (friendList.length < 2) { n.classList.remove('flipped'); return; }
+  n.dataset.busy = 1; n.classList.add('toss');
+  setTimeout(() => {
+    n.classList.add('notrans'); n.classList.remove('toss', 'flipped');
+    n.style.setProperty('--r', ((Math.random() - .5) * 6).toFixed(1) + 'deg');
+    pile.prepend(n); void n.offsetWidth; n.classList.remove('notrans'); delete n.dataset.busy;
+    seen = (seen + 1) % friendList.length; updatePile();
+  }, 420);
+});
+updatePile();
+
+/* ================= basket → security check → envelope → letter ================= */
+const lock = $('#lock'), lockQ = $('#lockQ'), lockOpts = $('#lockOpts'), lockStep = $('#lockStep');
+const envArea = $('#envArea'), envHint = $('#envHint'), reader = $('#reader');
+const QUIZ = [
+  { by: 'cala', q: "mrrp. question one. what's the best fruit in the world?", a: ['mango', 'pomelo', 'durian', 'calamansi'], c: 1, yes: 'correct. pomelo supremacy.', no: 'neigh. i am offended on behalf of the pomelo.' },
+  { by: 'me', q: "my turn. who's the funniest-looking guy in The Princess and the Pauper?", a: ['Preminger', 'Julian', 'Wolfie the dog'], c: 0, yes: 'yep. that face. still makes me laugh.', no: 'think about that face again.' },
+  { by: 'cala', q: 'last one. where did the best cake you ever had come from?', a: ['a fancy bakery', 'homemade', 'Costco', 'a five-star hotel'], c: 2, yes: 'the Costco one. obviously.', no: 'neigh. i know the truth.' },
+];
+let stage = 'basket', qi = 0, qBusy = false, typer = 0, typeDone = null, typeFull = '';
+function speaker(who) { duo.sp = who; $('#dlgName').textContent = who === 'me' ? MY_NAME : 'cala'; }
+function typeText(text, done, who) {
+  if (who) speaker(who);
+  clearInterval(typer); typeFull = text; typeDone = done || null; lockQ.textContent = ''; let i = 0;
+  typer = setInterval(() => { i++; lockQ.textContent = text.slice(0, i); duo.talk = NOW(); if (i % 2 === 0) tick(); if (i >= text.length) { clearInterval(typer); const f = typeDone; typeDone = null; f && f(); } }, reduce ? 1 : 26);
+}
+lockQ.addEventListener('click', () => { if (lockQ.textContent.length < typeFull.length) { clearInterval(typer); lockQ.textContent = typeFull; const f = typeDone; typeDone = null; f && f(); } });
+function react(r) { duo.react = r; duo.t = NOW(); }
+function reveal(el) { const r = el.getBoundingClientRect(), room = innerHeight - 120; window.scrollTo({ top: Math.max(0, scrollY + r.top - Math.max(14, (room - r.height) / 2)), behavior: reduce ? 'auto' : 'smooth' }); }
+function startQuiz() {
+  if (stage !== 'basket') return;
+  stage = 'quiz'; syncHot(); initAudio(); blip(); qi = 0;
+  $('#bkLede').textContent = 'security check first';
+  lock.hidden = false; lockStep.textContent = ''; lockOpts.innerHTML = '';
+  setTimeout(() => reveal(lock), 120);
+  typeText("wait! security check first. we have to make sure it's really you.", () => setTimeout(showQ, 900), 'me');
+}
+function showQ() {
+  const Q = QUIZ[qi];
+  lockStep.textContent = `question ${qi + 1} of ${QUIZ.length}`; lockOpts.innerHTML = '';
+  typeText(Q.q, () => {
+    Q.a.forEach((t, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.textContent = t; b.addEventListener('click', () => answer(b, i)); lockOpts.append(b); });
+    if (lock.getBoundingClientRect().bottom > innerHeight - 96) reveal(lock);
+  }, Q.by);
+}
+function answer(b, i) {
+  if (qBusy) return;
+  const Q = QUIZ[qi];
+  if (i === Q.c) {
+    qBusy = true; react('yay'); b.classList.add('right'); blip();
+    [...lockOpts.children].forEach(o => o.disabled = true);
+    typeText(Q.yes, () => setTimeout(() => { qBusy = false; qi++; if (qi < QUIZ.length) showQ(); else unlock(); }, 700));
+  } else { react('no'); b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong'); blip(false); typeText(Q.no); }
+}
+function unlock() {
+  lockStep.textContent = 'all done'; lockOpts.innerHTML = '';
+  react('yay'); jingle();
+  typeText("okay. no horsing around, it's really you.", () => setTimeout(() => {
+    typeText('mrrp. this is for you.', () => setTimeout(() => {
+      stage = 'sealed'; lock.hidden = true; envArea.hidden = false; lt.stage = 'sealed';
+      $('#bkLede').textContent = 'cala has your letter';
+      setTimeout(() => reveal(envArea), 150);
+    }, 900), 'cala');
+  }, 700), 'me');
+}
+function ltTap(hitSeal, hitCala) {
+  const now = NOW();
+  if (lt.stage === 'sealed' && hitSeal) {
+    initAudio(); crackSnd(); lt.stage = 'breaking'; lt.tB = now; envHint.textContent = '';
+    setTimeout(() => { noise(.4, 1800, .6, .2); lt.stage = 'opening'; lt.tO = NOW(); }, 450);
+    setTimeout(() => { lt.stage = 'open'; envHint.textContent = 'cala brought you a letter. tap it.'; }, 450 + 1700);
+  } else if (lt.stage === 'open' && hitCala) {
+    lt.stage = 'give'; lt.give = now; blip();
+    setTimeout(openReader, 600);
+  }
+}
+$('#ltWrap').addEventListener('click', e => { const [px, py] = toPix(LT.c, e); ltTap(Math.abs(px - 40) < 13 && Math.abs(py - 62) < 13, px > 24 && px < 56 && py > 12 && py < 56); });
+$('#ltWrap').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ltTap(true, true); } });
+let readerOpen = false;
+function openReader() {
+  if (stage === 'sealed') { stage = 'read'; syncHot(); $('#bkLede').textContent = 'tap anything to take a closer look'; }
+  $('#letterCala').hidden = false; $('#letterMe').hidden = true;
+  readerOpen = true; reader.scrollTop = 0; reader.classList.add('show'); reader.setAttribute('aria-hidden', 'false'); document.body.classList.add('locked');
+  setTimeout(() => $('#letterCala .x').focus({ preventScroll: true }), 500);
+}
+function closeReader() {
+  reader.classList.remove('show'); reader.setAttribute('aria-hidden', 'true'); document.body.classList.remove('locked');
+  if (lt.stage === 'give') lt.stage = 'open';
+  setTimeout(() => { readerOpen = false; }, 520);
+}
+$$('.sheet .x').forEach(b => b.addEventListener('click', closeReader));
+$('#toMine').addEventListener('click', async () => {
+  blip(); await dissolve('#FFFDF8', false, 420);
+  $('#letterCala').hidden = true; $('#letterMe').hidden = false; reader.scrollTop = 0;
+  await dissolve('#FFFDF8', true, 460); $('#letterMe .x').focus({ preventScroll: true });
+});
+$('#readerClose').addEventListener('click', closeReader);
+$('#relight').addEventListener('click', () => { closeReader(); setTimeout(relight, 400); });
+reader.addEventListener('click', e => { if (e.target === reader) closeReader(); });
+addEventListener('keydown', e => { if (e.key === 'Escape' && readerOpen) closeReader(); });
+
+/* ================= the gift basket ================= */
+const XC = { ...C, m: '#C9353F', M: '#9F2731', a: '#F2A7AE', n: '#2B2630', N: '#57505F', z: '#D9A86C', Z: '#B5824C', q: '#F3D9B4', i: '#CFC277', x: '#E9CB72', j: '#8C5E33', d: '#C98F57' };
+const gx = rows => grid(rows, XC);
+const mk = b => ({ b, s: outlined(b), h: outlined(b, C.O) });
+function cutC(x, w, h) { [[0, 0], [w - 1, 0], [0, h - 1], [w - 1, h - 1]].forEach(([a, b]) => x.clearRect(a, b, 1, 1)); }
+function trim(c) {
+  const x = c.getContext('2d'), w = c.width, h = c.height, dd = x.getImageData(0, 0, w, h).data; let x0 = w, y0 = h, x1 = -1, y1 = -1;
+  for (let Y = 0; Y < h; Y++) for (let X = 0; X < w; X++) if (dd[(Y * w + X) * 4 + 3]) { if (X < x0) x0 = X; if (X > x1) x1 = X; if (Y < y0) y0 = Y; if (Y > y1) y1 = Y; }
+  if (x1 < 0) return c; const [o, ox] = cnv(x1 - x0 + 1, y1 - y0 + 1); ox.drawImage(c, -x0, -y0); return o;
+}
+function rot(src, ang) {
+  const w = src.width, h = src.height, s = Math.ceil(Math.hypot(w, h)) + 2, [c, x] = cnv(s, s);
+  const sd = src.getContext('2d').getImageData(0, 0, w, h).data, out = x.createImageData(s, s), ca = Math.cos(ang), sa = Math.sin(ang);
+  for (let Y = 0; Y < s; Y++) for (let X = 0; X < s; X++) {
+    const dx = X - s / 2 + .5, dy = Y - s / 2 + .5, sx = Math.floor(ca * dx + sa * dy + w / 2), sy = Math.floor(-sa * dx + ca * dy + h / 2);
+    if (sx >= 0 && sy >= 0 && sx < w && sy < h) { const i = (sy * w + sx) * 4, o = (Y * s + X) * 4; for (let k = 0; k < 4; k++) out.data[o + k] = sd[i + k]; }
+  }
+  x.putImageData(out, 0, 0); return trim(c);
+}
+
+// --- the things in the basket ---
+const ENV_B = (() => {
+  const w = 21, h = 14, [c, x] = cnv(w, h), d = D(x);
+  d.r(0, 0, w, h, C.W); d.r(0, h - 1, w, 1, C.w);
+  d.line(0, h - 1, 9, 8, C.c); d.line(w - 1, h - 1, 11, 8, C.c);
+  d.line(0, 0, 10, 7, C.c); d.line(w - 1, 0, 10, 7, C.c);
+  x.drawImage(gx([".OOO.", "ORORO", "OOOOO", "ORRRO", ".OOO."]), 8, 6);
+  return c;
+})();
+const TIMS_B = (() => {
+  const w = 15, h = 22, [c, x] = cnv(w, h), d = D(x);
+  d.r(0, 0, w, h, XC.m); d.r(0, 15, w, 7, C.W); d.r(0, 15, w, 1, XC.M);
+  d.r(4, 3, 7, 1, C.W); d.r(5, 4, 5, 6, C.W); d.r(5, 6, 5, 1, XC.M); d.r(6, 10, 3, 1, C.W); d.p(4, 3, C.c); d.p(10, 3, C.c);
+  d.r(3, 12, 9, 1, XC.a); d.r(3, 18, 5, 1, XC.a); d.r(10, 18, 2, 1, C.c); d.p(1, 1, '#E3707A'); d.p(1, 2, '#E3707A');
+  cutC(x, w, h); return c;
+})();
+const SEPH_B = (() => {
+  const w = 15, h = 22, [c, x] = cnv(w, h), d = D(x);
+  for (let X = 0; X < w; X++) d.r(X, 0, 1, h, X % 3 === 1 ? C.W : XC.n);
+  d.r(2, 8, 11, 7, XC.n); d.r(4, 10, 7, 1, C.W); d.r(5, 12, 5, 1, XC.N);
+  cutC(x, w, h); return c;
+})();
+const GEN_B = (() => {
+  const w = 15, h = 22, [c, x] = cnv(w, h), d = D(x);
+  d.r(0, 0, w, h, C.l); d.r(0, 9, w, 2, C.O); d.r(6, 0, 2, h, C.O); d.r(2, 2, 3, 1, C.L); d.r(9, 15, 4, 1, C.L);
+  cutC(x, w, h); return c;
+})();
+function pomB(stage) {
+  const w = 21, h = 19, [c, x] = cnv(w, h), d = D(x), cx = 10, cy = 11;
+  if (stage < 2) {
+    for (let Y = 0; Y < h; Y++) for (let X = 0; X < w; X++) {
+      const dx = (X - cx) / 9.6, dy = (Y - cy) / 7.6, r = dx * dx + dy * dy; if (r > 1) continue;
+      let col = C.e; if (dx * .6 + dy > .6) col = XC.i; else if (dx + dy < -.75 && r > .3) col = C.Y;
+      if (col === C.e && (X * 7 + Y * 5) % 13 === 0) col = XC.i;
+      d.p(X, Y, col);
+    }
+    if (stage === 0) { d.r(10, 2, 1, 2, C.G); d.r(11, 1, 3, 2, C.S); d.p(14, 1, C.S); d.p(12, 2, C.G); d.p(6, 6, C.W); d.p(5, 7, C.W); }
+    else { d.ell(10, 5, 6, 2, C.W); d.ell(10, 5, 4, 1, C.h); d.p(8, 5, C.P); }
+  } else {
+    for (let k = 0; k < 6; k++) {
+      const a = -Math.PI / 2 + k * Math.PI / 3 + .3, tx = cx + Math.cos(a) * 9.6, ty = cy + 1 + Math.sin(a) * 7.2, a1 = a - .55, a2 = a + .55;
+      const pts = [[cx + Math.cos(a1) * 4.5, cy + 1 + Math.sin(a1) * 3.5], [tx, ty], [cx + Math.cos(a2) * 4.5, cy + 1 + Math.sin(a2) * 3.5]];
+      d.poly(pts, C.e); d.edges(pts, XC.i);
+    }
+    d.ell(cx, cy + 1, 5, 4, C.W);
+    if (stage === 2) { d.ell(cx, cy + 1, 4, 3, C.h); [[0, -3], [0, 3], [-4, 0], [4, 0], [-3, -2], [3, 2], [3, -2], [-3, 2]].forEach(([a, b]) => d.line(cx, cy + 1, cx + a, cy + 1 + b, C.W)); }
+    else { d.ell(cx, cy + 1, 3, 2, C.w); d.p(cx - 1, cy, C.c); }
+  }
+  return c;
+}
+const POM = [0, 1, 2, 3].map(s => mk(pomB(s)));
+const TEA_B = (() => {
+  const w = 26, h = 19, [c, x] = cnv(w, h), d = D(x);
+  for (let Y = 0; Y < h; Y++) for (let X = 17; X < w; X++) { const dd = Math.hypot(X - 20.5, Y - 10.5); if (dd >= 2.4 && dd <= 4.4) d.p(X, Y, C.G); }
+  d.line(5, 12, 1, 7, C.S); d.line(6, 12, 2, 7, C.S); d.line(6, 13, 2, 8, C.G); d.r(0, 6, 3, 1, C.S);
+  d.ell(12, 12, 8, 6, C.S);
+  for (let Y = 6; Y <= 18; Y++) for (let X = 4; X <= 20; X++) { const dx = (X - 12) / 8.5, dy = (Y - 12) / 6.5; if (dx * dx + dy * dy <= 1 && dx * .5 + dy > .45) d.p(X, Y, C.G); }
+  for (let X = 5; X <= 19; X++) { d.p(X, 11, C.l); d.p(X, 12, C.V); }
+  d.p(7, 8, C.s); d.p(8, 8, C.s); d.p(7, 9, C.s);
+  d.ell(12, 6, 5, 1, C.G); d.ell(12, 5, 4, 1, C.S); d.r(11, 2, 3, 2, C.O); d.p(11, 2, C.o);
+  return c;
+})();
+const TEA = mk(TEA_B), TEA_POUR = mk(rot(TEA_B, -.55));
+function cupB(full) { const [c, x] = cnv(12, 9), d = D(x); d.r(0, 0, 9, 1, full ? XC.x : C.c); d.r(0, 1, 9, 6, C.W); d.r(1, 7, 7, 1, C.W); d.r(0, 4, 9, 1, C.S); d.r(9, 2, 2, 1, C.W); d.r(10, 3, 1, 2, C.W); d.r(9, 5, 2, 1, C.W); return c; }
+const CUP = [mk(cupB(0)), mk(cupB(1))];
+let TEA_PX = 8, TEA_PY = 4, TEA_SX = 9, TEA_SY = 17;
+const HORSE_ROWS = [
+  "..zz......zz..",
+  "..zqz....zqz..",
+  "..zqzVlVlzqz..",
+  "...zlVlVllz...",
+  "..zzzlVllzzz..",
+  ".zzzzzlVzzzzz.",
+  ".zzzzzzlzzzzz.",
+  ".zBWzzzzzzBWz.",
+  ".zBBzzzzzzBBz.",
+  ".zPzzzzzzzzPz.",
+  "..zzzzzzzzzz..",
+  "..zqqqqqqqqz..",
+  ".zqqqqqqqqqqz.",
+  ".qqZZqqqqZZqq.",
+  ".qqqqqqqqqqqq.",
+  "..qqqqqqqqqq..",
+  "...qqqqqqqq...",
+];
+function horseB(mode) {
+  const r = HORSE_ROWS.slice();
+  if (mode === 'blink') { r[7] = '.zzzzzzzzzzzz.'; r[8] = '.zBBzzzzzzBBz.'; }
+  if (mode === 'neigh') { r[7] = '.zzzzzzzzzzzz.'; r[8] = '.zBBzzzzzzBBz.'; r[14] = '.qqqqrrrrqqqq.'; r[15] = '..qqqrPPrqqq..'; }
+  return gx(r);
+}
+const HORSE = { open: mk(horseB()), blink: mk(horseB('blink')), neigh: mk(horseB('neigh')) };
+const CARD_FRONT = (() => {
+  const w = 13, h = 18, [c, x] = cnv(w, h), d = D(x);
+  d.r(0, 0, w, h, C.W); d.r(0, h - 1, w, 1, C.w); d.r(w - 1, 0, 1, h, C.w);
+  x.drawImage(gx(["..B..", ".BBB.", "BBBBB", "..B..", ".BBB."]), 1, 3);
+  x.drawImage(gx([".p.p.", "ppppp", "ppppp", ".ppp.", "..p.."]), 7, 3);
+  x.drawImage(gx(["..p..", ".ppp.", "ppppp", ".ppp.", "..p.."]), 1, 10);
+  x.drawImage(gx(["..B..", ".BBB.", "BBBBB", "B.B.B", "..B.."]), 7, 10);
+  cutC(x, w, h); return c;
+})();
+const CARD_BACK = (() => {
+  const w = 13, h = 18, [c, x] = cnv(w, h), d = D(x);
+  d.r(0, 0, w, h, C.W);
+  for (let Y = 1; Y < h - 1; Y++) for (let X = 1; X < w - 1; X++) d.p(X, Y, ((X + Y) % 4 === 0 || (X - Y + 40) % 4 === 0) ? C.V : C.l);
+  cutC(x, w, h); return c;
+})();
+const CARD = mk(CARD_FRONT), CARD_B = mk(CARD_BACK), CARD_TILT = mk(rot(CARD_FRONT, .24));
+function dogB(bites) {
+  const w = 22, h = 9, [c, x] = cnv(w, h), d = D(x);
+  d.r(2, 0, 18, 3, C.R); d.r(1, 1, 20, 2, C.R); d.r(3, 0, 16, 1, '#D7854C');
+  for (let X = 3; X <= 18; X++) d.p(X, X % 4 < 2 ? 0 : 1, C.y);
+  d.r(1, 3, 20, 1, C.T); d.r(0, 4, 22, 3, C.T); d.r(1, 7, 20, 1, C.t); d.r(3, 8, 16, 1, C.t);
+  d.r(1, 4, 6, 1, C.Y); d.r(17, 4, 5, 3, C.t);
+  for (let b = 1; b <= bites; b++) { const bx = w + 1 - b * 6, by = 3; for (let Y = 0; Y < h; Y++) for (let X = 0; X < w; X++) if (Math.hypot(X - bx, Y - by) < 4.2 || X > bx + 2) x.clearRect(X, Y, 1, 1); }
+  return c;
+}
+const DOG = [0, 1, 2].map(b => mk(dogB(b))), DOG_TILT = mk(rot(dogB(0), -.55));
+
+// --- the basket itself (built once) ---
+const BKG = { cx: 95, ry0: 86, rx: 44, ry: 7, by: 119, brx: 37 };
+const rimY = X => { const k = (X - BKG.cx) / BKG.rx; return BKG.ry * Math.sqrt(Math.max(0, 1 - k * k)); };
+const gingham = (X, Y) => { const a = (X >> 1) & 1, b = (Y >> 1) & 1; return a && b ? C.V : (a || b ? C.l : C.L); };
+const BK_BACK = (() => {
+  const { cx, ry0, rx, ry } = BKG, [c, x] = cnv(144, 128), d = D(x);
+  for (let Y = ry0 - ry; Y <= ry0 + ry; Y++) for (let X = cx - rx; X <= cx + rx; X++) {
+    const dx = (X - cx) / rx, dy = (Y - ry0) / ry; if (dx * dx + dy * dy > 1) continue;
+    let col = gingham(X, Y); if (dy < -.2) col = col === C.L ? C.l : (col === C.l ? C.V : C.v);
+    d.p(X, Y, col);
+  }
+  for (let X = cx - rx; X <= cx + rx; X++) { const y = Math.round(ry0 - rimY(X)); d.p(X, y - 1, C.K); d.p(X, y, (X >> 1) % 2 ? C.T : C.t); d.p(X, y + 1, XC.d); }
+  return c;
+})();
+const BK_HANDLE = (() => {
+  const [c, x] = cnv(144, 128), d = D(x), cx = BKG.cx, cy = BKG.ry0 + 1, rx = 40, ry = 62, pts = [];
+  for (let i = 0; i <= 120; i++) { const a = Math.PI + Math.PI * i / 120; pts.push([Math.round(cx + rx * Math.cos(a)), Math.round(cy + ry * Math.sin(a))]); }
+  pts.forEach(([X, Y]) => d.r(X - 2, Y - 2, 5, 5, C.K));
+  pts.forEach(([X, Y], i) => d.r(X - 1, Y - 1, 3, 3, (i >> 2) % 2 ? C.T : C.t));
+  pts.forEach(([X, Y], i) => { if ((i >> 2) % 2) d.p(X - 1, Y - 1, C.Y); else d.p(X + 1, Y + 1, XC.d); });
+  return c;
+})();
+const BK_FRONT = (() => {
+  const { cx, ry0, rx, ry, by, brx } = BKG, [c, x] = cnv(144, 128), d = D(x);
+  const shade = col => ({ [C.Y]: C.T, [C.T]: C.t, [C.t]: XC.d, [XC.d]: XC.j })[col] || col;
+  for (let X = cx - rx; X <= cx + rx; X++) {
+    const top = Math.round(ry0 + rimY(X)), bot = Math.round(by + 3 * Math.sqrt(Math.max(0, 1 - ((X - cx) / brx) ** 2)));
+    for (let Y = top; Y <= bot; Y++) {
+      const hw = rx - (rx - brx) * (Y - ry0) / (by - ry0); if (Math.abs(X - cx) > hw) continue;
+      const yy = Y - (top - ry0) + 2, row = Math.floor(yy / 4), xx = X + (row % 2) * 3;
+      let col = (row + Math.floor(xx / 6)) % 2 ? C.T : C.t;
+      if (yy % 4 === 3 || xx % 6 === 0) col = XC.d;
+      const sx = (X - cx) / hw; if (sx > .5) col = shade(col); if (sx > .82) col = shade(col); if (sx < -.55 && col === C.T) col = C.Y;
+      d.p(X, Y, col);
+    }
+    for (let k = -2; k <= 1; k++) { const Y = top + k, b = ((X + Y) >> 1) % 2; d.p(X, Y, k === 1 ? XC.j : (b ? C.T : C.t)); }
+    d.p(X, top - 2, (X >> 1) % 2 ? C.Y : C.T);
+  }
+  [[cx - 31, 13, 9], [cx + 2, 15, 10], [cx + 30, 11, 8]].forEach(([fx, fw, fh]) => {
+    const top = Math.round(ry0 + rimY(fx)) + 1;
+    for (let Y = 0; Y < fh; Y++) { const hw = Math.round((fw / 2) * (1 - Y / fh)); for (let X = -hw; X <= hw; X++) d.p(fx + X, top + Y, Math.abs(X) === hw ? C.v : gingham(fx + X, top + Y)); }
+  });
+  return outlined(c);
+})();
+const BOW_LILAC = outlined(grid(["SSS.....SSS", "SsSS...SSsS", "SssSSGSSssS", "SsSSGGGSSsS", "SSS.SGS.SSS", "...SS.SS...", "..SS...SS.."], { S: '#CFA6D4', s: '#F0DDF0', G: '#9F70AC' }));
+const BOW_O = outlined(grid(["SSS.....SSS", "SsSS...SSsS", "SssSSGSSssS", "SsSSGGGSSsS", "SSS.SGS.SSS", "...SS.SS...", "..SS...SS.."], { S: C.O, s: C.o, G: C.R }));
+
+// --- the bouquet beside the basket ---
+const BQ = {
+  P0: [24, 102],
+  back: [[0, 50], [8, 34], [40, 32], [49, 50], [31, 116], [17, 116]],
+  front: [[1, 64], [24, 58], [47, 64], [31, 121], [17, 121]],
+  flowers: [{ k: 'pink', x: 24, y: 21 }, { k: 'lav', x: 12, y: 30 }, { k: 'pump', x: 36, y: 29 }, { k: 'lilac', x: 6, y: 45 }, { k: 'pump', x: 24, y: 36 }, { k: 'lilac', x: 42, y: 44 }, { k: 'pink', x: 15, y: 48 }, { k: 'lav', x: 33, y: 50 },
+    { k: 'lilac', x: 15, y: 13, bud: 1 }, { k: 'pump', x: 33, y: 12, bud: 1 }, { k: 'pink', x: 45, y: 26, bud: 1 }, { k: 'lav', x: 3, y: 31, bud: 1 }],
+  leaves: [[22, 70, -2.05, 34, 5], [26, 70, -1.1, 34, 5], [21, 68, -2.6, 25, 4], [27, 68, -.55, 25, 4]],
+};
+BQ.flowers.forEach((f, i) => { f.ph = (i * .37) % 1; });
+const BQ_DRAW = BQ.flowers.map((f, i) => ({ ...f, d: .55 + i * .07 })).sort((a, b) => a.y - b.y);
+const LEAF_PAL = [FG.M, FG.D, FG.L];
+function drawBouquet(d, now, t, hi) {
+  const sway = ph => Math.floor(now * 1.25 + ph * 2) % 2, P0 = BQ.P0, ol = hi ? C.O : C.K;
+  d.poly(BQ.back, '#FBE3EA'); d.edges(BQ.back, ol); d.line(9, 36, 22, 112, '#F0C2CF'); d.line(39, 34, 27, 112, '#F0C2CF');
+  BQ.leaves.forEach(([bx, by, a, L, w], i) => drawLeaf(d, bx, by, a + (sway(i * .5) ? .03 : 0), L, w, LEAF_PAL));
+  BQ.flowers.forEach(f => d.line(P0[0], P0[1], f.x + sway(f.ph), f.y + 3, FG.D));
+  BQ_DRAW.forEach(f => {
+    if (t < f.d) return;
+    const fx = f.x + sway(f.ph);
+    if (t < f.d + .12) { d.img(BUD, fx - 2, f.y - 2); return; }
+    const spr = f.bud ? TULIP_BUD[f.k] : TULIP[f.k];
+    d.img(spr, fx - Math.floor(spr.width / 2), f.y - Math.floor(spr.height / 2));
+  });
+  d.poly(BQ.front, C.L);
+  d.line(1, 64, 20, 72, C.l); d.line(20, 72, 23, 120, C.l); d.line(47, 64, 30, 72, C.l); d.line(30, 72, 27, 120, C.l);
+  for (let k = 0; k < 9; k++) { const px = 8 + (k * 13) % 32, py = 74 + (k * 7) % 40; if (py < 86 || py > 93) { const hw = 23 - 16 * (py - 64) / 57; if (Math.abs(px - 24) < hw - 3) d.p(px, py, C.W); } }
+  d.edges(BQ.front, ol);
+  for (let yy = 88; yy <= 91; yy++) {
+    const xa = Math.ceil(1 + 16 * (yy - 64) / 57) + 1, xb = Math.floor(47 - 16 * (yy - 64) / 57) - 1;
+    for (let xx = xa; xx <= xb; xx++) { let col = '#D2691E'; if (yy === 88 || yy === 91) col = '#A04C14'; else if ((xx + yy) % 4 === 0) col = '#F1A464'; d.p(xx, yy, col); }
+  }
+  d.img(BOW_LILAC, 18, 84);
+}
+
+// --- what's in the basket ---
+const GIFT_LIST = (typeof GIFT_CARDS !== 'undefined' ? GIFT_CARDS : []).filter(Boolean).slice(0, 2);
+const ITEMS = [
+  { id: 'tea', name: 'jasmine tea', desc: 'Uncle Iroh insists you take a break and have a cup.', x: 108, y: 57, spr: () => TEA,
+    says: ['jasmine tea. Uncle Iroh would approve.', 'he says tea first, worries later.', 'refill? he insists.'] },
+  { id: 'letter', name: 'a letter', desc: 'sealed with a paw print. Cala is guarding it, so expect a few questions.', x: 51, y: 57, spr: () => ENV_TILT },
+  { id: 'gift0', gift: 0, x: 76, y: 53 },
+  { id: 'gift1', gift: 1, x: 92, y: 57 },
+  { id: 'dog', name: 'a $1.50 hot dog', desc: "the Costco hot dog. some things never change, and that price is one of them.", x: 90, y: 70, spr: () => DOG_TILT,
+    says: ['*chomp*', '*chomp chomp*', 'all gone. $1.50 well spent.', 'a fresh one appeared. still $1.50.'] },
+  { id: 'card', name: 'a playing card', desc: 'found tucked in the basket. very suspicious. Hisoka was definitely here.', x: 71, y: 69, spr: () => CARD_TILT,
+    says: ['♠ ♥ ♦ ♣', 'it’s a little sticky. bungee gum sold separately.', 'the back is lavender. even Hisoka knows your colors.'] },
+  { id: 'pomelo', name: 'a pomelo', desc: 'x-large. the best fruit in the world, and that’s not up for debate.', x: 49, y: 69, spr: () => POM[0],
+    says: ['peeling...', 'all yours.', 'you ate the whole thing? fair.', 'a fresh one. there are infinite pomelos on your birthday.'] },
+  { id: 'horse', name: 'a horse plushie', desc: 'for all the horse jokes. he says happy birthday, but he’s a little hoarse.', x: 121, y: 68, spr: () => HORSE.open,
+    says: ['what do you call a horse that lives next door? your neigh-bor.', 'hay, happy birthday.', 'this comes straight from the horse’s mouth: you’re the best.', 'stable relationships matter. like you and Costco cake.', 'why the long face? it’s your birthday!'] },
+  { id: 'flowers', name: 'tulips', desc: 'lilac, lavender, pink and pumpkin pie orange. only your colors. no watering needed.', box: [0, 6, 50, 116],
+    says: ['they swayed. they like you.', 'pixel flowers never wilt.', 'smell them. (you can’t, but pretend.)'] },
+];
+const ENV = mk(ENV_B), ENV_TILT = mk(rot(ENV_B, -.2));
+ITEMS.forEach(it => {
+  it.st = { n: 0, t: -9, seen: false };
+  if (it.gift != null) {
+    const G = GIFT_LIST[it.gift]; if (!G) { it.off = true; return; }
+    it.G = G; it.name = G.store ? `${G.store} gift card` : 'a gift card';
+    const face = mk(({ cup: TIMS_B, lipstick: SEPH_B })[G.icon] || GEN_B); it.spr = () => face;
+  }
+  if (!it.box) { const s = it.spr().s; it.box = [it.x, it.y, s.width, Math.min(s.height, 93 - it.y)]; }
+});
+const LIVE = ITEMS.filter(it => !it.off);
+const bk = { t0: null, hover: null, hint: 0, hintT: 0 };
+const BKS = setupStage('#bkStage');
+function itemHidden(it) { return (inspOpen && inspItem === it) || (it.id === 'letter' && (stage === 'quiz' || stage === 'sealed')); }
+function drawBasket(now) {
+  const { c, x, d } = BKS; x.clearRect(0, 0, c.width, c.height);
+  const t = bk.t0 == null ? 99 : now - bk.t0;
+  let drop = 0; if (t < .3) drop = -Math.round(30 * (1 - t / .3) ** 2); else if (t < .42) drop = 2;
+  d.ell(BKG.cx, 123, 46, 2, 'rgba(62,49,80,.14)'); d.ell(24, 123, 16, 1, 'rgba(62,49,80,.12)');
+  x.save(); x.translate(0, drop);
+  d.img(BK_HANDLE, 0, 0); d.img(BK_BACK, 0, 0);
+  if (now - bk.hintT > 2.4) { bk.hintT = now; const pool = LIVE.filter(it => !it.st.seen && it.id !== 'flowers'); bk.hint = pool.length ? pool[Math.floor(now) % pool.length].id : null; }
+  LIVE.forEach((it, i) => {
+    if (it.id === 'flowers' || itemHidden(it)) return;
+    const ap = .4 + i * .09; if (t < ap) return;
+    let dy = t < ap + .1 ? -2 : 0;
+    const hk = now - bk.hintT; if (bk.hint === it.id && hk < .5) dy = [-1, -2, -2, -1, 0][Math.floor(hk / .1)] || 0;
+    const back = now - it.st.back; if (back < .3) dy = [-3, -1, 1, 0][Math.floor(back / .08)] || 0;
+    let spr = it.spr();
+    if (it.id === 'horse' && (now % 3.7) < .14) spr = HORSE.blink;
+    d.img(bk.hover === it.id ? spr.h : spr.s, it.x, it.y + dy);
+    if (it.id === 'tea') for (let k = 0; k < 3; k++) { const ph = (now * .9 + k / 3) % 1, sx = it.x + 1 + Math.round(Math.sin(ph * 6 + k) * 1.2), sy = it.y + 6 - Math.floor(ph * 12); if (ph < .8 || Math.floor(now * 12) % 2) d.p(sx, sy, k % 2 ? C.W : C.L); }
+    if (it.id === 'letter' && (now % 2.2) < .2) d.p(it.x + 12, it.y + 10, C.W);
+    if (bk.hint === it.id && hk < .6 && Math.floor(hk * 10) % 2 === 0) { d.img(sparkSprite(2, C.W), it.x - 3, it.y - 3); d.img(sparkSprite(1, C.W), it.x + it.box[2] - 1, it.y + 1); }
+  });
+  d.img(BK_FRONT, -1, -1);
+  d.img(BOW_O, BKG.cx - 40 - 5, BKG.ry0 - 38);
+  x.restore();
+  if (!(inspOpen && inspItem && inspItem.id === 'flowers')) drawBouquet(d, now, t, bk.hover === 'flowers');
+}
+// hotspots: real buttons laid over each thing so taps, hover and keyboard all work
+const bkWrap = $('#bkWrap'), bkTip = $('#bkTip');
+LIVE.forEach(it => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'hot'; b.setAttribute('aria-label', 'Look at ' + it.name);
+  const [x0, y0, w, h] = it.box;
+  Object.assign(b.style, { left: (x0 / 144 * 100) + '%', top: (y0 / 128 * 100) + '%', width: (w / 144 * 100) + '%', height: (h / 128 * 100) + '%' });
+  if (it.id === 'flowers') bkWrap.insertBefore(b, bkWrap.querySelector('.hot')); else bkWrap.append(b);
+  const on = () => { bk.hover = it.id; bkTip.textContent = it.name; bkTip.style.left = ((x0 + w / 2) / 144 * 100) + '%'; bkTip.style.top = (Math.max(4, y0 - 5) / 128 * 100) + '%'; bkTip.classList.add('on'); };
+  const off = () => { if (bk.hover === it.id) { bk.hover = null; bkTip.classList.remove('on'); } };
+  b.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') on(); }); b.addEventListener('pointerleave', off);
+  b.addEventListener('focus', () => { if (b.matches(':focus-visible')) on(); }); b.addEventListener('blur', off);
+  b.addEventListener('click', () => { off(); openItem(it); });
+  it.btn = b;
+});
+function syncHot() { LIVE.forEach(it => { it.btn.hidden = it.id === 'letter' && (stage === 'quiz' || stage === 'sealed'); }); }
+
+/* ---------- inspecting something ---------- */
+const insp = $('#inspect'), IC = setupStage('#inspCv'), giftHold = $('#giftHold');
+let inspOpen = false, inspItem = null, inspParts = [];
+function say(t) { $('#inspSay').textContent = t; }
+function openItem(it) {
+  if (inspOpen) return;
+  initAudio(); blip(); it.st.seen = true; inspItem = it; inspOpen = true; inspParts = []; updCount();
+  const extra = $('#inspExtra'); [...extra.children].forEach(ch => giftHold.append(ch));
+  const isGift = it.gift != null;
+  $('#inspCv').hidden = isGift; $('#inspHint').hidden = isGift || it.id === 'letter';
+  $('#inspName').hidden = isGift; $('#inspDesc').hidden = isGift;
+  $('#inspName').textContent = it.name || ''; $('#inspDesc').textContent = it.desc || ''; say('');
+  if (isGift && it.giftEl) extra.append(it.giftEl);
+  const acts = $('#inspActs'); acts.innerHTML = '';
+  if (it.id === 'letter') {
+    const read = stage === 'read';
+    $('#inspDesc').textContent = read ? 'you already passed the security check. Cala says you can read it as many times as you want.' : it.desc;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'pbtn'; b.textContent = read ? 'read it again' : 'open it';
+    b.addEventListener('click', () => { closeInspect(); setTimeout(read ? openReader : startQuiz, 380); }); acts.append(b);
+  }
+  const back = document.createElement('button'); back.type = 'button'; back.className = 'pbtn light'; back.textContent = 'put it back'; back.addEventListener('click', closeInspect); acts.append(back);
+  insp.scrollTop = 0; insp.classList.add('show'); insp.setAttribute('aria-hidden', 'false'); document.body.classList.add('locked');
+  setTimeout(() => $('#inspect .x').focus({ preventScroll: true }), 420);
+}
+function updCount() { const n = LIVE.filter(i => i.st.seen).length; $('#bkCount').textContent = !n ? '' : (n === LIVE.length ? 'you looked at everything \u2661' : `${n} of ${LIVE.length} looked at`); }
+function closeInspect() {
+  if (!inspOpen) return;
+  insp.classList.remove('show'); insp.setAttribute('aria-hidden', 'true'); if (!readerOpen) document.body.classList.remove('locked');
+  const it = inspItem; setTimeout(() => { inspOpen = false; it.st.back = NOW(); if (it.btn) it.btn.focus({ preventScroll: true }); }, 380);
+}
+insp.addEventListener('click', e => { if (e.target === insp) closeInspect(); });
+$('#inspect .x').addEventListener('click', closeInspect);
+addEventListener('keydown', e => { if (e.key === 'Escape' && inspOpen) closeInspect(); });
+function popBits(n, cols, x0, y0) { for (let i = 0; i < n; i++) inspParts.push({ x: x0 + (Math.random() - .5) * 8, y: y0 + (Math.random() - .5) * 4, vx: (Math.random() - .5) * 1.4, vy: -Math.random() * 1.6 - .3, c: cols[i % cols.length], t: 0 }); }
+function petals() { for (let i = 0; i < 9; i++) inspParts.push({ x: 6 + Math.random() * 32, y: -2 - Math.random() * 8, vx: 0, vy: .25 + Math.random() * .2, c: ['#F4A7B9', '#CFA6D4', '#F1A464', C.l][i % 4], t: Math.random() * 6, sway: 1 }); }
+function neigh() {
+  if (!ctx) return; const t = ctx.currentTime + .01, o = ctx.createOscillator(), g = ctx.createGain(), l = ctx.createOscillator(), lg = ctx.createGain();
+  o.type = 'square'; o.frequency.setValueAtTime(620, t); o.frequency.linearRampToValueAtTime(1050, t + .14); o.frequency.linearRampToValueAtTime(820, t + .4); o.frequency.linearRampToValueAtTime(430, t + .75);
+  l.frequency.value = 24; lg.gain.value = 70; l.connect(lg); lg.connect(o.frequency);
+  g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.045, t + .03); g.gain.exponentialRampToValueAtTime(.02, t + .5); g.gain.exponentialRampToValueAtTime(.0001, t + .8);
+  o.connect(g); g.connect(master); o.start(t); l.start(t); o.stop(t + .85); l.stop(t + .85);
+}
+function inspTap() {
+  const it = inspItem; if (!it || it.gift != null) return;
+  const st = it.st, now = NOW(); initAudio();
+  if (it.id === 'letter') { $('#inspActs .pbtn').click(); return; }
+  if (now - st.t < .25) return;
+  st.t = now; st.n++;
+  const cyc = arr => arr[(st.n - 1) % arr.length];
+  if (it.id === 'pomelo') { noise(.12, 2200, 1, .25); popBits(6, [C.e, C.W, C.h], 22, 14); say(cyc(it.says)); }
+  if (it.id === 'tea') { noise(1.1, 1500, .7, .1); setTimeout(() => { if (ctx) tone(hz(88), ctx.currentTime + .01, .2, 'triangle', .05); }, 1100); say(cyc(it.says)); }
+  if (it.id === 'horse') { neigh(); say(cyc(it.says)); }
+  if (it.id === 'card') { noise(.06, 3200, 1, .25); say(cyc(it.says)); }
+  if (it.id === 'dog') { noise(.07, 900, 2, .4); setTimeout(() => noise(.06, 700, 2, .3), 90); if (st.n % 4) popBits(5, [C.T, C.t], 30, 16); say(cyc(it.says)); }
+  if (it.id === 'flowers') { noise(.25, 3600, .8, .08); petals(); say(cyc(it.says)); }
+}
+$('#inspCv').addEventListener('click', inspTap);
+function drawInspect(now) {
+  const it = inspItem; if (!it || it.gift != null) return;
+  const { c, x, d } = IC; x.clearRect(0, 0, c.width, c.height);
+  const st = it.st, k = now - st.t, bob = Math.floor(now * 1.6) % 2, W = c.width, H = c.height;
+  const hop = k < .32 ? [-2, -3, -2, -1][Math.floor(k / .08)] : 0;
+  const ctr = (s, yy) => d.img(s, Math.floor((W - s.width) / 2), yy);
+  d.ell(W / 2, H - 3, 14, 1, 'rgba(62,49,80,.12)');
+  if (it.id === 'letter') { ctr(ENV.s, 8 + bob); if ((now % 1.6) < .2) d.p(Math.floor((W - ENV.s.width) / 2) + 11, 15 + bob, C.W); }
+  if (it.id === 'pomelo') { const s = POM[st.n % 4].s; ctr(s, H - 4 - s.height + hop); }
+  if (it.id === 'horse') {
+    const neighing = k < .8, s = neighing ? HORSE.neigh.s : ((now % 3.7) < .14 ? HORSE.blink.s : HORSE.open.s);
+    const sh = neighing ? (Math.floor(k * 16) % 2 ? 1 : -1) : 0; d.img(s, Math.floor((W - s.width) / 2) + sh, 6 + (neighing ? hop : bob));
+    if (neighing) { d.img(NOTES[0], 33, 8 - Math.floor(k * 10)); d.img(NOTES[1], 6, 12 - Math.floor(k * 8)); }
+  }
+  if (it.id === 'card') {
+    const fk = clamp(k / .32), face = (st.n % 2 === 0) ? (fk < .5 ? CARD_B : CARD) : (fk < .5 ? CARD : CARD_B);
+    const s = (k < .32 ? face : (st.n % 2 ? CARD_B : CARD)).s, sw = Math.max(1, Math.round(s.width * Math.abs(Math.cos(Math.PI * fk))));
+    x.drawImage(s, Math.floor((W - sw) / 2), 6 + (k < .32 ? -2 : bob), sw, s.height);
+  }
+  if (it.id === 'dog') { const b = st.n % 4; if (b < 3) ctr(DOG[b].s, 12 + hop + bob); else { d.p(18, H - 4, C.T); d.p(24, H - 5, C.t); d.p(27, H - 4, C.T); } }
+  if (it.id === 'tea') {
+    const pouring = k < 1.3 && st.n > 0, full = st.n > 0 && !(pouring && k < .8) ? 1 : 0;
+    d.img(CUP[full].s, 2, H - 12);
+    if (pouring) {
+      d.img(TEA_POUR.s, TEA_PX, TEA_PY);
+      if (k > .2 && k < 1.1) for (let yy = TEA_SY; yy < H - 11; yy++) if ((yy + Math.floor(now * 20)) % 3) d.p(TEA_SX, yy, XC.x);
+    } else d.img(TEA.s, 15, H - 4 - TEA.s.height + bob);
+    if (full && (!pouring || k > 1)) for (let n = 0; n < 3; n++) { const ph = (now * .8 + n / 3) % 1; d.p(7 + Math.round(Math.sin(ph * 6 + n) * 1.3), H - 13 - Math.floor(ph * 10), n % 2 ? C.W : C.L); }
+    if (!pouring && !full) for (let n = 0; n < 3; n++) { const ph = (now * .8 + n / 3) % 1; d.p(16 + Math.round(Math.sin(ph * 6 + n) * 1.2), H - 4 - TEA.s.height + 6 - Math.floor(ph * 9), n % 2 ? C.W : C.L); }
+  }
+  if (it.id === 'flowers') {
+    const sway = ph => Math.floor(now * 1.25 + ph * 2) % 2 + (k < .6 ? (Math.floor(k * 12) % 2 ? 1 : -1) : 0);
+    const tl = [['pump', 8, 11, .1], ['pink', 17, 5, .4], ['lilac', 27, 6, .7], ['lav', 36, 12, .2]];
+    drawLeaf(d, 21, H - 4, -2.15, 15, 3, LEAF_PAL); drawLeaf(d, 23, H - 4, -.95, 15, 3, LEAF_PAL);
+    tl.forEach(([kk, fx, fy, ph]) => d.line(22, H - 2, fx + sway(ph), fy + 4, FG.D));
+    drawLeaf(d, 20, H - 3, -2.6, 11, 3, LEAF_PAL); drawLeaf(d, 24, H - 3, -.5, 11, 3, LEAF_PAL);
+    tl.forEach(([kk, fx, fy, ph]) => d.img(TULIP[kk], fx + sway(ph) - 5, fy - 5));
+  }
+  for (let i = inspParts.length - 1; i >= 0; i--) {
+    const p = inspParts[i]; p.t += .1;
+    if (p.sway) { p.x += Math.sin(p.t * 1.3) * .4; p.y += p.vy; } else { p.vy += .12; p.x += p.vx; p.y += p.vy; }
+    if (p.y > H) { inspParts.splice(i, 1); continue; } d.p(p.x, p.y, p.c);
+  }
+}
+
+/* ================= gift cards (scratch to reveal) ================= */
+(() => {
+  const cards = GIFT_LIST, wrap = giftHold, ps = $('#giftPs');
+  if (!cards.length) { ps.hidden = true; return; }
+  if (cards.length === 1) ps.textContent = 'p.s. did you find the gift card in the basket? 👀';
+  const KEY = 'cala-mrrp';
+  const unscr = v => { if (!v) return ''; if (/^https?:/i.test(v)) return v; try { const b = atob(v); let o = ''; for (let i = 0; i < b.length; i++) o += String.fromCharCode(b.charCodeAt(i) ^ KEY.charCodeAt(i % KEY.length)); return /^https?:/i.test(o) ? o : ''; } catch (e) { return ''; } };
+  const ICONS_ = {
+    cup: ["..gggggg..", ".gggggggg.", "WWWWWWWWWW", ".WWWWWWWW.", ".pppppppp.", ".ppWppWpp.", ".ppWWWWpp.", "..ppWWpp..", "..pppppp..", "..WWWWWW..", "...WWWW..."],
+    lipstick: ["....pp..", "...ppp..", "..pppp..", "..pppp..", "..pppp..", ".yyyyyy.", ".yYyyyy.", ".BBBBBB.", ".BbBBBB.", ".BbBBBB.", ".BBBBBB.", ".BBBBBB."],
+    gift: [".OO..OO.", "O..OO..O", ".OOOOOO.", "VVVOOVVV", "lllOOlll", "lllOOlll", "lllOOlll", "lllOOlll"],
+  };
+  cards.forEach((G, gi) => {
+    const link = unscr(G.link || '');
+    const el = document.createElement('div'); el.className = 'gift';
+    const owner = ITEMS.find(it => it.gift === gi); if (owner) owner.giftEl = el;
+    el.innerHTML = `<div class="gift-top"><canvas class="px gift-icon" aria-hidden="true"></canvas><span class="gift-kicker">a little gift for you</span></div>
+      <p class="gift-store"></p><p class="gift-amt"></p><p class="gift-note" hidden></p>
+      <div class="scratch"><div class="scratch-under"></div><canvas class="px scratch-top" width="64" height="18" aria-label="Scratch to reveal"></canvas></div>
+      <p class="gift-hint">scratch the silver part</p>
+      <button class="textbtn reveal" type="button">or tap here to reveal it</button>
+      <a class="pbtn gift-link" target="_blank" rel="noopener" hidden></a>`;
+    wrap.append(el);
+    const q = sel => el.querySelector(sel);
+    q('.gift-store').textContent = G.store ? `${G.store} gift card` : 'a gift card';
+    if (G.amount) q('.gift-amt').textContent = G.amount; else q('.gift-amt').hidden = true;
+    if (G.note) { q('.gift-note').textContent = G.note; q('.gift-note').hidden = false; }
+    const under = q('.scratch-under');
+    if (link) under.innerHTML = `<p class="scratch-msg">your card is ready!</p><p class="scratch-label">tap the button below</p>`;
+    else if (G.code) under.innerHTML = `<p class="scratch-label">your code</p><p class="scratch-code">${esc(G.code)}</p>`;
+    else under.innerHTML = `<p class="scratch-msg">${esc(G.message || 'check your messages')}</p>`;
+    const icon = outlined(grid(ICONS_[G.icon] || ICONS_.gift)), ic = q('.gift-icon');
+    ic.width = icon.width; ic.height = icon.height; ic.style.width = (icon.width * 3.6) + 'px'; ic.getContext('2d').drawImage(icon, 0, 0);
+    const sc = q('.scratch-top'), sx = sc.getContext('2d'), W = sc.width, H = sc.height;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { sx.fillStyle = (x + y) % 2 ? '#CFC7DA' : '#BDB4CB'; sx.fillRect(x, y, 1, 1); }
+    sx.fillStyle = '#FFFDF8'; [[6, 4], [18, 12], [31, 5], [44, 13], [57, 6], [12, 9], [50, 3], [38, 10]].forEach(([a, b]) => { sx.fillRect(a - 1, b, 3, 1); sx.fillRect(a, b - 1, 1, 3); });
+    const done = new Uint8Array(W * H); let cleared = 0, revealed = false, down = false;
+    function reveal() {
+      if (revealed) return; revealed = true;
+      sx.clearRect(0, 0, W, H); sc.style.pointerEvents = 'none'; initAudio(); jingle();
+      const r = sc.getBoundingClientRect(); confetti(r.left + r.width / 2, r.top + r.height / 2);
+      q('.reveal').hidden = true;
+      if (link) { const a = q('.gift-link'); a.href = link; const tims = /tim/i.test(G.store || ''); a.textContent = tims ? 'open your Tims card' : (G.store ? `open your ${G.store} card` : 'open your gift card'); a.hidden = false; q('.gift-hint').textContent = tims ? 'add it to your Tims app right away so it’s all yours' : 'save it to your account right away so it’s all yours'; }
+      else if (G.code) { q('.gift-hint').textContent = 'tap the code to copy it'; const c = q('.scratch-code'); c.addEventListener('click', () => { if (navigator.clipboard) navigator.clipboard.writeText(G.code).then(() => toast('copied'), () => {}); }); }
+      else q('.gift-hint').textContent = 'happy birthday!';
+    }
+    function scratchAt(e) {
+      const [px, py] = toPix(sc, e), cx = Math.floor(px), cy = Math.floor(py);
+      for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
+        if (dx * dx + dy * dy > 5) continue; const X = cx + dx, Y = cy + dy; if (X < 0 || Y < 0 || X >= W || Y >= H) continue;
+        const i = Y * W + X; if (!done[i]) { done[i] = 1; cleared++; sx.clearRect(X, Y, 1, 1); }
+      }
+      if (cleared > W * H * .5) reveal();
+    }
+    sc.addEventListener('pointerdown', e => { down = true; try { sc.setPointerCapture(e.pointerId); } catch (_) {} initAudio(); scratchAt(e); e.preventDefault(); });
+    sc.addEventListener('pointermove', e => { if (!down || revealed) return; scratchAt(e); if (Math.random() < .25) noise(.03, 3200, 1, .06); e.preventDefault(); });
+    ['pointerup', 'pointercancel'].forEach(t => sc.addEventListener(t, () => { down = false; }));
+    q('.reveal').addEventListener('click', reveal);
+  });
+})();
+
+$('#mySig').textContent = MY_NAME;
+if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { setTimeout(() => $('#mySig').classList.add('on'), 250); io.disconnect(); } }), { threshold: .5 }); io.observe($('#mySig').parentElement); } else $('#mySig').classList.add('on');
+let toastT = 0;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200); }
+
+/* ================= the cozy table behind the envelope ================= */
+const cz = { c: $('#coverBg'), ok: false };
+cz.x = cz.c.getContext('2d');
+const czRnd = seed => { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; };
+const PAW_PRINT = grid(["X.X.X", ".....", ".XXX.", ".XXX."], { X: '#8C5C3A' });
+const G3 = { N: ["X..X", "XX.X", "X.XX", "X..X", "X..X"], O: ["XXX", "X.X", "X.X", "X.X", "XXX"], V: ["X.X", "X.X", "X.X", "X.X", ".X."], 1: [".X.", "XX.", ".X.", ".X.", ".X.", ".X.", "XXX"] };
+const SMALL_FLAME = [[".y.", "yYy", "yYy", "fYf", ".f."], ["y..", "yy.", "yYy", "fYf", ".f."], ["..y", ".yy", "yYy", "fYf", ".f."]].map(g => grid(g));
+const MUG = (() => {
+  const [c, x] = cnv(11, 10), d = D(x);
+  d.r(0, 0, 8, 1, C.c); d.r(1, 0, 6, 1, '#6B4429'); d.r(0, 1, 8, 8, C.W); d.r(0, 4, 8, 2, '#D2691E'); d.r(7, 1, 1, 8, C.w); d.r(0, 8, 8, 1, C.w);
+  d.r(8, 2, 2, 1, C.W); d.r(9, 3, 1, 3, C.W); d.r(8, 6, 2, 1, C.W); d.p(1, 2, '#FFFFFF');
+  return outlined(c);
+})();
+const CANDLE = (() => {
+  const [c, x] = cnv(10, 11), d = D(x);
+  d.r(2, 1, 6, 8, C.W); d.r(2, 1, 6, 1, C.w); d.r(6, 2, 2, 7, C.c); d.p(4, 0, C.B); d.p(3, 3, '#FFFFFF');
+  d.r(0, 9, 10, 2, C.S); d.r(0, 10, 10, 1, C.G);
+  return outlined(c);
+})();
+const VASE = (() => {
+  const [c, x] = cnv(9, 10), d = D(x);
+  d.r(2, 0, 5, 1, C.l); d.r(3, 1, 3, 2, C.l); d.ell(4, 6, 4, 3, C.l);
+  for (let Y = 3; Y < 10; Y++) for (let X = 5; X < 9; X++) { const dx = (X - 4) / 4.4, dy = (Y - 6) / 3.4; if (dx * dx + dy * dy <= 1 && X > 5) d.p(X, Y, C.V); }
+  d.p(2, 5, C.L); d.p(2, 6, C.L); d.r(1, 7, 7, 1, C.L);
+  return outlined(c);
+})();
+const BOOK_COLS = [C.l, C.S, '#D2691E', '#F4A7B9', C.V, '#CFA6D4'];
+function layoutCozy() {
+  const r = $('#opStage').getBoundingClientRect(); if (!r.width) return;
+  const P = r.width / 112, ox = ((r.left % P) + P) % P - P, oy = ((r.top % P) + P) % P - P;
+  const W = Math.ceil((innerWidth - ox) / P) + 1, H = Math.ceil((innerHeight - oy) / P) + 1;
+  Object.assign(cz.c.style, { left: ox + 'px', top: oy + 'px', width: W * P + 'px', height: H * P + 'px' });
+  cz.c.width = W; cz.c.height = H; cz.x.imageSmoothingEnabled = false;
+  Object.assign(cz, { P, W, H, sx: Math.round((r.left - ox) / P), sy: Math.round((r.top - oy) / P) });
+  buildCozy(); cz.ok = true;
+}
+function buildCozy() {
+  const { W, H, sx, sy } = cz, [c, x] = cnv(W, H), d = D(x), rnd = czRnd(4242);
+  const wide = sx >= 34, tableY = Math.max(Math.round(H * .3), sy + 30);
+  const L = cz.L = { tableY, wide, stars: [], bulbs: [], motes: [] };
+  // wall: dusky lavender stripes with tiny dots
+  d.r(0, 0, W, tableY, '#CDC1E0');
+  for (let X = 0; X < W; X++) if (X % 8 < 3) d.r(X, 0, 1, tableY, '#C5B8DA');
+  for (let Y = 4; Y < tableY - 2; Y += 8) for (let X = 5; X < W; X += 8) d.p(X + ((Y >> 3) % 2) * 4, Y, '#D8CEEA');
+  // window with the night sky
+  const ww = Math.min(64, Math.round(W * .46)) & ~1, wh = Math.min(tableY - 20, 50), wx = Math.round(W / 2 - ww / 2), wy = Math.max(13, tableY - 11 - wh);
+  Object.assign(L, { ww, wh, wx, wy });
+  for (let Y = 0; Y < wh; Y++) { const k = Y / wh; for (let X = 0; X < ww; X++) { const th = B4[(Y & 3) * 4 + (X & 3)] / 16; d.p(wx + X, wy + Y, k + th * .35 < .45 ? '#2B2750' : (k + th * .35 < .85 ? '#383166' : '#4A3F7A')); } }
+  const mx = wx + ww - 13, my = wy + 7; d.ell(mx, my, 4, 4, '#FFF1C2'); d.ell(mx + 2, my - 1, 3, 3, '#2B2750');
+  for (let i = 0; i < Math.round(ww * wh / 70); i++) L.stars.push([wx + 2 + Math.floor(rnd() * (ww - 4)), wy + 2 + Math.floor(rnd() * (wh * .7)), rnd() * 6, .6 + rnd()]);
+  d.r(wx - 2, wy - 2, ww + 4, 2, '#8C5E33'); d.r(wx - 2, wy + wh, ww + 4, 2, '#8C5E33'); d.r(wx - 2, wy, 2, wh, '#8C5E33'); d.r(wx + ww, wy, 2, wh, '#8C5E33');
+  d.r(wx + ww / 2 - 1, wy, 2, wh, '#8C5E33'); d.r(wx, wy + Math.round(wh * .45), ww, 2, '#8C5E33');
+  d.r(wx - 5, wy + wh + 2, ww + 10, 3, C.T); d.r(wx - 5, wy + wh + 4, ww + 10, 1, C.t); d.r(wx - 4, wy + wh + 5, ww + 8, 1, 'rgba(62,49,80,.18)');
+  // curtains
+  d.r(wx - 9, wy - 6, ww + 18, 2, '#6E4A30');
+  [[wx - 8, 1], [wx + ww - 2, -1]].forEach(([cx0, dir]) => {
+    for (let Y = wy - 4; Y < wy + wh + 6; Y++) {
+      const t = (Y - wy) / wh, pinch = t > .5 && t < .7 ? 3 : (t > .4 && t < .8 ? 1 : 0), w = 10 - pinch;
+      for (let X = 0; X < w; X++) { const px = dir > 0 ? cx0 + X : cx0 + 10 - 1 - X, fold = (X + (dir > 0 ? 0 : 1)) % 3; d.p(px, Y, fold === 0 ? C.G : (fold === 1 ? C.S : C.s)); }
+    }
+    const ty = wy + Math.round(wh * .6); d.r(dir > 0 ? cx0 : cx0 + 3, ty, 7, 2, '#D2691E');
+  });
+  // wall calendar: nov 1
+  const calX = wx - 9 - 20, calY = wy + 6;
+  if (calX >= 2) {
+    d.r(calX - 1, calY - 1, 17, 22, C.K); d.r(calX, calY, 15, 20, C.W); d.r(calX, calY, 15, 6, '#D2691E');
+    [['N', 1], ['O', 6], ['V', 10]].forEach(([g, gx]) => G3[g].forEach((row, j) => { for (let i = 0; i < row.length; i++) if (row[i] === 'X') d.p(calX + gx + i, calY + 1 + j, C.W); }));
+    G3[1].forEach((row, j) => { for (let i = 0; i < row.length; i++) if (row[i] === 'X') { d.r(calX + 4 + i * 2, calY + 8 + j, 2, 1, C.K); } });
+    d.p(calX + 12, calY + 10, C.p); d.p(calX + 11, calY + 9, C.p); d.p(calX + 13, calY + 9, C.p); d.p(calX + 12, calY + 9, C.p);
+    d.r(calX + 3, calY - 2, 1, 2, C.k); d.r(calX + 11, calY - 2, 1, 2, C.k);
+  }
+  // hanging plant
+  const plX = wx + ww + 9 + 10;
+  if (plX < W - 6) {
+    d.line(plX, 0, plX - 4, wy + 2, C.c); d.line(plX, 0, plX + 4, wy + 2, C.c);
+    d.r(plX - 5, wy + 2, 11, 6, C.R); d.r(plX - 5, wy + 2, 11, 1, C.o); d.r(plX + 2, wy + 3, 3, 5, '#9E5226');
+    for (let v = 0; v < 3; v++) { const vx = plX - 4 + v * 4, len = 10 + v * 5 + Math.floor(rnd() * 6); for (let k = 0; k < len; k++) { const px = vx + Math.round(Math.sin(k * .5 + v) * 1.2), py = wy + 8 + k; d.p(px, py, FG.D); if (k % 3 === 1) { d.p(px - 1, py, FG.M); d.p(px + 1, py + 1, FG.L); } } }
+  }
+  // a little shelf on wide screens
+  if (wide && W - (wx + ww) > 70) {
+    const shX = Math.round(wx + ww + (W - wx - ww) * .42), shY = wy + Math.round(wh * .55), shW = 42;
+    let bx = shX + 2; for (let i = 0; i < 6; i++) { const bw = 3 + (i % 2), bh = 9 + ((i * 5) % 4); d.r(bx, shY - bh, bw, bh, BOOK_COLS[i]); d.r(bx, shY - bh + 2, bw, 1, C.W); bx += bw; }
+    d.r(bx + 1, shY - 7, 4, 7, BOOK_COLS[0]);
+    d.r(shX + 30, shY - 5, 8, 5, C.R); d.r(shX + 30, shY - 5, 8, 1, C.o); [[-2, -9], [1, -11], [4, -9], [6, -7], [-1, -6]].forEach(([a, b]) => { d.r(shX + 33 + a, shY - 5 + b, 2, 4, FG.M); d.p(shX + 33 + a, shY - 5 + b, FG.L); });
+    d.r(shX - 2, shY, shW + 4, 2, C.T); d.r(shX - 2, shY + 2, shW + 4, 1, '#8C5E33'); d.r(shX + 2, shY + 3, 2, 3, '#8C5E33'); d.r(shX + shW - 4, shY + 3, 2, 3, '#8C5E33');
+    // a framed photo on the other side
+    const fX = Math.round(wx * .45) - 9, fY = wy + 8;
+    if (fX > 4) { d.r(fX - 1, fY - 1, 20, 16, C.K); d.r(fX, fY, 18, 14, C.T); d.r(fX + 2, fY + 2, 14, 10, '#F3D9E0'); d.img(TULIP.pink, fX + 3, fY + 2); d.img(TULIP.lilac, fX + 8, fY + 3); }
+  }
+  // fairy lights across the top
+  const span = 34;
+  for (let X = 0; X < W; X++) { const y = 3 + Math.round(5 * Math.sin(Math.PI * ((X % span) / span))); d.p(X, y, '#5B4A3A'); }
+  for (let X = 3, i = 0; X < W; X += 6, i++) { const y = 3 + Math.round(5 * Math.sin(Math.PI * ((X % span) / span))) + 1; L.bulbs.push([X, y, [C.y, C.P, C.L, C.o][i % 4], rnd() * 6, .5 + rnd() * .9]); }
+  // the table
+  d.r(0, tableY, W, H - tableY, '#A8744C');
+  let y = tableY + 2, row = 0;
+  while (y < H) {
+    const ph = 5 + Math.floor(row * .9), base = row % 2 ? '#A06D46' : '#AC784F';
+    d.r(0, y, W, ph, base); d.r(0, y, W, 1, '#B98457'); d.r(0, y + ph - 1, W, 1, '#6E4A30');
+    let jx = Math.floor(rnd() * 50); while (jx < W) { d.r(jx, y, 1, ph, '#6E4A30'); jx += 36 + Math.floor(rnd() * 40); }
+    for (let g = 0; g < W / 9; g++) { const gx = Math.floor(rnd() * W), gy = y + 1 + Math.floor(rnd() * (ph - 2)), gl = 3 + Math.floor(rnd() * 9); d.r(gx, gy, gl, 1, '#93613D'); }
+    if (rnd() < .5) { const kx = Math.floor(rnd() * W), ky = y + Math.floor(ph / 2); d.p(kx, ky, '#6E4A30'); d.p(kx + 1, ky, '#7E5233'); d.p(kx - 1, ky, '#93613D'); }
+    y += ph; row++;
+  }
+  d.r(0, tableY, W, 1, '#5E3D27'); d.r(0, tableY + 1, W, 1, '#C99A6B');
+  // things on the table
+  const vase = wide ? [sx - 22, tableY + 24] : [sx + 15, tableY + 14];
+  const mug = wide ? [sx + 122, sy + 100] : [sx + 95, tableY + 16];
+  const cand = wide ? [sx - 12, sy + 110] : [sx + 101, Math.min(H - 14, sy + 138)];
+  Object.assign(L, { mug, cand });
+  // tulips in a vase
+  const [vx, vy] = vase, top = vy - 10;
+  [[-7, -16, 'pump'], [5, -19, 'lilac'], [-1, -24, 'pink'], [10, -13, 'lav']].forEach(([a, b]) => d.line(vx, top + 1, vx + a, top + b + 4, FG.D));
+  drawLeaf(d, vx - 1, top + 1, -2.2, 9, 2, LEAF_PAL); drawLeaf(d, vx + 1, top + 1, -.9, 9, 2, LEAF_PAL);
+  [[-7, -16, 'pump'], [5, -19, 'lilac'], [-1, -24, 'pink'], [10, -13, 'lav']].forEach(([a, b, k]) => d.img(TULIP[k], vx + a - 5, top + b - 5));
+  d.ell(vx, vy, 6, 1, 'rgba(62,49,80,.22)'); d.img(VASE, vx - 5, vy - 11);
+  // mug + candle bodies
+  d.ell(mug[0], mug[1], 6, 1, 'rgba(62,49,80,.22)'); d.img(MUG, mug[0] - 5, mug[1] - 10);
+  d.ell(cand[0], cand[1], 6, 1, 'rgba(62,49,80,.22)'); d.img(CANDLE, cand[0] - 6, cand[1] - 12);
+  if (wide) { d.ell(sx + 134, tableY + 30, 9, 2, 'rgba(62,49,80,.2)'); d.img(POM[0].s, sx + 123, tableY + 12); }
+  // petals + Cala's paw prints
+  [[sx + 6, sy + 118, '#F4A7B9'], [sx + 12, sy + 121, '#CFA6D4'], [sx + 104, sy + 60, '#F1A464'], [sx + 3, sy + 70, C.l]].forEach(([px, py, col]) => { if (py < H) { d.r(px, py, 2, 1, col); d.p(px + 1, py + 1, col); } });
+  const pr = wide ? [[W - 18, H - 8], [W - 30, H - 17], [W - 24, H - 27], [W - 37, H - 35]] : [[W - 10, H - 7], [W - 18, H - 15], [W - 12, H - 24]];
+  pr.forEach(([px, py]) => { if (py > tableY + 4) { x.globalAlpha = .45; d.img(PAW_PRINT, px, py); x.globalAlpha = 1; } });
+  // soft corners
+  x.fillStyle = 'rgba(46,34,72,.14)';
+  for (let Y = 0; Y < H; Y++) for (let X = 0; X < W; X++) { const dx = (X - W / 2) / (W / 2), dy = (Y - H * .48) / (H * .55), v = dx * dx * .6 + dy * dy * .8 - .75; if (v > 0 && B4[(Y & 3) * 4 + (X & 3)] / 16 < v * 1.6) x.fillRect(X, Y, 1, 1); }
+  for (let i = 0; i < 9; i++) L.motes.push([rnd() * W, tableY * .3 + rnd() * tableY, rnd() * 6, .3 + rnd() * .5]);
+  cz.stat = c;
+}
+function drawCozy(now) {
+  if (!cz.ok) return;
+  const { x, W, H, L } = cz, d = D(x);
+  x.clearRect(0, 0, W, H); x.drawImage(cz.stat, 0, 0);
+  L.stars.forEach(([sx0, sy0, ph, sp]) => { const v = Math.sin(now * sp * 2 + ph); if (v > .2) d.p(sx0, sy0, v > .8 ? '#FFFFFF' : '#CFC7EA'); if (v > .92) { d.p(sx0 - 1, sy0, '#8C84C0'); d.p(sx0 + 1, sy0, '#8C84C0'); } });
+  L.bulbs.forEach(([bx, by, col, ph, sp]) => {
+    const on = Math.sin(now * sp * 1.6 + ph) > -.35;
+    if (on) { x.fillStyle = 'rgba(255,236,190,.28)'; x.fillRect(bx - 1, by - 1, 4, 4); }
+    d.r(bx, by, 2, 2, on ? col : '#7D6E86'); if (on) d.p(bx, by, '#FFFFFF');
+  });
+  const [cx0, cy0] = L.cand, fl = Math.floor(now * 8) % 3, gl = Math.floor(now * 3) % 2;
+  d.img(GLOW, cx0 - 15 + gl, cy0 - 26); d.img(SMALL_FLAME[fl], cx0 - 2, cy0 - 17);
+  const [mx0, my0] = L.mug; for (let n = 0; n < 3; n++) { const ph = (now * .7 + n / 3) % 1; if (ph < .85 || Math.floor(now * 10) % 2) d.p(mx0 - 2 + n * 2 + Math.round(Math.sin(ph * 6 + n) * 1.2), my0 - 12 - Math.floor(ph * 11), n % 2 ? '#FFFFFF' : '#E9E1F5'); }
+  L.motes.forEach(m => { const mx = (m[0] + Math.sin(now * m[3] + m[2]) * 6 + now * 1.5) % W, my = m[1] + Math.sin(now * m[3] * .7 + m[2]) * 4; if (Math.sin(now * 2 + m[2]) > -.3) d.p(mx, my, 'rgba(255,241,194,.85)'); });
+}
+
+/* ================= main loop ================= */
+sizeFull(); addEventListener('resize', sizeFull);
+requestAnimationFrame(layoutCozy); if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!coverGone) layoutCozy(); });
+addEventListener('resize', () => { clearTimeout(cz.rt); cz.rt = setTimeout(() => { if (!coverGone) layoutCozy(); }, 120); });
+let lastDraw = 0, lastBg = 0;
+function loop(ms) {
+  const now = ms / 1000;
+  if (ms - lastDraw >= 33) {
+    lastDraw = ms;
+    if (!coverGone) { drawCozy(now); drawOpener(now); }
+    const id = SCENES[cur] && SCENES[cur].id;
+    if (coverGone && id === 's-cake') drawCake(now);
+    if (id === 's-basket') { drawBasket(now); if (!envArea.hidden) drawLetterEnv(now); if (!lock.hidden) drawDuo(now); }
+    if (inspOpen) drawInspect(now);
+    if (readerOpen) drawSheetCala(now);
+    drawFx();
+  }
+  if (ms - lastBg >= 150) { lastBg = ms; drawBg(now); }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
