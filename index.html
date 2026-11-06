@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#EAE4F5">
+<meta name="format-detection" content="telephone=no">
 <title>for Aleisha</title>
 <meta name="description" content="something for your birthday">
 <meta property="og:title" content="for Aleisha">
@@ -25,18 +28,21 @@
   --ol:var(--px) 0 0 0 var(--ink),calc(var(--px)*-1) 0 0 0 var(--ink),0 var(--px) 0 0 var(--ink),0 calc(var(--px)*-1) 0 0 var(--ink);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;color-scheme:only light}
+button,a,[role=button],.hot,canvas{touch-action:manipulation}
+canvas{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+button{-webkit-appearance:none;appearance:none;color:inherit;font:inherit}
 body{font-family:var(--pix);color:var(--ink);background:var(--bg);min-height:100vh;overflow-x:hidden;-webkit-tap-highlight-color:transparent;font-size:18px;line-height:1.4}
 body.locked{overflow:hidden}
 button{font:inherit;color:inherit}
 :focus-visible{outline:var(--px) solid var(--org);outline-offset:var(--px)}
 [hidden]{display:none!important}
 canvas.px{image-rendering:-moz-crisp-edges;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;image-rendering:pixelated}
-#bgfx{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-#dim{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;background:rgba(46,34,72,.32);transition:opacity 1.2s steps(6)}
+#bgfx{position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+#dim{position:fixed;top:0;right:0;bottom:0;left:0;z-index:0;pointer-events:none;opacity:0;background:rgba(46,34,72,.32);transition:opacity 1.2s steps(6)}
 body.dim #dim{opacity:1}
-#fx{position:fixed;inset:0;width:100%;height:100%;z-index:70;pointer-events:none}
-#wipe{position:fixed;inset:0;width:100%;height:100%;z-index:90;pointer-events:none;display:none}
+#fx{position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:70;pointer-events:none}
+#wipe{position:fixed;top:0;right:0;bottom:0;left:0;width:100%;height:100%;z-index:90;pointer-events:none;display:none}
 
 /* stages: crisp pixel canvases that fit phones and laptops */
 .stagewrap{position:relative;margin:0 auto;container-type:inline-size;
@@ -55,7 +61,7 @@ body.dim #dim{opacity:1}
 .pbtn.light:hover{background:#FFF6EA}
 
 /* ---------- envelope opener ---------- */
-#cover{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;background:var(--bg)}
+#cover{position:fixed;top:0;right:0;bottom:0;left:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:16px;background:var(--bg)}
 #cover.gone{display:none}
 #cover{overflow:hidden}
 #coverBg{position:absolute;left:0;top:0;pointer-events:none}
@@ -82,8 +88,9 @@ body.dim #dim{opacity:1}
 @keyframes hopL{50%{transform:translateY(-18px);color:var(--orgd)}}
 #cakeWrap{--w:118;--h:104;--room:240px;margin-top:4px}
 .flag-label{font-size:11px;font-size:2.95cqw;color:var(--lavd)}
-.cala-label{font-size:14px;font-size:4cqw;color:var(--ink2)}
+.kala-label{font-size:14px;font-size:4cqw;color:var(--ink2)}
 .bubble{background:var(--paper);font-size:15px;font-size:4.3cqw;padding:.22em .5em .3em;
+  box-shadow:2px 0 0 0 var(--ink),-2px 0 0 0 var(--ink),0 2px 0 0 var(--ink),0 -2px 0 0 var(--ink);
   box-shadow:.7cqw 0 0 0 var(--ink),-.7cqw 0 0 0 var(--ink),0 .7cqw 0 0 var(--ink),0 -.7cqw 0 0 var(--ink);visibility:hidden}
 .bubble.on{visibility:visible;animation:popIn .3s steps(3)}
 @keyframes popIn{from{transform:translate(-50%,-30%) scale(.5)}}
@@ -130,7 +137,7 @@ body.dim #dim{opacity:1}
 .fnote{position:absolute;left:50%;top:14px;width:min(80vw,300px);height:320px;margin-left:calc(min(80vw,300px)/-2);transform:rotate(var(--r,0deg));border:0;background:none;padding:0;text-align:left;cursor:pointer;transition:transform .4s steps(4),opacity .4s steps(4)}
 .fnote.toss{transform:translate(115%,-20px) rotate(16deg);opacity:0}
 .fnote.notrans{transition:none}
-.fside{position:absolute;inset:0;padding:30px 24px 22px;background:var(--tint,var(--paper));box-shadow:var(--ol),calc(var(--px)*2) calc(var(--px)*3) 0 0 rgba(62,49,80,.18)}
+.fside{position:absolute;top:0;right:0;bottom:0;left:0;padding:30px 24px 22px;background:var(--tint,var(--paper));box-shadow:var(--ol),calc(var(--px)*2) calc(var(--px)*3) 0 0 rgba(62,49,80,.18)}
 .fside.back{display:none;overflow-y:auto}
 .fnote.flipped .fside.front{display:none}
 .fnote.flipped .fside.back{display:block}
@@ -149,10 +156,10 @@ body.dim #dim{opacity:1}
 .hot{position:absolute;border:0;padding:0;margin:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .hot:focus{outline:none}
 .hot:focus-visible{outline:var(--px) dashed var(--org);outline-offset:0}
-.bk-tip{background:var(--paper);font-size:13px;font-size:3.3cqw;padding:.2em .5em .28em;transform:translate(-50%,-100%);box-shadow:.6cqw 0 0 0 var(--ink),-.6cqw 0 0 0 var(--ink),0 .6cqw 0 0 var(--ink),0 -.6cqw 0 0 var(--ink);visibility:hidden;z-index:3}
+.bk-tip{background:var(--paper);font-size:13px;font-size:3.3cqw;padding:.2em .5em .28em;transform:translate(-50%,-100%);box-shadow:2px 0 0 0 var(--ink),-2px 0 0 0 var(--ink),0 2px 0 0 var(--ink),0 -2px 0 0 var(--ink);box-shadow:.6cqw 0 0 0 var(--ink),-.6cqw 0 0 0 var(--ink),0 .6cqw 0 0 var(--ink),0 -.6cqw 0 0 var(--ink);visibility:hidden;z-index:3}
 .bk-tip.on{visibility:visible}
 .bk-count{text-align:center;font-size:15px;color:var(--ink2);margin-top:8px;min-height:21px}
-.inspect{position:fixed;inset:0;z-index:58;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(46,34,72,.5);padding:max(28px,calc(env(safe-area-inset-top) + 18px)) 16px 40px;visibility:hidden;display:flex;flex-direction:column}
+.inspect{position:fixed;top:0;right:0;bottom:0;left:0;z-index:58;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(46,34,72,.5);padding:max(28px,calc(env(safe-area-inset-top) + 18px)) 16px 40px;visibility:hidden;display:flex;flex-direction:column}
 .inspect.show{visibility:visible}
 .insp-box{position:relative;width:100%;max-width:420px;margin:auto;padding:24px 18px 18px;text-align:center;transform:translateY(30px);opacity:0;transition:transform .4s steps(4),opacity .4s steps(4)}
 .inspect.show .insp-box{transform:none;opacity:1}
@@ -179,15 +186,15 @@ body.dim #dim{opacity:1}
 .opt.wrong{animation:shakeP .32s steps(4)}
 @keyframes shakeP{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 #envArea{margin-top:18px}
-#ltWrap{--w:80;--h:84;--room:170px;cursor:pointer;width:min(100%,360px,calc((100svh - 170px)*80/84))}
+#ltWrap{--w:80;--h:84;--room:170px;cursor:pointer;width:min(100%,360px,calc((100vh - 170px)*80/84));width:min(100%,360px,calc((100svh - 170px)*80/84))}
 .env-hint{text-align:center;color:var(--ink2);margin-top:10px}
 
 /* letter */
-.reader{position:fixed;inset:0;z-index:60;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(46,34,72,.5);padding:max(96px,calc(env(safe-area-inset-top) + 82px)) 16px 48px;visibility:hidden}
+.reader{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(46,34,72,.5);padding:max(96px,calc(env(safe-area-inset-top) + 82px)) 16px 48px;visibility:hidden}
 .reader.show{visibility:visible}
 .sheet{position:relative;max-width:560px;margin:0 auto;background:var(--paper);padding:34px 26px 0;box-shadow:var(--ol),calc(var(--px)*3) calc(var(--px)*3) 0 0 rgba(0,0,0,.22);transform:translateY(36px);opacity:0;transition:transform .5s steps(5),opacity .5s steps(5)}
 .reader.show .sheet{transform:none;opacity:1}
-.sheet-cala{position:absolute;left:50%;bottom:calc(100% - 12px);width:96px;transform:translateX(-50%)}
+.sheet-kala{position:absolute;left:50%;bottom:calc(100% - 12px);width:96px;transform:translateX(-50%)}
 .sheet h2{padding-right:46px;font-weight:700;font-size:36px;color:var(--lavd);text-shadow:3px 3px 0 var(--orgl);line-height:1.1}
 #myTitle{font-size:32px;line-height:1.1}
 .sheet-body.hand{font-family:var(--hand);font-size:25px;line-height:1.42;font-weight:500;color:#3B3149;margin-top:16px}
@@ -213,11 +220,12 @@ body.dim #dim{opacity:1}
 .gift-store{font-weight:700;font-size:24px;margin-top:8px;line-height:1.15}
 .gift-amt{font-weight:700;font-size:44px;line-height:1.1;color:var(--lavd);text-shadow:3px 3px 0 var(--orgl)}
 .scratch{position:relative;margin:14px auto 0;width:100%;max-width:300px;aspect-ratio:64/18;background:var(--paper);box-shadow:var(--ol)}
-.scratch-under{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px}
+@supports not (aspect-ratio:1/1){.scratch{height:0;padding-top:28.125%}}
+.scratch-under{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 8px}
 .scratch-label{font-size:13px;color:var(--ink2);line-height:1.1}
 .scratch-code{font-family:var(--mono);font-size:27px;letter-spacing:.08em;line-height:1.1;cursor:copy;-webkit-user-select:all;user-select:all}
 .scratch-msg{font-size:18px;line-height:1.2}
-.scratch-top{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+.scratch-top{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;touch-action:none;cursor:grab}
 .scratch-top:active{cursor:grabbing}
 .gift-hint{font-size:15px;color:var(--ink2);margin-top:10px}
 .gift .textbtn{font-size:14px;margin-top:2px}
@@ -246,6 +254,24 @@ body.dim #dim{opacity:1}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+/* phones held sideways: stage on the left, words on the right, nav tucked in the corner */
+@media (orientation:landscape) and (max-height:540px){
+  .scene{max-width:min(960px,100%);padding:max(12px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) 72px max(20px,env(safe-area-inset-left))}
+  #s-cake.active,#s-basket.active{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:26px;align-items:center;align-content:center}
+  #s-cake.active{grid-template-areas:"stage hero" "stage lyric" "stage prompt"}
+  #s-cake .hero{grid-area:hero;padding-top:0} #cakeWrap{grid-area:stage;--room:84px} #lyric{grid-area:lyric} #prompt{grid-area:prompt;min-height:96px}
+  .t-small{font-size:20px} .t-name{font-size:clamp(40px,7.5vw,68px)}
+  #s-basket.active{grid-template-areas:"stage title" "stage lede" "stage count" "stage lock" "stage env"}
+  #s-basket .scene-h{grid-area:title;margin-top:0;font-size:clamp(26px,4.4vw,36px)} #bkLede{grid-area:lede} #bkWrap{grid-area:stage;margin-top:0;--room:84px} #bkCount{grid-area:count} #lock{grid-area:lock} #envArea{grid-area:env;margin-top:6px}
+  #lock:not([hidden]){display:grid;grid-template-columns:42% 1fr;column-gap:12px;align-items:start;margin-top:10px;padding:10px}
+  #duo{grid-row:1 / span 3;margin:0} .dlg-head,.dlg-text,.dlg-opts{grid-column:2}
+  .dlg-text{font-size:16px;min-height:2.6em;margin-top:2px} .opt{font-size:16px;padding:4px 10px 5px 8px}
+  #ltWrap{width:min(100%,300px,calc((100vh - 150px)*80/84));width:min(100%,300px,calc((100svh - 150px)*80/84))}
+  #nav{left:max(14px,env(safe-area-inset-left));right:auto;bottom:max(10px,env(safe-area-inset-bottom));transform:translateY(220%)}
+  #nav.show{transform:none}
+  #inspCv{width:min(100%,180px)} .insp-box{padding:16px 14px 14px} .insp-name{font-size:22px;margin-top:8px} .insp-desc{font-size:16px}
+  .reader{padding-top:max(24px,env(safe-area-inset-top))}
+}
 </style>
 </head>
 <body class="locked">
@@ -269,10 +295,10 @@ body.dim #dim{opacity:1}
     <p class="t-small">happy birthday,</p>
     <h1 class="t-name" id="tname">Aleisha</h1>
   </header>
-  <div class="stagewrap" id="cakeWrap" tabindex="0" aria-label="A pixel Costco strawberry shortcake with one candle, and Cala the cat">
+  <div class="stagewrap" id="cakeWrap" tabindex="0" aria-label="A pixel Costco strawberry shortcake with one candle, and Kala the cat">
     <canvas id="cakeStage" class="px" width="118" height="104"></canvas>
     <span class="ov flag-label" style="left:58.5%;top:39.9%">the Costco one</span>
-    <span class="ov cala-label" style="left:83%;top:96.6%">Cala</span>
+    <span class="ov kala-label" style="left:83%;top:96.6%">Kala</span>
     <span class="ov bubble" id="catBubble" style="left:68%;top:59%">mrrp!</span>
   </div>
   <div id="lyric" class="lyric" aria-hidden="true"></div>
@@ -338,12 +364,12 @@ body.dim #dim{opacity:1}
   <p class="bk-count" id="bkCount"></p>
   <div class="dialog pbox" id="lock" hidden>
     <canvas id="duo" class="px" width="96" height="62" aria-hidden="true"></canvas>
-    <div class="dlg-head"><p class="dlg-name" id="dlgName">cala</p><p class="dlg-step" id="lockStep"></p></div>
+    <div class="dlg-head"><p class="dlg-name" id="dlgName">kala</p><p class="dlg-step" id="lockStep"></p></div>
     <p class="dlg-text" id="lockQ" aria-live="polite"></p>
     <div class="dlg-opts" id="lockOpts"></div>
   </div>
   <div id="envArea" hidden>
-    <div class="stagewrap" id="ltWrap" role="button" tabindex="0" aria-label="An envelope from Cala">
+    <div class="stagewrap" id="ltWrap" role="button" tabindex="0" aria-label="An envelope from Kala">
       <canvas id="ltStage" class="px" width="80" height="84"></canvas>
       <span class="ov bubble" id="envBubble" style="left:82%;top:20%">mrrp!</span>
     </div>
@@ -369,17 +395,17 @@ body.dim #dim{opacity:1}
 
 <!-- ================= the letter ================= -->
 <div id="reader" class="reader" role="dialog" aria-modal="true" aria-labelledby="readerTitle" aria-hidden="true">
-  <article class="sheet" id="letterCala">
-    <canvas class="sheet-cala px" id="sheetCala" width="26" height="16" aria-hidden="true"></canvas>
+  <article class="sheet" id="letterKala">
+    <canvas class="sheet-kala px" id="sheetKala" width="26" height="16" aria-hidden="true"></canvas>
     <button class="x" type="button" aria-label="Close the letter">×</button>
     <h2 id="readerTitle">to my favorite human,</h2>
     <div class="sheet-body cat">
-      <p>mrrp. it is me, Cala. i was asked to deliver this, which is a very big job for a cat my size.</p>
+      <p>mrrp. it is me, Kala. i was asked to deliver this, which is a very big job for a cat my size.</p>
       <p>happy birthday. you are my favorite lap, my favorite person to sit on, and you are allowed to put silly hats on me. i will allow it. sometimes.</p>
       <p>my birthday wishes for you: more naps, more pomelo, more treats (for me), and the best year ever.</p>
       <p>okay. there is one more letter. it is not from me. i did not read it. (i read it.)</p>
     </div>
-    <p class="sheet-sig">love, Cala <canvas class="px paw" id="pawSig" width="7" height="7" aria-hidden="true"></canvas></p>
+    <p class="sheet-sig">love, Kala <canvas class="px paw" id="pawSig" width="7" height="7" aria-hidden="true"></canvas></p>
     <div class="sheet-actions"><button class="pbtn" id="toMine" type="button">read the other letter</button></div>
     <div class="sheet-band" aria-hidden="true"></div>
   </article>
@@ -450,7 +476,8 @@ const C = {
 const B4 = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 
 /* ================= tiny pixel engine ================= */
-function cnv(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d'); x.imageSmoothingEnabled = false; return [c, x]; }
+function crisp(x) { x.imageSmoothingEnabled = false; x.webkitImageSmoothingEnabled = false; x.mozImageSmoothingEnabled = false; x.msImageSmoothingEnabled = false; return x; }
+function cnv(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; const x = crisp(c.getContext('2d')); return [c, x]; }
 function D(x) {
   const R = Math.round;
   return {
@@ -490,11 +517,11 @@ function outlined(src, col = C.K) {
   for (let j = -1; j <= sh; j++) for (let i = -1; i <= sw; i++) if (!A(i, j) && (A(i - 1, j) || A(i + 1, j) || A(i, j - 1) || A(i, j + 1))) x.fillRect(i + 1, j + 1, 1, 1);
   x.drawImage(src, 1, 1); return c;
 }
-function setupStage(id) { const c = $(id), x = c.getContext('2d'); x.imageSmoothingEnabled = false; return { c, x, d: D(x) }; }
+function setupStage(id) { const c = $(id), x = crisp(c.getContext('2d')); return { c, x, d: D(x) }; }
 function toPix(c, e) { const r = c.getBoundingClientRect(); return [(e.clientX - r.left) * c.width / r.width, (e.clientY - r.top) * c.height / r.height]; }
 
 /* ================= sprites ================= */
-// Cala the calico (22 x 24): head + body drawn separately so her head can bob
+// Kala the calico (22 x 24): head + body drawn separately so her head can bob
 const HEAD = [
   "..KK..............KK..",
   "..KBK............KBK..",
@@ -537,7 +564,7 @@ const PAW = grid([".KKK.", "KWWWK", ".KKK."]);
 const LETTER = grid([
   "KKKKKKKKKKKKKK", "KWVWWWWWWWWVWK", "KWWVWWWWWWVWWK", "KWWWVWWWWVWWWK", "KWWWWVOOVWWWWK",
   "KWWWWWOOWWWWWK", "KWWWWWWWWWWWWK", "KwwwwwwwwwwwwK", "KKKKKKKKKKKKKK"]);
-function calaLook(now, seed = 0) {
+function kalaLook(now, seed = 0) {
   const tb = (now + seed) % 4.3, te = (now + seed * 1.7) % 6.4;
   return { eyes: tb < .14 ? 'blink' : 'open', ear: te > 6.05 ? 1 : 0 };
 }
@@ -548,12 +575,12 @@ function drawTail(d, bx, by, ph) {
   pts.forEach(([x, y]) => d.r(x - 1, y - 1, 4, 4, C.K));
   pts.forEach(([x, y]) => d.r(x, y, 2, 2, C.O));
 }
-function drawCala(d, x, y, o) {
+function drawKala(d, x, y, o) {
   drawTail(d, x + 18, y + 20, o.tail || 0);
   d.img(BODY_S, x, y + 12);
   d.img(headSprite(o.eyes, o.ear), x + (o.hx || 0), y + (o.hy || 0));
 }
-function drawCalaHolding(d, x, y, o) {
+function drawKalaHolding(d, x, y, o) {
   d.img(headSprite(o.eyes, o.ear), x + (o.hx || 0), y);
   const ly = y + 11 - (o.lift || 0) - (o.bob || 0);
   d.img(LETTER, x + 4, ly);
@@ -658,7 +685,7 @@ const CAKE = (() => {
 const CAKE_X = 4, CAKE_Y = 26, WICK = [CAKE_X + 33, CAKE_Y + 12];
 
 /* ================= stages ================= */
-const OP = setupStage('#opStage'), CK = setupStage('#cakeStage'), LT = setupStage('#ltStage'), SC = setupStage('#sheetCala');
+const OP = setupStage('#opStage'), CK = setupStage('#cakeStage'), LT = setupStage('#ltStage'), SC = setupStage('#sheetKala');
 const linerPat = x => x._lp || (x._lp = x.createPattern(WEAVE, 'repeat'));
 function drawSprigFlap(d, cx, cy) {
   d.line(cx - 19, cy + 9, cx + 14, cy - 13, C.G);
@@ -701,7 +728,7 @@ function drawOpener(now) {
   else { const k = now - op.tBreak; if (k < .9 && (k < .55 || Math.floor(k * 20) % 2 === 0)) { d.img(SEAL_A2[0], sx - Math.floor(k * 16), sy + Math.floor(k * k * 70)); d.img(SEAL_A2[1], sx + Math.floor(k * 16), sy + Math.floor(k * k * 85)); } }
 }
 
-/* ---------- cake + Cala ---------- */
+/* ---------- cake + Kala ---------- */
 const cake = { out: false, hop: -9, talkUntil: 0, lean: 0, wiggle: 0, smoke: [], notes: [] };
 function drawCake(now) {
   const { c, x, d } = CK; x.clearRect(0, 0, c.width, c.height);
@@ -719,12 +746,12 @@ function drawCake(now) {
   cake.smoke.forEach(s => { const k = now - s.t; if (k < 0) return; const yy = s.y - Math.floor(k / .07), xx = s.x + Math.round(Math.sin(k * 5 + s.ph) * 1.5); if (k < 1.2 || Math.floor(k * 16) % 2) d.r(xx, yy, 2, 2, C.g); });
   cake.notes = cake.notes.filter(n => now - n.t < 1.8);
   cake.notes.forEach(n => { const k = now - n.t; if (k > 1.4 && Math.floor(k * 14) % 2) return; d.img(n.s, n.x + Math.round(Math.sin(k * 4) * 1.5), n.y - Math.floor(k / .055)); });
-  const o = calaLook(now); o.tail = now * 2.2;
+  const o = kalaLook(now); o.tail = now * 2.2;
   if (phase === 'song') { const bi = Math.floor((clock() - songT0) / BEAT); o.hx = bi >= 0 ? (bi % 2 ? 1 : -1) : 0; }
   if (phase === 'wish') o.eyes = 'closed';
   if (now < cake.talkUntil) o.eyes = 'happy';
   const hk = now - cake.hop; const dy = hk < .48 ? ([-2, -4, -5, -4, -2, 0][Math.floor(hk / .08)] || 0) : 0;
-  drawCala(d, 86, 71 + dy, o);
+  drawKala(d, 86, 71 + dy, o);
 }
 
 /* ---------- small flower helpers ---------- */
@@ -744,10 +771,10 @@ function drawLetterEnv(now) {
   if (lt.stage === 'opening' || lt.stage === 'open' || lt.stage === 'give') { f = FLAP_SEQ[Math.min(FLAP_SEQ.length - 1, Math.floor((now - lt.tO) / .065))]; rise = Math.min(MAXR, Math.floor(Math.max(0, now - lt.tO - .5) / .05) * 2); }
   const inside = () => {
     if (rise <= 0) return;
-    const o = calaLook(now, 1.3);
+    const o = kalaLook(now, 1.3);
     if (lt.stage === 'give') { o.eyes = 'happy'; o.lift = Math.min(4, Math.floor((now - lt.give) / .06)); }
     else if (rise >= MAXR) { o.hx = Math.floor(now / 1.1) % 2; o.bob = Math.floor(now * 2.4) % 2; }
-    drawCalaHolding(d, 29, ey + 22 - rise, o);
+    drawKalaHolding(d, 29, ey + 22 - rise, o);
   };
   drawEnvelope(LT, ex, ey, f, inside, false, 64, 42);
   const sx = ex + 32 - 9, sy = ey + 24 - 9;
@@ -756,20 +783,20 @@ function drawLetterEnv(now) {
   $('#envBubble').classList.toggle('on', rise >= MAXR && lt.stage === 'open');
 }
 
-/* ---------- Cala on the letter ---------- */
-function drawSheetCala(now) {
+/* ---------- Kala on the letter ---------- */
+function drawSheetKala(now) {
   const { c, x, d } = SC; x.clearRect(0, 0, c.width, c.height);
-  const o = calaLook(now, .6), k = now % 5, peek = k > 4 ? [0, 1, 2, 3, 3, 2, 1, 0][Math.floor((k - 4) * 8)] || 0 : 0;
+  const o = kalaLook(now, .6), k = now % 5, peek = k > 4 ? [0, 1, 2, 3, 3, 2, 1, 0][Math.floor((k - 4) * 8)] || 0 : 0;
   d.img(headSprite(o.eyes, o.ear), 2, 1 + peek);
   d.img(PAW, 4, 12); d.img(PAW, 17, 12);
 }
 
-/* ---------- me + Cala in the security check ---------- */
+/* ---------- me + Kala in the security check ---------- */
 // my pixel sprite: 9 frames, 38 x 48 each (0 idle, 1 talking, 2-3 arms out, 4 front, 5-6 turning, 7-8 walking)
 const ME_IMG = new Image(), ME_W = 38, ME_H = 48;
 ME_IMG.src = 'data:image/png;base64,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';
 const DUO = setupStage('#duo');
-const duo = { sp: 'cala', react: '', t: -9, talk: 0 };
+const duo = { sp: 'kala', react: '', t: -9, talk: 0 };
 const DUO_BG = (() => {
   const [c, x] = cnv(96, 62), d = D(x);
   d.r(0, 0, 96, 62, '#E4DBF2'); d.r(0, 50, 96, 12, '#EADFD2'); d.r(0, 50, 96, 1, C.c); d.r(0, 49, 96, 1, '#CFC3E6');
@@ -792,22 +819,22 @@ function drawDuo(now) {
   d.ell(mx + 19, 57, 13, 1, 'rgba(62,49,80,.18)');
   if (ME_IMG.complete && ME_IMG.naturalWidth) x.drawImage(ME_IMG, f * ME_W, 0, ME_W, ME_H, mx + hx, my + hy, ME_W, ME_H);
   if (no) { d.p(mx + 33, my + 14, C.L); d.p(mx + 33, my + 15, C.L); d.p(mx + 32, my + 16, C.L); }
-  // cala
-  const o = calaLook(now, 2.1); o.tail = now * 2.2;
-  if (duo.sp === 'cala' && talking) { o.hx = Math.floor(now * 9) % 2 ? 1 : -1; }
+  // kala
+  const o = kalaLook(now, 2.1); o.tail = now * 2.2;
+  if (duo.sp === 'kala' && talking) { o.hx = Math.floor(now * 9) % 2 ? 1 : -1; }
   if (yay) { o.eyes = 'happy'; }
   if (no) { o.hx = Math.floor(k * 18) % 2 ? 1 : -1; o.eyes = 'closed'; }
   let cdy = yay && k < .45 ? ([-2, -3, -2, -1, 0][Math.floor(k / .09)] || 0) : 0;
-  if (duo.poke === 'cala' && pk < .5) { cdy = [-2, -3, -2, -1, 0][Math.floor(pk / .1)] || 0; o.eyes = 'happy'; }
+  if (duo.poke === 'kala' && pk < .5) { cdy = [-2, -3, -2, -1, 0][Math.floor(pk / .1)] || 0; o.eyes = 'happy'; }
   d.ell(66, 57, 11, 1, 'rgba(62,49,80,.16)');
-  drawCala(d, 55, 33 + cdy, o);
+  drawKala(d, 55, 33 + cdy, o);
   // who's talking
   const ax = duo.sp === 'me' ? mx + 19 : 66, ay = (duo.sp === 'me' ? 2 : 27) - (Math.floor(now * 3) % 2);
   d.img(ARROW_S, ax - 2, ay);
 }
 const ARROW_S = grid(["OOOOO", ".OOO.", "..O.."]);
 
-/* ---------- Cala's paw-print signature ---------- */
+/* ---------- Kala's paw-print signature ---------- */
 (() => { const { x } = setupStage('#pawSig'); x.drawImage(outlined(grid(["O.O.O", ".....", ".OOO.", "OOOOO", ".OOO."])), 0, 0); })();
 
 /* ---------- pomelo icon on the receipt ---------- */
@@ -823,7 +850,7 @@ const ARROW_S = grid(["OOOOO", ".OOO.", "..O.."]);
 const bg = { c: $('#bgfx'), P: 4, list: [] };
 const fx = { c: $('#fx'), P: 3, parts: [] };
 function sizeFull() {
-  [bg, fx].forEach(o => { o.c.width = Math.ceil(innerWidth / o.P); o.c.height = Math.ceil(innerHeight / o.P); o.x = o.c.getContext('2d'); o.x.imageSmoothingEnabled = false; });
+  [bg, fx].forEach(o => { o.c.width = Math.ceil(innerWidth / o.P); o.c.height = Math.ceil(innerHeight / o.P); o.x = crisp(o.c.getContext('2d')); });
   bg.list = []; const n = Math.round(innerWidth * innerHeight / 26000) + 6;
   for (let i = 0; i < n; i++) bg.list.push({ x: Math.random() * bg.c.width, y: Math.random() * bg.c.height, ph: Math.random() * 6, col: [C.l, C.o, C.S, C.W, C.l][i % 5], sp: .6 + Math.random() * .9 });
   const s = Math.max(2, Math.min(5, Math.round(Math.min(innerWidth - 36, 118 * 4.6) / 118)));
@@ -893,7 +920,21 @@ const lineEls = $$('.line', lyricBox);
 
 /* ================= audio ================= */
 let ctx = null, master = null, bassBus = null;
+// older iPhones mute web sound when the ring switch is on silent, unless a (silent) media clip is playing
+function unmuteIOS() {
+  if (unmuteIOS.done || navigator.audioSession) return; unmuteIOS.done = true;
+  const ua = navigator.userAgent, ios = /iP(hone|ad|od)/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  if (!ios) return;
+  try {
+    const n = 800, buf = new ArrayBuffer(44 + n * 2), v = new DataView(buf), w = (o, t) => { for (let i = 0; i < t.length; i++) v.setUint8(o + i, t.charCodeAt(i)); };
+    w(0, 'RIFF'); v.setUint32(4, 36 + n * 2, true); w(8, 'WAVE'); w(12, 'fmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, 8000, true); v.setUint32(28, 16000, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, 'data'); v.setUint32(40, n * 2, true);
+    const a = document.createElement('audio'); a.setAttribute('x-webkit-airplay', 'deny'); a.setAttribute('playsinline', ''); a.loop = true; a.preload = 'auto';
+    a.src = URL.createObjectURL(new Blob([buf], { type: 'audio/wav' })); unmuteIOS.el = a; const pr = a.play(); if (pr && pr.catch) pr.catch(() => { unmuteIOS.done = false; });
+  } catch (e) {}
+}
 function initAudio() {
+  unmuteIOS();
   if (ctx) { if (ctx.state === 'suspended') ctx.resume(); return; }
   try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
   const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
@@ -1187,12 +1228,12 @@ updatePile();
 const lock = $('#lock'), lockQ = $('#lockQ'), lockOpts = $('#lockOpts'), lockStep = $('#lockStep');
 const envArea = $('#envArea'), envHint = $('#envHint'), reader = $('#reader');
 const QUIZ = [
-  { by: 'cala', q: "mrrp. question one. what's the best fruit in the world?", a: ['mango', 'pomelo', 'durian', 'calamansi'], c: 1, yes: 'correct. pomelo supremacy.', no: 'neigh. i am offended on behalf of the pomelo.' },
+  { by: 'kala', q: "mrrp. question one. what's the best fruit in the world?", a: ['mango', 'pomelo', 'durian', 'calamansi'], c: 1, yes: 'correct. pomelo supremacy.', no: 'neigh. i am offended on behalf of the pomelo.' },
   { by: 'me', q: "my turn. who's the funniest-looking guy in The Princess and the Pauper?", a: ['Preminger', 'Julian', 'Wolfie the dog'], c: 0, yes: 'yep. that face. still makes me laugh.', no: 'think about that face again.' },
-  { by: 'cala', q: 'last one. where did the best cake you ever had come from?', a: ['a fancy bakery', 'homemade', 'Costco', 'a five-star hotel'], c: 2, yes: 'the Costco one. obviously.', no: 'neigh. i know the truth.' },
+  { by: 'kala', q: 'last one. where did the best cake you ever had come from?', a: ['a fancy bakery', 'homemade', 'Costco', 'a five-star hotel'], c: 2, yes: 'the Costco one. obviously.', no: 'neigh. i know the truth.' },
 ];
 let stage = 'basket', qi = 0, qBusy = false, typer = 0, typeDone = null, typeFull = '';
-function speaker(who) { duo.sp = who; $('#dlgName').textContent = who === 'me' ? MY_NAME : 'cala'; }
+function speaker(who) { duo.sp = who; $('#dlgName').textContent = who === 'me' ? MY_NAME : 'kala'; }
 function typeText(text, done, who) {
   if (who) speaker(who);
   clearInterval(typer); typeFull = text; typeDone = done || null; lockQ.textContent = ''; let i = 0;
@@ -1202,7 +1243,7 @@ lockQ.addEventListener('click', () => { if (lockQ.textContent.length < typeFull.
 function react(r) { duo.react = r; duo.t = NOW(); }
 $('#duo').addEventListener('click', e => {
   const [px] = toPix(DUO.c, e), now = NOW();
-  if (px >= 52 && px < 84) { sfx('meow'); duo.poke = 'cala'; duo.pt = now; }
+  if (px >= 52 && px < 84) { sfx('meow'); duo.poke = 'kala'; duo.pt = now; }
   else if (px >= 10 && px < 52) { sfx('boop'); duo.poke = 'me'; duo.pt = now; }
 });
 function reveal(el) { const r = el.getBoundingClientRect(), room = innerHeight - 120; window.scrollTo({ top: Math.max(0, scrollY + r.top - Math.max(14, (room - r.height) / 2)), behavior: reduce ? 'auto' : 'smooth' }); }
@@ -1237,18 +1278,18 @@ function unlock() {
   typeText("okay. no horsing around, it's really you.", () => setTimeout(() => {
     sfx('meow'); typeText('mrrp. this is for you.', () => setTimeout(() => {
       stage = 'sealed'; lock.hidden = true; envArea.hidden = false; lt.stage = 'sealed';
-      $('#bkLede').textContent = 'cala has your letter';
+      $('#bkLede').textContent = 'kala has your letter';
       setTimeout(() => reveal(envArea), 150);
-    }, 900), 'cala');
+    }, 900), 'kala');
   }, 700), 'me');
 }
-function ltTap(hitSeal, hitCala) {
+function ltTap(hitSeal, hitKala) {
   const now = NOW();
   if (lt.stage === 'sealed' && hitSeal) {
     initAudio(); crackSnd(); lt.stage = 'breaking'; lt.tB = now; envHint.textContent = '';
     setTimeout(() => { noise(.4, 1800, .6, .2); lt.stage = 'opening'; lt.tO = NOW(); }, 450);
-    setTimeout(() => { lt.stage = 'open'; envHint.textContent = 'cala brought you a letter. tap it.'; sfx('meow'); }, 450 + 1700);
-  } else if (lt.stage === 'open' && hitCala) {
+    setTimeout(() => { lt.stage = 'open'; envHint.textContent = 'kala brought you a letter. tap it.'; sfx('meow'); }, 450 + 1700);
+  } else if (lt.stage === 'open' && hitKala) {
     lt.stage = 'give'; lt.give = now; sfx('paper');
     setTimeout(openReader, 600);
   }
@@ -1258,9 +1299,9 @@ $('#ltWrap').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key =
 let readerOpen = false;
 function openReader() {
   if (stage === 'sealed') { stage = 'read'; syncHot(); $('#bkLede').textContent = 'tap anything to take a closer look'; }
-  $('#letterCala').hidden = false; $('#letterMe').hidden = true;
+  $('#letterKala').hidden = false; $('#letterMe').hidden = true;
   readerOpen = true; reader.scrollTop = 0; reader.classList.add('show'); reader.setAttribute('aria-hidden', 'false'); document.body.classList.add('locked');
-  setTimeout(() => $('#letterCala .x').focus({ preventScroll: true }), 500);
+  setTimeout(() => $('#letterKala .x').focus({ preventScroll: true }), 500);
 }
 function closeReader() {
   reader.classList.remove('show'); reader.setAttribute('aria-hidden', 'true'); document.body.classList.remove('locked');
@@ -1270,7 +1311,7 @@ function closeReader() {
 $$('.sheet .x').forEach(b => b.addEventListener('click', () => { sfx('paper'); closeReader(); }));
 $('#toMine').addEventListener('click', async () => {
   sfx('paper'); await dissolve('#FFFDF8', false, 420);
-  $('#letterCala').hidden = true; $('#letterMe').hidden = false; reader.scrollTop = 0;
+  $('#letterKala').hidden = true; $('#letterMe').hidden = false; reader.scrollTop = 0;
   await dissolve('#FFFDF8', true, 460); $('#letterMe .x').focus({ preventScroll: true });
 });
 $('#readerClose').addEventListener('click', () => { sfx('paper'); closeReader(); });
@@ -1504,7 +1545,7 @@ const GIFT_LIST = (typeof GIFT_CARDS !== 'undefined' ? GIFT_CARDS : []).filter(B
 const ITEMS = [
   { id: 'tea', name: 'jasmine tea', desc: 'Uncle Iroh insists you take a break and have a cup.', x: 108, y: 57, spr: () => TEA,
     says: ['jasmine tea. Uncle Iroh would approve.', 'he says tea first, worries later.', 'refill? he insists.'] },
-  { id: 'letter', name: 'a letter', desc: 'sealed with a paw print. Cala is guarding it, so expect a few questions.', x: 51, y: 57, spr: () => ENV_TILT },
+  { id: 'letter', name: 'a letter', desc: 'sealed with a paw print. Kala is guarding it, so expect a few questions.', x: 51, y: 57, spr: () => ENV_TILT },
   { id: 'gift0', gift: 0, x: 76, y: 53 },
   { id: 'gift1', gift: 1, x: 92, y: 57 },
   { id: 'dog', name: 'a $1.50 hot dog', desc: "the Costco hot dog. some things never change, and that price is one of them.", x: 90, y: 70, spr: () => DOG_TILT,
@@ -1590,7 +1631,7 @@ function openItem(it) {
   const acts = $('#inspActs'); acts.innerHTML = '';
   if (it.id === 'letter') {
     const read = stage === 'read';
-    $('#inspDesc').textContent = read ? 'you already passed the security check. Cala says you can read it as many times as you want.' : it.desc;
+    $('#inspDesc').textContent = read ? 'you already passed the security check. Kala says you can read it as many times as you want.' : it.desc;
     const b = document.createElement('button'); b.type = 'button'; b.className = 'pbtn'; b.textContent = read ? 'read it again' : 'open it';
     b.addEventListener('click', () => { closeInspect(); setTimeout(read ? openReader : startQuiz, 380); }); acts.append(b);
   }
@@ -1776,7 +1817,7 @@ function layoutCozy() {
   const P = r.width / 112, ox = ((r.left % P) + P) % P - P, oy = ((r.top % P) + P) % P - P;
   const W = Math.ceil((innerWidth - ox) / P) + 1, H = Math.ceil((innerHeight - oy) / P) + 1;
   Object.assign(cz.c.style, { left: ox + 'px', top: oy + 'px', width: W * P + 'px', height: H * P + 'px' });
-  cz.c.width = W; cz.c.height = H; cz.x.imageSmoothingEnabled = false;
+  cz.c.width = W; cz.c.height = H; crisp(cz.x);
   Object.assign(cz, { P, W, H, sx: Math.round((r.left - ox) / P), sy: Math.round((r.top - oy) / P) });
   buildCozy(); cz.ok = true;
 }
@@ -1864,7 +1905,7 @@ function buildCozy() {
   d.ell(mug[0], mug[1], 6, 1, 'rgba(62,49,80,.22)'); d.img(MUG, mug[0] - 5, mug[1] - 10);
   d.ell(cand[0], cand[1], 6, 1, 'rgba(62,49,80,.22)'); d.img(CANDLE, cand[0] - 6, cand[1] - 12);
   if (wide) { d.ell(sx + 134, tableY + 30, 9, 2, 'rgba(62,49,80,.2)'); d.img(POM[0].s, sx + 123, tableY + 12); }
-  // petals + Cala's paw prints
+  // petals + Kala's paw prints
   [[sx + 6, sy + 118, '#F4A7B9'], [sx + 12, sy + 121, '#CFA6D4'], [sx + 104, sy + 60, '#F1A464'], [sx + 3, sy + 70, C.l]].forEach(([px, py, col]) => { if (py < H) { d.r(px, py, 2, 1, col); d.p(px + 1, py + 1, col); } });
   const pr = wide ? [[W - 18, H - 8], [W - 30, H - 17], [W - 24, H - 27], [W - 37, H - 35]] : [[W - 10, H - 7], [W - 18, H - 15], [W - 12, H - 24]];
   pr.forEach(([px, py]) => { if (py > tableY + 4) { x.globalAlpha = .45; d.img(PAW_PRINT, px, py); x.globalAlpha = 1; } });
@@ -1904,7 +1945,7 @@ function loop(ms) {
     if (coverGone && id === 's-cake') drawCake(now);
     if (id === 's-basket') { drawBasket(now); if (!envArea.hidden) drawLetterEnv(now); if (!lock.hidden) drawDuo(now); }
     if (inspOpen) drawInspect(now);
-    if (readerOpen) drawSheetCala(now);
+    if (readerOpen) drawSheetKala(now);
     drawFx();
   }
   if (ms - lastBg >= 150) { lastBg = ms; drawBg(now); }
